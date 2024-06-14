@@ -10,7 +10,6 @@ public class Main1436 {
 
         int n = Integer.parseInt(br.readLine());
         int count = 0;
-        String title = "세상의 종말 ";
         /**
          * n번째 종말숫자를 구할 때까지 반복문 진행
          */
@@ -23,7 +22,7 @@ public class Main1436 {
             }
         }
         
-        bw.write(title + number + "\n");
+        bw.write(number + "\n");
         bw.flush();
         bw.close();
         br.close();
