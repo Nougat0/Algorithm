@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -16,6 +16,7 @@ public class Main19532 {
         int f = Integer.parseInt(st.nextToken());
 
         /**
+         * Brute Force가 아닌 방식
          * ax + by = c
          * dx + ey = f
          *
@@ -33,13 +34,22 @@ public class Main19532 {
          * (ec - bf)/(ae - bd) = x (정수) %값이 0
          * -------------------------
          * -1,000,000 < a*b < 1,000,000 (int 범위 충족)
-         * 다만 나눗셈이 있어서 0의 경우 확인
-         * 0/n = 0 -> 오류 없음
-         * n/0 = undefined -> 오류 발생 / 대체 출력문 없음...
          */
+        //bw.write(String.format("%d %d%n", (e*c - b*f)/(a*e - b*d), (c*d - a*f)/(b*d - a*e)));
 
-        bw.write(String.format("%d %d%n", (e*c - b*f)/(a*e - b*d), (c*d - a*f)/(b*d - a*e)));
-//        bw.write(String.format("%d %d%n", (0)/(10), (c*d - a*f)/(b*d - a*e)));
+        /**
+         * Brute Force 방식으로 풀기
+         */
+        outerLoop:
+        for(int i=-999; i<1000; i++) {
+            for(int j=-999; j<1000; j++){
+                if((a*i + b*j == c) && (d*i + e*j == f)) {
+                    bw.write(String.format("%d %d%n", i, j));
+                    break outerLoop;
+                }
+            }
+        }
+
         bw.flush();
         bw.close();
         br.close();
