@@ -1,15 +1,19 @@
 package baekjoon.processing;
 
 import java.io.*;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main1010 {
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(String.format("시작 %s",new Timestamp(System.currentTimeMillis())));
         //입력
         int t = Integer.parseInt(br.readLine());
         for(int i=0; i<t; i++) {
@@ -22,9 +26,9 @@ public class Main1010 {
             //결국 m개 중에 n개 선택하는 경우의 수 구하기임
             //맨 밑의 점의 위치에 따라 나머지 점들 배치
             //모든 점들은 밑의 점 위치에 따라 자리 제약이 있음
-
+            bw.write(String.format("%d시작 %s%n", (i+1), new Timestamp(System.currentTimeMillis())));
             //경우의 수이기 때문에 for문 안에서 할 것은 별로 없다... 그냥 곱하기 연산 하면 될 듯
-            int count = countRecursive(1, n, m+1, 0);
+            int count = countRecursive(1, n, m, 0);
             /*
             첫번째(j) 점: n ~ m
             두번째(k) 점: n-1 ~ j-1 (첫번째 점의 경우에 따라 각각 계산)
@@ -95,8 +99,9 @@ public class Main1010 {
             }
              */
             bw.write(String.format("%d%n", count));
-
+            bw.write(String.format("%d끝 %s%n", (i+1), new Timestamp(System.currentTimeMillis())));
         }
+        bw.write(String.format("끝 %s%n", new Timestamp(System.currentTimeMillis())));
 
         bw.newLine();
         bw.flush();
@@ -107,21 +112,67 @@ public class Main1010 {
     /**
      * 가장 바깥에 점이 하나 더 있다고 가정하기 (m+1)
      * @param depth
-     * @param n
-     * @param m
+     * @param n n은 모든 재귀함수에서 동일하게 갖고 있어야 함
+     * @param m 다음 재귀 for문 최대값
      * @param count
      * @return
      */
-    public static int countRecursive(int depth, int n, int m, int count) {
+    public static int countRecursive(int depth, int n, int m, int count) throws IOException {
+//        bw.write(String.format("[ %d-%d-%d :: 시작 ]%n", depth, n, m));
         int depthCount = 0;
         boolean finalDepth = depth == n;
+        if(finalDepth)
+            count += (m- (n-depth+1) +1);
+        else
+            for(int i=n-depth+1; i<=m; i++) {
+//                bw.write(String.format("%d--%d%n", depth, i));
+                depthCount += countRecursive(depth+1, n, i-1, count);
+            }
 
-        for(int i=n-depth+1; i<m-depth+1; i++) {
-            depthCount ++;
-            count += countRecursive(depth+1, n, i-1, count);
-        }
-
-        if(finalDepth) return count + depthCount;
-        else return count;
+//        bw.write(String.format("[ %d-%d-%d :: 끝 ]%n", depth, n, m));
+        return count + depthCount;
     }
+    /*
+    3개 : 6개
+    n=3, m=6
+    ---------------------------------
+    j==3 --> lkjxxx
+        k==2 --> lkjxxx -> l=1
+	    l=1 --> lkjxxx
+    ---------------------------------1
+    j==4 --> lkxjxx
+        k==2 --> lkxjxx -> l=1
+	    l=1 --> lkxjxx
+        k==3 --> lxkjxx -> l=2
+	    l=1 --> lxkjxx
+	    l=2 --> xlkjxx
+    ---------------------------------1+2
+    j==5 --> lkxxjx
+        k==2 --> lkxxjx
+	    l=1 --> lkxxjx
+        k==3 --> lxkxjx -> l=2
+	    l=1 --> lxkxjx
+	    l=2 --> xlkxjx
+        k==4 --> lxxkjx -> l=3
+	    l=1 --> lxxkjx
+	    l=2 --> xlxkjx
+	    l=3 --> xxlkjx
+    ---------------------------------1+2+3
+    j==6 --> lkxxxj
+        k==2 --> lkxxxj
+	    l=1 --> lkxxxj
+        k==3 --> lxkxxj
+	    l=1 --> lxkxxj
+	    l=2 --> xlkxxj
+        k==4 --> lxxkxj -> l=3
+	    l=1 --> lxxkxj
+	    l=2 --> xlxkxj
+	    l=3 --> xxlkxj
+        k==5 --> lxxxkj -> l=4
+	    l=1 --> lxxxkj
+	    l=2 --> xlxxkj
+	    l=3 --> xxlxkj
+	    l=4 --> xxxlkj
+    ---------------------------------1+2+3+4
+     */
 }
