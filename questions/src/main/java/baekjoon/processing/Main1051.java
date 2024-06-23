@@ -30,23 +30,24 @@ public class Main1051 {
      * @return 존재하지 않을 경우 1
      */
     public static int checkSquare(int[][] square) {
-        int maxEdge = 0;
-        for(int i=0; i<square.length - 1; i++) {
-            for(int j=0; j<square[0].length - 1; j++) {
+        int maxDiff = 0;
+        int count = 1;
+        for(int i=0; i<square.length - 1 - maxDiff; i++) {
+            for(int j=0; j<square[0].length - 1 - maxDiff; j++) {
                 //왼쪽 상단 꼭지점(i,j)에서 사각형 확인
-                for(int k=j+1; k<square[0].length; k++) {
-                    System.out.println("반복문 실행");
+                for(int k=j+1+maxDiff; k<square[0].length; k++) {
+                    System.out.println("반복문 실행" + count++);
                     if(square[i][j] == square[i][k]) {
                         int diff = k-j;
-                        if(i+diff > square.length - 1 || maxEdge >= diff) continue;
+                        if(i+diff > square.length - 1 || maxDiff >= diff) continue;
                         if(square[i][j] == square[i+diff][j] && square[i][j] == square[i+diff][k]) {
-                            maxEdge = diff+1;
+                            maxDiff = diff;
                         }
                     }
                 }
             }
         }
-        if(maxEdge == 0) return 1;
-        else return (int) Math.pow(maxEdge, 2);
+        if(maxDiff == 0) return 1;
+        else return (int) Math.pow(maxDiff+1, 2);
     }
 }
