@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -31,12 +31,10 @@ public class Main1051 {
      */
     public static int checkSquare(int[][] square) {
         int maxDiff = 0;
-        int count = 1;
         for(int i=0; i<square.length - 1 - maxDiff; i++) {
             for(int j=0; j<square[0].length - 1 - maxDiff; j++) {
                 //왼쪽 상단 꼭지점(i,j)에서 사각형 확인
                 for(int k=j+1+maxDiff; k<square[0].length; k++) {
-                    System.out.println("반복문 실행" + count++);
                     if(square[i][j] == square[i][k]) {
                         int diff = k-j;
                         if(i+diff > square.length - 1 || maxDiff >= diff) continue;
