@@ -23,15 +23,11 @@ public class Main1037 {
 
     /**
      * 주어진 약수 목록의 최소공배수 구하기
-     * @param realDividers
-     * @return
+     * @param realDividers 약수 목록
+     * @return 약수 최소값 * 약수 최대값 (약수가 1개일 경우 해당 값의 제곱)
      */
     private static int getLeastCommonMultiple(int[] realDividers) {
-        if(realDividers.length == 1) {
-            return realDividers[0] * realDividers[0];
-        } else {
-            Arrays.sort(realDividers);
-            return realDividers[0] * realDividers[realDividers.length-1];
-        }
+        Arrays.sort(realDividers);
+        return realDividers[0] * realDividers[realDividers.length-1];
     }
 }
