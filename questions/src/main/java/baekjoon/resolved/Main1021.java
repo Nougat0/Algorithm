@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -19,15 +19,26 @@ public class Main1021 {
 
         for(int i=0; i<m; i++) {
             int nextTarget = Integer.parseInt(st.nextToken());
-            while(que.get(pointer) != nextTarget) {
-                if (que.get(pointer) < nextTarget) {
-                    pointer++;
-                } else if (que.get(pointer) > nextTarget) {
-                    pointer--;
+            int index = que.indexOf(nextTarget);
+            if(pointer != index) {
+                //단순 크다 작다로 판단할 게 아니라 move 갯수를 확인하고 움직일 것
+                if(pointer < index) {
+                    if(index - pointer > pointer + que.size() - index) {
+                        moves += pointer + que.size() - index;
+                    } else {
+                        moves += index - pointer;
+                    }
+                } else {
+                    if(pointer - index > que.size() - pointer + index) {
+                        moves += que.size() - pointer + index;
+                    } else {
+                        moves += pointer - index;
+                    }
                 }
-                moves++;
+                pointer = index;
             }
             que.remove(pointer);
+            //마지막 index에 있었을 경우 0으로 이동
             if(que.size() == pointer) pointer = 0;
         }
 
