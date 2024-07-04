@@ -1,7 +1,8 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main1158 {
     public static void main(String[] args) throws IOException {
@@ -11,7 +12,8 @@ public class Main1158 {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         List<Integer> circle = new ArrayList<>();
-        String printLine = "";
+        List<Integer> printList = new ArrayList<>();
+
         for(int i=1; i<=n; i++) circle.add(i);
 
         /*
@@ -26,11 +28,13 @@ public class Main1158 {
                     cursor -= circle.size();
                 }
             }
-            printLine += circle.get(cursor) + ", ";
+            printList.add(circle.get(cursor));
             circle.remove(cursor);
             cursor--;
         }
-        bw.write(String.format("<%s>%n", printLine.substring(0, printLine.lastIndexOf(", "))));
+        bw.write(String.format("<%s>%n",
+                printList.stream().map(Object::toString)
+                .collect(Collectors.joining(", "))));
         bw.flush();
         bw.close();
         br.close();
