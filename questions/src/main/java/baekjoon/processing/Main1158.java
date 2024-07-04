@@ -11,7 +11,7 @@ public class Main1158 {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         List<Integer> circle = new ArrayList<>();
-        List<Integer> printList = new ArrayList<>();
+        String printLine = "";
         for(int i=1; i<=n; i++) circle.add(i);
 
         /*
@@ -20,20 +20,19 @@ public class Main1158 {
          */
         int cursor = -1;
         while(!circle.isEmpty()) {
-            if(cursor + k > circle.size() - 1) {
-                while(cursor + k > circle.size() - 1) {
-                    cursor = (cursor + k) - (circle.size());
+            cursor += k;
+            if(cursor > circle.size() - 1) {
+                while(cursor > circle.size() - 1) {
+                    cursor -= circle.size();
                 }
             }
-            else cursor = cursor + k;
-            System.out.println(circle.get(cursor));
+            printLine += circle.get(cursor) + ", ";
             circle.remove(cursor);
             cursor--;
         }
-
+        bw.write(String.format("<%s>%n", printLine.substring(0, printLine.lastIndexOf(", "))));
         bw.flush();
         bw.close();
         br.close();
-
     }
 }
