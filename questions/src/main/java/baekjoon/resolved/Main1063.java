@@ -1,7 +1,7 @@
 package baekjoon.resolved;
 
 import java.io.*;
-import java5.util.*;
+import java.util.*;
 
 public class Main1063 {
     public static void main(String[] args) throws IOException {
