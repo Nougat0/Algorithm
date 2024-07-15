@@ -1,7 +1,6 @@
 package baekjoon.processing;
 
 import java.io.*;
-import java.math.BigInteger;
 
 public class Main1212 {
     public static void main(String[] args) throws IOException {
@@ -9,31 +8,53 @@ public class Main1212 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //8진수
         char[] number = br.readLine().toCharArray();
-        //10진수 변환
-        BigInteger zero = new BigInteger("0");
-        BigInteger one = new BigInteger("1");
-        BigInteger two = new BigInteger("2");
-        BigInteger decimal = zero;
-        for(int i=0; i<number.length; i++)
-            decimal = decimal.add(new BigInteger(
-                Character.getNumericValue(number[i]) *
-                (int) Math.pow(8, number.length-1-i) + ""
-            ));
-        //2진수 변환
-        String binary = "";
-        if(decimal.compareTo(zero) == 0) {
-            binary = "0";
-        } else {
-            while(decimal.divide(two).compareTo(one) == 0 || decimal.divide(two).compareTo(one) == 1) {
-                if(decimal.divide(two).compareTo(one) == 0)
-                    binary = String.format("%d%d", decimal.divide(two), decimal.remainder(two)) + binary;
-                else binary = decimal.remainder(two) + binary;
-                decimal = new BigInteger(decimal.divide(two) + "");
+        //2진수로 변환 후 바로 출력
+        BinaryFromOctal changer = new BinaryFromOctal();
+        for(int i=0; i< number.length; i++){
+            //BinaryFromOctal 클래스 활용하여 2진수 값 가져오기
+            String result = changer.getBinary(Character.getNumericValue(number[i]));
+            if(i==0) { //첫번째 숫자의 경우 1) 0인지 확인 및 2) 맨 앞 0 제거
+                result = result.replaceAll("^0+", "");
+                if(number[i] == '0') result = "0";
             }
+            bw.write(result);
         }
-        bw.write(binary + "\n");
+        bw.newLine();
         bw.flush();
         bw.close();
         br.close();
+    }
+
+    /**
+     * 8진수의 각 자릿수를 2진수로 변환하는 용도의 클래스
+     */
+    public static class BinaryFromOctal {
+        private String[] binary = new String[8]; //Memoization용 배열 선언
+        /*
+        octal 을 2진수로 변환
+        계산된 값이 binary에 없을 경우, 직접 계산
+        */
+        public String getBinary(int octal) {
+            if(binary[octal] == null)
+                binary[octal] = calculateBinary(octal);
+            return binary[octal];
+        }
+        /*
+        2진수 변환 값 계산용 메소드
+        */
+        public String calculateBinary(int octal) {
+            String binary = "";
+            if(octal == 0) binary = "0";
+            else {
+                //2진수 구하기
+                while(octal/2 > 0 || octal%2 > 0) {
+                    binary = octal%2 + binary;
+                    octal /= 2;
+                }
+            }
+            if(binary.length() < 3) //부족한 자릿수 채워넣기
+                binary = String.format("%03d", Integer.parseInt(binary));
+            return binary;
+        }
     }
 }
