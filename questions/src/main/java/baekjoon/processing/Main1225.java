@@ -8,15 +8,21 @@ public class Main1225 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        char[] a = st.nextToken().toCharArray();
-        char[] b = st.nextToken().toCharArray();
+        String a = st.nextToken();
+        String b = st.nextToken();
+        /*
+        EX) 246 * 87
+        = 2*8 + 2*7 + 4*8 + 4*7 + 6*8 + 6*7
+        = 2(8+7) + 4(8+7) + 6(8+7)
+        = (2+4+6) * (8+7)
+        */
+        long sumA = 0, sumB = 0; //곱의 최대값이 약 81억이므로 long
+        for(int i=0; i<a.length(); i++)
+            sumA += Character.getNumericValue(a.charAt(i));
+        for(int i=0; i<b.length(); i++)
+            sumB += Character.getNumericValue(b.charAt(i));
 
-        long sum = 0;
-        for(int i=0; i<a.length; i++)
-            for(int j=0; j<b.length; j++)
-                sum += Character.getNumericValue(a[i]) * Character.getNumericValue(b[j]);
-
-        bw.write(sum + "\n");
+        bw.write(sumA * sumB + "\n");
         bw.flush();
         bw.close();
         br.close();
