@@ -9,16 +9,20 @@ public class Main1373 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //2진수
         String binaryNumber = br.readLine();
-        if(binaryNumber.length()%3 != 0) //0 채워서 자릿수 맞추기
-            binaryNumber = "0".repeat(3 - binaryNumber.length()%3) + binaryNumber;
-        char[] number = binaryNumber.toCharArray();
+        int length = binaryNumber.length();
+        if(length%3 != 0) {//0 채워서 자릿수 맞추기
+            binaryNumber = "0".repeat(3 - length%3) + binaryNumber;
+            length += 3 - length%3;
+        }
 
         //8진수로 변환
-        int[] octalNumber = new int[number.length/3];
+        int[] octalNumber = new int[length/3];
         BinaryFromOctal changer = new BinaryFromOctal();
-        for(int i=number.length-1; i-2>=0; i-=3){ //3자리씩 8진수로 변환할 2진수 묶음 만들기
+        for(int i=length-1; i-2>=0; i-=3){ //3자리씩 8진수로 변환할 2진수 묶음 만들기
             String binary = new StringBuffer()
-                    .append(number[i-2]).append(number[i-1]).append(number[i]).toString();
+                    .append(binaryNumber.charAt(i-2))
+                    .append(binaryNumber.charAt(i-1))
+                    .append(binaryNumber.charAt(i)).toString();
             //BinaryFromOctal 클래스 활용하여 8진수 값 가져오기
             octalNumber[i/3] = changer.getOctal(binary);
         }
