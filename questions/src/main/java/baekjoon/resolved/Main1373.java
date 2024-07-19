@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -9,7 +9,8 @@ public class Main1373 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //2진수
         String binaryNumber = br.readLine();
-        binaryNumber = "0".repeat(3 - binaryNumber.length()%3) + binaryNumber; //0 채워서 자릿수 맞추기
+        if(binaryNumber.length()%3 != 0) //0 채워서 자릿수 맞추기
+            binaryNumber = "0".repeat(3 - binaryNumber.length()%3) + binaryNumber;
         char[] number = binaryNumber.toCharArray();
 
         //8진수로 변환
