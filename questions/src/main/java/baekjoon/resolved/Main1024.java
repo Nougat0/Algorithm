@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -12,7 +12,7 @@ public class Main1024 {
         접근개념: List(n) = {a+0, a+1, a+2, ... a+n-1}
         */
         int sum = Integer.parseInt(st.nextToken()); //합계
-        int length = Integer.parseInt(st.nextToken()); //최소길이
+        final int length = Integer.parseInt(st.nextToken()); //최소길이
 
         int finalLength = length; //최종길이, 최소길이로 초기화
         for(int i=1; i<finalLength; i++) {
