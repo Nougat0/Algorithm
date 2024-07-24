@@ -1,9 +1,6 @@
 package baekjoon.resolved;
 
 import java.io.*;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.StringTokenizer;
 
 public class Main1964 {
     public static void main(String[] args) throws IOException {
