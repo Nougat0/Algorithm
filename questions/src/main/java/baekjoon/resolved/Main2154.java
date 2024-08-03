@@ -8,9 +8,14 @@ public class Main2154 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
-        for(int i=1; i<=n; i++) sb.append(i); //문자열 만들기
+        for(int i=1; i<=n; i++) {
+            sb.append(i); //문자열 만들기
+            if(sb.indexOf(String.valueOf(n)) > 0) {
+                bw.write(sb.indexOf(String.valueOf(n))+1 + "\n");
+                break;
+            }
+        }
         //출력
-        bw.write(sb.indexOf(String.valueOf(n))+1 + "\n");
         bw.flush();
         bw.close();
         br.close();
