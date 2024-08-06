@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -18,7 +18,7 @@ public class Main1598 {
 //        int num2x = num2 % 4 == 0 ? 3 : num2 % 4 - 1;
 //        int num2y = num2 % 4 == 0 ? num1 / 4 - 1 : num2 / 4;
 
-        bw.write(Math.abs(getX(num1) - getX(num2) + 1) + Math.abs(getY(num1) - getY(num2) + 1) + "\n");
+        bw.write(Math.abs(getX(num1) - getX(num2)) + Math.abs(getY(num1) - getY(num2)) + "\n");
         bw.flush();
         bw.close();
         br.close();
