@@ -21,21 +21,25 @@ public class Main1440 {
         for(int i=0; i<3; i++) //입력
             time[i] = Integer.parseInt(st.nextToken());
 
-        for(int i=0; i<3; i++) {
-            //확인할 위치정보 arrayList 로 가지고 있기
-            List<Integer> index = new ArrayList<>() {{add(0);add(1);add(2);}};
-            if(time[i] > 0 && time[i] <= 12) { //시 체크
-                index.remove(i);
-                for (int j=0; j<2; j++) { //시를 제외한 나머지 칸들 확인
-                    if (time[index.get(j)] >= 0 && time[index.get(j)] < 60) { //분 체크
-                        int sec = j==0 ? 1 : 0;
-                        if (time[sec] >= 0 && time[sec] < 60) { //초 체크
-                            count++;
-                        }
-                    }
-                }
-            }
+        //0번이 시
+        if(time[0] > 0 && time[0] <= 12) {
+            //분, 초 체크
+            if(time[1] < 60 && time[2] < 60) count++;
+            if(time[2] < 60 && time[1] < 60) count++;
         }
+        //1번이 시
+        if(time[1] > 0 && time[1] <= 12) {
+            //분, 초 체크
+            if(time[0] < 60 && time[2] < 60) count++;
+            if(time[2] < 60 && time[0] < 60) count++;
+        }
+        //2번이 시
+        if(time[2] > 0 && time[2] <= 12) {
+            //분, 초 체크
+            if(time[1] < 60 && time[2] < 60) count++;
+            if(time[0] < 60 && time[0] < 60) count++;
+        }
+
         //출력
         bw.write(count + "\n");
         bw.flush();
