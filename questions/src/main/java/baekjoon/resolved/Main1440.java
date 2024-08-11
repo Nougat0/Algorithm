@@ -21,24 +21,14 @@ public class Main1440 {
         for(int i=0; i<3; i++) //입력
             time[i] = Integer.parseInt(st.nextToken());
 
-        //0번이 시
-        if(time[0] > 0 && time[0] <= 12) {
-            //분, 초 체크
-            if(time[1] < 60 && time[2] < 60) count++;
-            if(time[2] < 60 && time[1] < 60) count++;
-        }
-        //1번이 시
-        if(time[1] > 0 && time[1] <= 12) {
-            //분, 초 체크
-            if(time[0] < 60 && time[2] < 60) count++;
-            if(time[2] < 60 && time[0] < 60) count++;
-        }
-        //2번이 시
-        if(time[2] > 0 && time[2] <= 12) {
-            //분, 초 체크
-            if(time[1] < 60 && time[0] < 60) count++;
-            if(time[0] < 60 && time[1] < 60) count++;
-        }
+        for(int h=0; h<3; h++) //h(시간)
+            for(int m=0; m<3; m++) { //m(분)
+                if(h==m) continue; //같은자리 조회 시 넘김
+                for(int s=0; s<3; s++) { //s(초)
+                    if(m==s || h==s) continue; //같은자리 조회 시 넘김
+                    if(time[h] > 0 && time[h] <= 12 && time[m] < 60 && time[s] < 60) count++;
+                }
+            }
 
         //출력
         bw.write(count + "\n");
