@@ -36,8 +36,8 @@ public class Main1440 {
         //2번이 시
         if(time[2] > 0 && time[2] <= 12) {
             //분, 초 체크
-            if(time[1] < 60 && time[2] < 60) count++;
-            if(time[0] < 60 && time[0] < 60) count++;
+            if(time[1] < 60 && time[0] < 60) count++;
+            if(time[0] < 60 && time[1] < 60) count++;
         }
 
         //출력
