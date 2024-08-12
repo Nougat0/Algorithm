@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.Arrays;
@@ -43,8 +43,10 @@ public class Main1942 {
                     startArr[1] = 0;
                     startArr[2] = 0;
                 }
-                if(startArr[0] == endArr[0] && startArr[1] == endArr[1] && startArr[2] == endArr[2])
+                if(startArr[0] == endArr[0] && startArr[1] == endArr[1] && startArr[2] == endArr[2]) {
+                    if(check3ModIs0(startArr)) count++; //마지막 수는 따로 확인
                     same = true;
+                }
             }
             bw.write(count + "\n");
         }
@@ -52,7 +54,12 @@ public class Main1942 {
         bw.close();
         br.close();
     }
-
+    
+    /**
+     * 전달된 시간 배열의 시간정수가 3의 배수인지 확인하는 함수
+     * @param arr
+     * @return 3의 정수일 경우 true, 아닐 경우 false
+     */
     static boolean check3ModIs0(int[] arr) {
         return Integer.parseInt(String.format("%02d%02d%02d", arr[0], arr[1], arr[2])) % 3 == 0;
     }
