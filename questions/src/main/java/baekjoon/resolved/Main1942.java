@@ -61,6 +61,7 @@ public class Main1942 {
      * @return 3의 정수일 경우 true, 아닐 경우 false
      */
     static boolean check3ModIs0(int[] arr) {
-        return Integer.parseInt(String.format("%02d%02d%02d", arr[0], arr[1], arr[2])) % 3 == 0;
+        int num = arr[0] * 10000 + arr[1] * 100 + arr[2];
+        return num % 3 == 0;
     }
 }
