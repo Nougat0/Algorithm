@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -14,19 +14,19 @@ public class Main2445 {
         for(int i=1; i<n; i++) {
             for(int j=0; j<i; j++) //별 찍기
                 sb.append(star);
-            for(int j=i; j<2*n-i-1; j++) //빈칸 찍기
+            for(int j=i; j<2*n-i; j++) //빈칸 찍기
                 sb.append(blank);
             for(int j=0; j<i; j++) //별 찍기
                 sb.append(star);
             sb.append(newLine);
         }
-        for(int i=1; i<2*n; i++) //가운데 줄 찍기
+        for(int i=0; i<2*n; i++) //가운데 줄 찍기
             sb.append(star);
         sb.append(newLine);
         for(int i=n; i>0; i--) {
             for(int j=1; j<i; j++) //별 찍기
                 sb.append(star);
-            for(int j=2*n-i; j>i-1; j--) //빈칸 찍기
+            for(int j=2*n-i; j>i-2; j--) //빈칸 찍기
                 sb.append(blank);
             for(int j=1; j<i; j++) //별 찍기
                 sb.append(star);
