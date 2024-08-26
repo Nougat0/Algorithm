@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -15,7 +15,7 @@ public class Main2447 {
         boolean[][] square = new boolean[n][n]; //true: blank, false: star
 
         //재귀함수로 구멍 뚫기
-        pinchHoles(square, 0, 0, n);
+        punchHoles(square, 0, 0, n);
 
         //결과 출력
         for(int i=0; i<n; i++) {
@@ -37,7 +37,7 @@ public class Main2447 {
      * @param yStart 현재 칸의 y 시작값
      * @param cellSize 현재 칸의 크기
      */
-    private static void pinchHoles(boolean[][] square, int xStart, int yStart, int cellSize) {
+    private static void punchHoles(boolean[][] square, int xStart, int yStart, int cellSize) {
         if(cellSize == 1) return;
         int nextCellSize = cellSize/3;
         // 3*3 = 9개 칸으로 생각
@@ -50,7 +50,7 @@ public class Main2447 {
                             square[k][l] = true;
                 } else {
                     //그 외 칸: 재귀함수 실행
-                    pinchHoles(square,xStart+nextCellSize*i, yStart+nextCellSize*j, nextCellSize);
+                    punchHoles(square,xStart+nextCellSize*i, yStart+nextCellSize*j, nextCellSize);
                 }
     }
 }
