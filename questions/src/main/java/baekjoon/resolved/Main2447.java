@@ -30,7 +30,7 @@ public class Main2447 {
 
     /**
      * 전달받은 square 배열을 9개의 정사각형 칸을 가진 것으로 간주하고,
-     * 정 가운데 칸만 뚫고 나머지 칸은 다시 pinchHoles 재귀호출을 함
+     * 정 가운데 칸만 뚫고 나머지 칸은 다시 punchHoles 재귀호출을 함
      * 최종적으로 cellSize 3까지만 구멍 뚫기 진행
      * @param square 구멍을 뚫을 배열
      * @param xStart 현재 칸의 x 시작값
