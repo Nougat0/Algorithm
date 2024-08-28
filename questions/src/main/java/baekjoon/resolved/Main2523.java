@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -14,8 +14,6 @@ public class Main2523 {
         for(int i=1; i<n; i++){
             for(int j=n-i; j<n; j++)
                 sb.append(star);
-//            for(int j=0; j<n-i; j++)
-//                sb.append(blank);
             sb.append(newLine);
         }
         for(int i=1; i<=n; i++)
@@ -24,8 +22,6 @@ public class Main2523 {
         for(int i=n-1; i>0; i--){
             for(int j=i; j>0; j--)
                 sb.append(star);
-//            for(int j=n-i; j>0; j--)
-//                sb.append(blank);
             sb.append(newLine);
         }
 
