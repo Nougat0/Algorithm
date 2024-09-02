@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -16,7 +16,6 @@ public class Main10995 {
             }
             bw.newLine();
         }
-
         bw.flush();
         bw.close();
         br.close();
