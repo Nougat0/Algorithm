@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -33,8 +33,10 @@ public class Main10997 {
         }
         //출력
         for(int i=0; i<maxY; i++) {
-            for(int j=0; j<maxX; j++)
+            for(int j=0; j<maxX; j++) {
+                if(i==1 && j>0) continue; //공백만 찍다가 줄이 끝날 경우 예외처리
                 bw.write(whirl[i][j] ? star : blank);
+            }
             bw.newLine();
         }
         bw.flush();
