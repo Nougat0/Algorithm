@@ -1,12 +1,11 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
 public class Main13015 {
     public static final String star = "*";
     public static final String blank = " ";
-    public static final String newLine = "\n";
-    // >><< 모양 만들기
+    // 뚜껑/바닥 덮은 >><< 모양 만들기
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
