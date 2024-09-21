@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -22,6 +22,11 @@ public class Main1526 {
         br.close();
     }
 
+    /**
+     * 금민수인지 확인하고 반환하는 로직
+     * @param number 확인할 수
+     * return number가 금민수인지 여부
+     */
     public static boolean checkGoldMin(int number) {
         boolean isGoldMin = true;
         //n 자릿수 확인 (n>1)
