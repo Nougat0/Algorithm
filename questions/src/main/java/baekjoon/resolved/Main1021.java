@@ -20,6 +20,10 @@ public class Main1021 {
         for(int i=0; i<m; i++) {
             int nextTarget = Integer.parseInt(st.nextToken());
             int index = que.indexOf(nextTarget);
+
+            //int straightMove = Math.abs(index - pointer);
+            //int aroundMove = que.size() + straightMove;
+
             if(pointer != index) {
                 //단순 크다 작다로 판단할 게 아니라 move 갯수를 확인하고 움직일 것
                 if(pointer < index) {
