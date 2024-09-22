@@ -38,16 +38,16 @@ public class Main1408 {
         former = nextDay ? nowTime : startTime;
         latter = nextDay ? startTime : nowTime;
 
-        int hour = latter[0] - former[0];
-        int minute = latter[1] - former[1];
-        if(minute < 0) {
-            hour--;
-            minute += 60;
-        }
         int second = latter[2] - former[2];
+        int minute = latter[1] - former[1];
+        int hour = latter[0] - former[0];
         if(second < 0) {
             minute--;
             second += 60;
+        }
+        if(minute < 0) {
+            hour--;
+            minute += 60;
         }
         if(!nextDay) { //임무시작 다음날이 아니라면 24시간에서 지나간 시간을 빼기
             second = 60 - second;
