@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -10,7 +10,7 @@ public class Main10699 {
         //서울 오늘 날짜 구하기
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setTimeZone(TimeZone.getTimeZone("KST"));
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul")); //KST는 안된다...
         //출력
         bw.write(sdf.format(today));
         bw.newLine();
