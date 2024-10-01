@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -12,7 +12,7 @@ public class Main26575 {
         for(int i=0; i<testCase; i++) {
             //입력
             st = new StringTokenizer(br.readLine());
-            int dogCnt = Integer.parseInt(st.nextToken());
+            double dogCnt = Double.parseDouble(st.nextToken());
             double foodPerDogInPounds = Double.parseDouble(st.nextToken());
             double foodPricePerPound = Double.parseDouble(st.nextToken());
             //연산 및 소수점 2자리까지 반올림
