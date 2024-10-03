@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -21,9 +21,11 @@ public class Main15803 {
         직선방정식 기울기 연산
         (y = ax+b // y-ax = b // y'-y = ax'-ax // a = y'-y / x'-x )
          */
-        if((location[0][1]-location[1][1])/(location[0][0]-location[1][0])
-                == (location[1][1]-location[2][1])/(location[1][0]-location[2][0]))
-            bw.write(aligned);
+        if(location[0][0] == location[1][0] && location[0][0] == location[2][0] //x좌표 모두 일치
+                || location[0][1] == location[1][1] && location[0][1] == location[2][1] //y좌표 모두 일치
+                || (location[0][1]-location[1][1])/(location[0][0]-location[1][0]) //직선방정식 기울기 연산
+                == (location[1][1]-location[2][1])/(location[1][0]-location[2][0])
+        ) bw.write(aligned);
         else bw.write(notAligned);
 
         bw.newLine();
