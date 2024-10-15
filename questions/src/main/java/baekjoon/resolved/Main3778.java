@@ -18,14 +18,13 @@ public class Main3778 {
             if(firstLength == 0 || secondLength == 0) { //단어 길이 == 0
                 countDistance = Math.max(firstLength, secondLength);
             } else { //단어 길이 > 0
-                //알파벳별로 등장개수 확인
-                int[] first = new int[26];
-                int[] second = new int[26];
-                for(int a=0; a<firstLength; a++) first[firstWord[a]-97]++; 
-                for(int a=0; a<secondLength; a++) second[secondWord[a]-97]++; 
+                //알파벳별로 등장개수 확인 -> 둘이 같다면 0이 될 것, 같지 않다면 0이 아님
+                int[] alphabetUsed = new int[26];
+                for(int a=0; a<firstLength; a++) alphabetUsed[firstWord[a]-97]++;
+                for(int a=0; a<secondLength; a++) alphabetUsed[secondWord[a]-97]--;
                 int distance;
                 for(int a=0; a<26; a++) { //알파벳별 차이 확인
-                    distance = Math.abs(first[a] - second[a]);
+                    distance = Math.abs(alphabetUsed[a]);
                     //차이나는 값은 모두 더하기
                     if(distance > 0) countDistance += distance;
                 }
