@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -7,8 +7,9 @@ public class Main3778 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         int testCase = Integer.parseInt(br.readLine());
-        for(int i=1; i<=testCase; i++) {
+        for(int i=1; i<=testCase; i++) { //테스트케이스별로 2개 line 읽기
             int countDistance = 0;
             char[] firstWord = br.readLine().toCharArray();
             char[] secondWord = br.readLine().toCharArray();
@@ -29,8 +30,9 @@ public class Main3778 {
                     if(distance > 0) countDistance += distance;
                 }
             }
-            bw.write(String.format("Case #%d: %d%n", i, countDistance));
+            sb.append("Case #").append(i).append(": ").append(countDistance).append("\n");
         }
+        bw.write(sb.toString());
         bw.flush();
         bw.close();
         br.close();
