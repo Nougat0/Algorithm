@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -18,6 +18,7 @@ public class Main29724 {
         int totalWeight = 0; //총 질량
         int totalPrice = 0; //총 가격
         StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
         for(int i=0; i<boxes; i++) {
             st = new StringTokenizer(br.readLine());
             boolean boxType = st.nextToken().equals(apple); //true:사과, false:배
@@ -31,8 +32,9 @@ public class Main29724 {
                 totalPrice += apples*applePrice;
             }
         }
+        sb.append(totalWeight).append("\n").append(totalPrice).append("\n");
         //출력
-        bw.write(String.format("%d%n%d%n", totalWeight, totalPrice));
+        bw.write(sb.toString());
         bw.flush();
         bw.close();
         br.close();
