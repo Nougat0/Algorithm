@@ -17,10 +17,9 @@ public class Main4158 {
             int sameCDs = 0;
             List<Integer> listOfCDs = new ArrayList<>();
             for(int i=0; i<sangCDs; i++) listOfCDs.add(Integer.parseInt(br.readLine()));
-            for(int i=0; i<sunCDs; i++) {
-                int numberOfCD = Integer.parseInt(br.readLine());
-                if(listOfCDs.contains(numberOfCD)) sameCDs++; //같이 갖고 있는지만 확인
-            }
+            for(int i=0; i<sunCDs; i++)
+                if(listOfCDs.contains(Integer.parseInt(br.readLine())))
+                    sameCDs++; //같이 갖고 있는 CD
             bw.write(sameCDs + "\n");
         }
         bw.flush();
