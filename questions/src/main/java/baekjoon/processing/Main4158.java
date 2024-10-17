@@ -1,12 +1,9 @@
 package baekjoon.processing;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main4158 {
-    public static final int maxCDNo = 1000000000; //CD 번호 최대값
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -16,13 +13,14 @@ public class Main4158 {
             st = new StringTokenizer(testCase);
             int sangCDs = Integer.parseInt(st.nextToken());
             int sunCDs = Integer.parseInt(st.nextToken());
-            boolean[] sangCDList = new boolean[maxCDNo];
-            boolean[] sunCDList = new boolean[maxCDNo];
-            for(int i=0; i<sangCDs; i++) sangCDList[Integer.parseInt(br.readLine())] = true;
-            for(int i=0; i<sunCDs; i++) sunCDList[Integer.parseInt(br.readLine())] = true;
-
+            //각자 갖고 있는 CD 번호 입력 및 대조
             int sameCDs = 0;
-            for(int i=0; i<maxCDNo; i++) if(sangCDList[i] && sunCDList[i]) sameCDs++;
+            List<Integer> listOfCDs = new ArrayList<>();
+            for(int i=0; i<sangCDs; i++) listOfCDs.add(Integer.parseInt(br.readLine()));
+            for(int i=0; i<sunCDs; i++) {
+                int numberOfCD = Integer.parseInt(br.readLine());
+                if(listOfCDs.contains(numberOfCD)) sameCDs++; //같이 갖고 있는지만 확인
+            }
             bw.write(sameCDs + "\n");
         }
         bw.flush();
