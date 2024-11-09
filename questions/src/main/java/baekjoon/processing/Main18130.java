@@ -26,7 +26,7 @@ public class Main18130 {
             int timeflow = fanInfo[1], section = 1; //추가비용 첫 구간으로 초기화
             while(timeflow < time) {
                 //추가비용 부과
-                expense += section*fanInfo[2];
+                expense += (long) section*fanInfo[2];
                 //다음 추가비용 부과구간
                 timeflow += fanInfo[1];
                 section++;
