@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -12,6 +12,7 @@ public class Main30156 {
         for(byte b=0; b<n; b++) {
             char[] balloons = br.readLine().toCharArray();
             for(char balloon : balloons) colors[b][balloon - 97]++;
+            //두 색상 중 최소값을 제출
             sb.append(Math.min(colors[b][0], colors[b][1])).append("\n");
         }
         bw.write(sb.toString());
