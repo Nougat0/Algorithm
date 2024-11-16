@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -22,7 +22,7 @@ public class Main27481 {
                     }
             } //오른쪽부터 들어가기
             else if(customers[c] == 'R') {
-                for(int i=9; i>0; i--)
+                for(int i=9; i>=0; i--)
                     if(!rooms[i]) {
                         rooms[i] = true;
                         break;
