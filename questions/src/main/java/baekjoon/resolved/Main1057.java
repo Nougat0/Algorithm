@@ -39,7 +39,7 @@ public class Main1057 {
         int min = Math.min(number1, number2);
         int max = Math.max(number1, number2);
 
-        if(min/2 + 1 == max/2 && min%2 == 1 && max%2 == 0) return true;
+        if(min/2 + 1 == max/2 && Math.abs(min - max) == 1) return true;
         else return false;
     }
 }
