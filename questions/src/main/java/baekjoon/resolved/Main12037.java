@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -21,19 +21,16 @@ public class Main12037 {
             c = Integer.parseInt(st.nextToken());
             v = Integer.parseInt(st.nextToken());
             l = Integer.parseInt(st.nextToken());
-            //모음만 조합한 수
             long validWords = 0;
+            //[1] 모음만 조합한 수
             validWords += Math.pow(v, l);
-            //자음 포함 (자음+모음) -> 2자리 차지하는 새로운 모음
+            //[2] 자음 포함 (자음+모음) -> 2자리 차지하는 새로운 모음
             for(int i=1; i<=l/2; i++) {//i:포함할 자음 개수(종류X)
-                long factor = 1, addWords = c*v;
-                if(l-i > 1) {
-                    factor = getFactorial(l-i);
-                    //자음이 들어갈 자리는 구분되지 않으므로 같은 것 정렬 제거 -> /2 해줘야 함
-                    //나머지 모음 자리들의 조합 곱해주기
-                    addWords *= (long) (factor/2 * Math.pow(v, l-i));
-                }
-                validWords += addWords;
+                int newLength = l-i; //추가된 자음 개수에 따른 length
+                //조합 계산 -> newLength 중에서 자음이 들어갈 자리 i곳의 경우의 수
+                long factor = getFactorial(newLength) / (getFactorial(i) * getFactorial(newLength - i));
+                //나머지 자리에 들어갈 모음의 경우의 수 곱하기, 배치된 자음자릿수에 들어갈 자음의 종류에 따른 경우의 수
+                validWords += (long) (factor * Math.pow(v, newLength) * Math.pow(c, i)); 
             }
             sb.append("Case #").append(t+1).append(": ").append(validWords % 1000000007).append("\n");
         }
