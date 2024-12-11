@@ -9,44 +9,30 @@ public class Main10989 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
-        for(int i=0; i<n; i++) arr[i] = Integer.parseInt(br.readLine());
+        int[] inputArr = new int[n];
+        int[] outputArr = new int[n];
+        int[] countingSort = new int[10001];
+        for(int i=0; i<n; i++) {
+            inputArr[i] = Integer.parseInt(br.readLine());
+            countingSort[inputArr[i]]++;
+        }
         br.close();
-        //병합정렬법 사용
-        mergeSort(arr, n);
+        //CountingSort 방식 사용
+        for(int i=1; i<=10000; i++) {
+            countingSort[i] = countingSort[i-1] + countingSort[i];
+        }
+        for(int i=n-1; i>=0; i--) {
+            int outputIndex = countingSort[inputArr[i]]-1; //이번 인덱스
+            outputArr[outputIndex] = inputArr[i]; //출력배열 특정위치(인덱스)에 값 넣기
+            countingSort[inputArr[i]]--; //같은 수의 다음인덱스 업데이트
+        }
+        
         //출력
         for(int i=0; i<n; i++) {
-            sb.append(arr[i]);
-            if(i<n-1) sb.append("\n");
+            sb.append(outputArr[i]).append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
         bw.close();
-    }
-    public static void mergeSort(int[] origin, int n) {
-        if(n < 2) return; //배열크기가 2보다 작을 시 실행중단
-
-        int mid = n/2; //중앙값 index
-        int[] one = new int[mid]; //좌측 배열
-        int[] two = new int[n-mid]; //우측 배열
-
-        for(int i=0; i<mid; i++) {//좌측 배열 복사
-            one[i] = origin[i];
-        }
-        for(int i=mid; i<n; i++) {//우측 배열 복사
-            two[i-mid] = origin[i];
-        }
-        mergeSort(one, mid); //재귀호출
-        mergeSort(two, n-mid); //재귀호출
-        merge(origin, one, two, mid, n-mid); //병합
-    }
-    public static void merge(int[] origin, int[] one, int[] two, int left, int right) {
-        int i=0, j=0, k=0;
-        while(i<left && j<right) {
-            if(one[i] <= two[j]) origin[k++] = one[i++];
-            else origin[k++] = two[j++];
-        }
-        while(i<left) origin[k++] = one[i++];
-        while(j<right) origin[k++] = two[j++];
     }
 }
