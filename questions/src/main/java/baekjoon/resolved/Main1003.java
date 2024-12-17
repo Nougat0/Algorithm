@@ -1,10 +1,10 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
 
 public class Main1003 {
-    public static Fibonacci[] add = new Fibonacci[41];
+    public static Fibonacci[] add = new Fibonacci[41]; //저장된 피보나치 0,1 호출 수
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -21,8 +21,8 @@ public class Main1003 {
     }
 
     public static class Fibonacci {
-        int zeroCount;
-        int oneCount;
+        int zeroCount; //0의 개수
+        int oneCount; //1의 개수
 
         public Fibonacci() {
             this.zeroCount = 0;
@@ -34,10 +34,12 @@ public class Main1003 {
             this.oneCount = oneCount;
         }
 
+        //피보나치 결과값(0, 1의 호출회수)
         public Fibonacci add(Fibonacci f) {
             return new Fibonacci(this.zeroCount + f.zeroCount, this.oneCount + f.oneCount);
         }
 
+        //n에 대한 0과 1의 호출회수 구하기(재귀)
         public Fibonacci count(int n) {
             Fibonacci result = new Fibonacci(0,0);
             /*값이 이미 계산되었을 경우*/
@@ -60,6 +62,7 @@ public class Main1003 {
             return result;
         }
 
+        //호출된 count(0), count(1) 의 개수 출력
         public void printString(StringBuilder sb) {
             sb.append(zeroCount).append(" ").append(oneCount).append("\n");
         }
