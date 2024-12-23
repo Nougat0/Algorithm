@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -27,10 +27,38 @@ public class Main11068 {
      */
     public static int checkPalindromeForRadixes(int number) {
         for(int b=2; b<=64; b++) {
-            String str = Integer.toString(number,b);
+            String str = convertToRadix(number, b);
             if(isPalindrome(str)) return 1;
         }
         return 0;
+    }
+
+    /**
+     * 10진수를 N진수로 변환
+     * 각 나머지는 다음처럼 표기함.
+     * 1) 0~9 : 0~9,
+     * 2) 10~35 : a~z,
+     * 3) 36~61 : A~Z,
+     * 4) 62~64 : #,$,%
+     * @param number N (2<= N <= 64)
+     * @return 변환된 문자열
+     */
+    public static String convertToRadix(int number, int radix) {
+        StringBuilder result = new StringBuilder();
+        while(number > 0) {
+            int remainder = number % radix;
+            if(remainder >= 62) {
+                result.append((char) (remainder - 62 + '#')); //#, $, %
+            } else if(remainder >= 36) {
+                result.append((char) (remainder - 37 + 'A')); //A~Z
+            } else if(remainder >= 10) {
+                result.append((char) (remainder - 10 + 'a')); //a~z
+            } else {
+                result.append(remainder); //0~9
+            }
+            number /= radix;
+        }
+        return result.toString();
     }
 
     /**
