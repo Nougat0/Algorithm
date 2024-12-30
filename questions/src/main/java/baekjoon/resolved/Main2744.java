@@ -1,7 +1,7 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 
 public class Main2744 {
     public static void main(String[] args) throws IOException {
