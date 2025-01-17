@@ -13,11 +13,17 @@ public class Main28470 {
         StringTokenizer st;
         //입력
         int repeat = Integer.parseInt(br.readLine());
-        double[][] input = new double[3][repeat];
+        int[][] input = new int[3][repeat];
         for(int i=0; i<3; i++) {
             st = new StringTokenizer(br.readLine());
             for(int j=0; j<repeat; j++) {
-                input[i][j] = Double.parseDouble(st.nextToken());
+                int value;
+                if(i == RATE) { //부동소수점 제거를 위해 입력 시 *10
+                    value = (int) (Double.parseDouble(st.nextToken()) * 10);
+                } else {
+                    value = Integer.parseInt(st.nextToken());
+                }
+                input[i][j] = value;
             }
         }
         //연산
@@ -26,9 +32,9 @@ public class Main28470 {
             //각 동작 시 순서 정하기
             //먼저 하는 동작이 정해진 값에서 RATE만큼 변함
             //증가량 vs 감소량 비교해서 아드레날린 보존가능한 방향으로 정하기
-            double hitFirst = Math.floor(input[INCREASE][i]*input[RATE][i]) - input[DECREASE][i];
-            double duckFirst = input[INCREASE][i] - Math.floor(input[DECREASE][i]*input[RATE][i]);
-            adrenaline += Math.max(hitFirst, duckFirst);
+            double hitFirst = Math.floor(input[INCREASE][i]*input[RATE][i]/10.0) - input[DECREASE][i];
+            double duckFirst = input[INCREASE][i] - Math.floor(input[DECREASE][i]*input[RATE][i]/10.0);
+            adrenaline += (int) Math.max(hitFirst, duckFirst);
         }
         bw.write(adrenaline + "\n");
         bw.flush();
