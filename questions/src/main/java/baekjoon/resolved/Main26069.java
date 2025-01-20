@@ -22,24 +22,16 @@ public class Main26069 {
                 infectionStart = (meet[0].charAt(0) == 'C' && meet[0].equals(Chong) || meet[1].charAt(0) == 'C' && meet[1].equals(Chong));
                 if(infectionStart) {
                     //총총이를 만났으므로 춤추는 목록에 추가
-                    for(int j=0; j<2; j++) {
-                        danceList.add(meet[j]);
-                    }
+                    danceList.addAll(List.of(meet));
                     danceCnt++;
                 }
             } else {
-                int dancing = 0;
+                boolean dancing1 = danceList.contains(meet[0]);
+                boolean dancing2 = danceList.contains(meet[1]);
                 //앞사람이나 뒷사람이 춤을 추고 있는지 확인
-                for(int j=0; j<2; j++) {
-                    if(danceList.contains(meet[j])) {
-                        dancing++;
-                    }
-                }
-                //한 명만 춤추고 있다면 둘 다 춤추게 만들기
-                if(dancing == 1) {
-                    for(int j=0; j<2; j++) {
-                        danceList.add(meet[j]);
-                    }
+                if(dancing1 ^ dancing2) {
+                    //한 명만 춤추고 있다면 둘 다 춤추게 만들기
+                    danceList.addAll(List.of(meet));
                     danceCnt++;
                 }
             }
