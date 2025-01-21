@@ -8,7 +8,6 @@ public class Main26069 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
-        String[] meet;
         //초기화
         int danceCnt = 1; //최초 춤추는 사람(토끼): 총총이 1명
         Set<String> danceList = new HashSet<>(); //춤추는 사람 목록
@@ -17,13 +16,15 @@ public class Main26069 {
         int count = Integer.parseInt(br.readLine());
         for(int i=0; i<count; i++) {
             st = new StringTokenizer(br.readLine());
-            meet = new String[] {st.nextToken(), st.nextToken()};
-            boolean dancing1 = danceList.contains(meet[0]);
-            boolean dancing2 = danceList.contains(meet[1]);
+            String person1 = st.nextToken();
+            String person2 = st.nextToken();
+            boolean dancing1 = danceList.contains(person1);
+            boolean dancing2 = danceList.contains(person2);
             //앞사람이나 뒷사람이 춤을 추고 있는지 확인
             if(dancing1 ^ dancing2) {
                 //한 명만 춤추고 있다면 둘 다 춤추게 만들기
-                danceList.addAll(List.of(meet));
+                if(dancing1) danceList.add(person2);
+                else if(dancing2) danceList.add(person1);
                 danceCnt++;
             }
         }
