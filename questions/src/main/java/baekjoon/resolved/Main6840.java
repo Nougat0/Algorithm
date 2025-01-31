@@ -11,14 +11,12 @@ public class Main6840 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        //입력
+        //입력 + 바로 연산
         int[] bowls = new int[BOWLS];
+        int biggest = 0, smallest = 0, middle = 0;
+        //단순 정렬보다 재밌어 보여서 해봤는데... 실효성은 없는 듯?
         for(int i=0; i<BOWLS; i++) {
             bowls[i] = Integer.parseInt(br.readLine());
-        }
-        //단순 정렬보다 재밌어 보여서 해봤는데... 실효성은 없는 듯?
-        int biggest = 0, smallest = 0, middle = 0;
-        for(int i=0; i<BOWLS; i++) {
             if(biggest == 0 && smallest == 0) {
                 //초기값 지정
                 biggest = bowls[i];
