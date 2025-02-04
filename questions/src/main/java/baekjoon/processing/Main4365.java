@@ -19,11 +19,12 @@ public class Main4365 {
         Deck deck = new Deck(shuffles);
         //예제에는 1줄에 26개 숫자가 존재하나... 문제 조건으로는 명시되지 않음
         //셔플정보 입력받음 -> 개수 제한 없이...
-        int index = 0, shuffleCount = 0;
-        while(shuffleCount < shuffles) {
+        int index = 0, shuffleCount = 0, totalShuffleCount = 0;
+        while(totalShuffleCount < shuffles*FULL_DECK) {
             st = new StringTokenizer(br.readLine());
             while(st.hasMoreTokens()) {
                 deck.shuffle[shuffleCount][index++] = Integer.parseInt(st.nextToken());
+                totalShuffleCount++;
                 //입력받다가 FULL_DECK 에 도달하면 알아서 다음 셔플정보로 입력하기
                 if(index == FULL_DECK) {
                     shuffleCount++;
