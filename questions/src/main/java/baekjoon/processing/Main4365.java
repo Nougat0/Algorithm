@@ -6,6 +6,7 @@ import java.util.*;
 public class Main4365 {
     /*
     입력된 셔플 순서는 부가적으로 주어진다... 무조건 입력순서대로 셔플한 것이 아님
+    셔플 정보로 주어지는 Integer들은 한 줄에 개수제한이 따로 없는 듯...?
      */
     public static final int FULL_DECK = 52;
     public static void main(String[] args) throws IOException {
@@ -17,19 +18,17 @@ public class Main4365 {
         int[][] organizedShuffle = new int[shuffles][FULL_DECK]; //정렬된 셔플 저장용 배열
         Deck deck = new Deck(shuffles);
         //예제에는 1줄에 26개 숫자가 존재하나... 문제 조건으로는 명시되지 않음
-        //셔플정보 입력받음
+        //셔플정보 입력받음 -> 개수 제한 없이...
         int index = 0, shuffleCount = 0;
-        for(int i=0; i<shuffles*2; i++) {
+        while(shuffleCount < shuffles) {
             st = new StringTokenizer(br.readLine());
-            for(int j=index; j<index+FULL_DECK/2; j++) {
-                deck.shuffle[shuffleCount][j] = Integer.parseInt(st.nextToken());
-            }
-            //인덱스 값 조정
-            if(index == FULL_DECK/2) {
-                index = 0;
-                shuffleCount++;
-            } else {
-                index += 26;
+            while(st.hasMoreTokens()) {
+                deck.shuffle[shuffleCount][index++] = Integer.parseInt(st.nextToken());
+                //입력받다가 FULL_DECK 에 도달하면 알아서 다음 셔플정보로 입력하기
+                if(index == FULL_DECK) {
+                    shuffleCount++;
+                    index = 0;
+                }
             }
         }
         //셔플 순서대로 정렬
@@ -101,6 +100,7 @@ public class Main4365 {
         int value; //2~10, Jack, Queen, King, Ace
 
         public Card(int suit, int value) {
+            //순서로만 입력받고 인쇄 시 실제 값으로 변환
             this.suit = suit;
             this.value = value;
         }
