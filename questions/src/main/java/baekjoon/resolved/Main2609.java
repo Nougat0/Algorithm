@@ -1,7 +1,7 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main2609 {
     /*
