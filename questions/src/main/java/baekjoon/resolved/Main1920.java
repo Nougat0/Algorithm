@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -19,7 +19,7 @@ public class Main1920 {
         //비교대상 숫자들 목록 - 존재여부 확인
         int m = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
-        for(int i=0; i<n; i++) {
+        for(int i=0; i<m; i++) {
             boolean inList = nSet.contains(Integer.parseInt(st.nextToken()));
             sb.append(inList ? 1 : 0).append("\n");
         }
