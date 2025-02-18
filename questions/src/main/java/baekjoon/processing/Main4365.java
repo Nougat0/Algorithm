@@ -5,8 +5,12 @@ import java.util.*;
 
 public class Main4365 {
     /*
-    입력된 셔플 순서는 부가적으로 주어진다... 무조건 입력순서대로 셔플한 것이 아님
-    셔플 정보로 주어지는 Integer들은 한 줄에 개수제한이 따로 없는 듯...?
+    일전에 문제를 완전히 잘못 이해하고 풀었음... 수정함
+
+    입력: 1) 존재하는 셔플 정보 모음 -> 2) 진행하는 셔플 번호
+    셔플 정보로 주어지는 Integer들은 한 줄에 개수 제한이 따로 없음! Integer 총 개수만 알 수 있음
+    입력된 셔플 정보가 모두 사용되는 것도 아님!!
+    셔플 진행 횟수는 명시되지 않음... EOF 감지로 예상하고 구현함
      */
     public static final int FULL_DECK = 52;
     public static void main(String[] args) throws IOException {
@@ -14,34 +18,25 @@ public class Main4365 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         StringTokenizer st;
-        int shuffles = Integer.parseInt(br.readLine()); //셔플 개수
-        int[][] organizedShuffle = new int[shuffles][FULL_DECK]; //정렬된 셔플 저장용 배열
+        int shuffles = Integer.parseInt(br.readLine()); //셔플 정보 개수
         Deck deck = new Deck(shuffles);
-        //예제에는 1줄에 26개 숫자가 존재하나... 문제 조건으로는 명시되지 않음
-        //셔플정보 입력받음 -> 개수 제한 없이...
-        int index = 0, shuffleCount = 0, totalShuffleCount = 0;
-        while(totalShuffleCount < shuffles*FULL_DECK) {
+        //예제에는 1줄에 26개 숫자가 존재하나... 문제 조건으로는 줄당 Integer 개수 제한이 명시되지 않음
+        int index = 0;
+        while(index < shuffles*FULL_DECK) {
             st = new StringTokenizer(br.readLine());
             while(st.hasMoreTokens()) {
-                deck.shuffle[shuffleCount][index++] = Integer.parseInt(st.nextToken());
-                totalShuffleCount++;
-                //입력받다가 FULL_DECK 에 도달하면 알아서 다음 셔플정보로 입력하기
-                if(index == FULL_DECK) {
-                    shuffleCount++;
-                    index = 0;
-                }
+                deck.shuffle[index / FULL_DECK][index % FULL_DECK] = Integer.parseInt(st.nextToken());
+                index++;
             }
         }
-        //셔플 순서대로 정렬
-        for(int i=0; i<shuffles; i++) {
-            int order = Integer.parseInt(br.readLine());
-            organizedShuffle[order - 1] = deck.shuffle[i];
-        }
-        deck.shuffle = organizedShuffle;
         //셔플 진행, 출력
-        for(int i=0; i<shuffles; i++) {
-            sb.append(deck.shuffle()); //셔플 진행 후 결과 출력
-            sb.append("\n"); //셔플 사이 공백
+        String shuffleNumber;
+        boolean start = false;
+        while((shuffleNumber = br.readLine()) != null) {
+            if(!start) start = true; //첫 결과물 이후 공백 넣기
+            else sb.append("\n"); //셔플 사이 공백
+            //셔플 진행 후 결과 출력
+            sb.append(deck.shuffle(Integer.parseInt(shuffleNumber)));
         }
         bw.write(sb.toString());
         bw.flush();
@@ -50,12 +45,11 @@ public class Main4365 {
     }
 
     /**
-     * 전체 카드 순서, 셔플 진행하는 클래스
+     * 전체 카드 순서 저장, 셔플 진행하는 클래스
      */
     public static class Deck {
         Card[] cards; //현재 카드 (52개)
         int[][] shuffle; //셔플 순서와 동작
-        int shuffleTurn; //셔플 진행할 순번
 
         public Deck(int shuffleCnt) {
             //카드 덱 초기화
@@ -71,10 +65,11 @@ public class Main4365 {
 
         /**
          * 셔플 동작 1회 진행
+         * @param order 입력된 셔플 종류들 중 진행할 셔플의 순서
          * @return 셔플 직후 카드 순서 toString()
          */
-        public String shuffle() {
-            int[] oneShuffle = shuffle[shuffleTurn++];
+        public String shuffle(int order) {
+            int[] oneShuffle = shuffle[order-1];
             Card[] shuffledCards = new Card[FULL_DECK];
             for(int j=0; j<FULL_DECK; j++) {
                 shuffledCards[j] = cards[oneShuffle[j] - 1];
