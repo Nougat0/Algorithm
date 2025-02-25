@@ -17,17 +17,9 @@ public class Main5671 {
             int max = Integer.parseInt(st.nextToken());
             int rooms = 0;
             for(int i=min; i<=max; i++) {
-                boolean[] numbers = new boolean[10];
-                char[] number = String.valueOf(i).toCharArray();
-                int index = 0, count = 0, length = number.length;
-                // 중복숫자가 나올 때까지 방번호 등장 숫자 탐색
-                while(index < length && !numbers[number[index] - 48]) {
-                    numbers[number[index++] - 48] = true;
-                    count++;
+                if(checkUsable(i)) {
+                    rooms++;
                 }
-                // 방 번호 길이보다 짧을 시 중복 등장
-                // count와 길이가 같을 경우에만 해당 번호 사용
-                if(count == length) rooms++;
             }
             sb.append(rooms).append("\n");
         }
@@ -35,5 +27,31 @@ public class Main5671 {
         bw.flush();
         bw.close();
         br.close();
+    }
+
+    /**
+     * 사용가능한 호실 번호인지 확인
+     * (중복되는 1의 자리 숫자 존재하는지 확인)
+     * @param n
+     * @return 중복존재: false, 중복없음: true
+     */
+    public static boolean checkUsable(int n) {
+        boolean[] numbers = new boolean[10];
+        //10~ 의 자리 체크
+        while(n/10 > 0) {
+            int number = n % 10;
+            if(numbers[number]) {
+                return false;
+            } else {
+                numbers[number] = true;
+            }
+            n /= 10;
+        }
+        //마지막 남은 1의 자리 체크
+        if(numbers[n]) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
