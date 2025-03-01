@@ -1,6 +1,7 @@
 package baekjoon.processing;
 
 import java.io.*;
+import java.math.*;
 import java.util.*;
 
 public class Main1788 {
@@ -16,9 +17,9 @@ public class Main1788 {
     }
 
     public static class Fibo {
-        long[] fiboSeq;
+        BigInteger[] fiboSeq;
         public Fibo() {
-            this.fiboSeq = new long[1000001];
+            this.fiboSeq = new BigInteger[1000001];
         }
 
         /**
@@ -38,27 +39,25 @@ public class Main1788 {
             else sb.append(-1);
             //둘째 줄 : 결과의 절대값 구하기
             int index = Math.abs(n); // 0 ~ 양수만 입력되게 함
-            long result = fibo(index);
-            sb.append("\n").append(result % 1000000000);
+            fibo(index);
+
+            BigInteger result = fiboSeq[n];
+            sb.append("\n").append(result.mod(BigInteger.valueOf(100000000)));
             return sb;
         }
 
         /**
          * 피보나치 수열 전개
          * Top-Down(재귀)
+         * -> Bottom-Up 으로 바꿈 (원인: StackOverFlowError)
          * @param n
          * @return
          */
-        public long fibo(int n) {
-            if(n == 0) return 0;
-            else if(n == 1) return 1;
-            else {
-                if(fiboSeq[n] > 0) {
-                    return fiboSeq[n];
-                } else {
-                    long result = fibo(n-1) + fibo(n-2);
-                    return (fiboSeq[n] = result);
-                }
+        public void fibo(int n) {
+            fiboSeq[0] = BigInteger.ZERO;
+            fiboSeq[1] = BigInteger.ONE;
+            for(int i=2; i<=n; i++) {
+                fiboSeq[i] = fiboSeq[i-1].add(fiboSeq[i-2]);
             }
         }
     }
