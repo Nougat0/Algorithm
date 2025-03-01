@@ -1,7 +1,6 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.math.*;
 import java.util.*;
 
 public class Main1788 {
@@ -17,9 +16,9 @@ public class Main1788 {
     }
 
     public static class Fibo {
-        BigInteger[] fiboSeq;
+        long[] fiboSeq;
         public Fibo() {
-            this.fiboSeq = new BigInteger[1000001];
+            this.fiboSeq = new long[1_000_001];
         }
 
         /**
@@ -28,8 +27,8 @@ public class Main1788 {
          * 다만 n이 음수일 때는 결과가 음수, 양수 번갈아가면서 나옴
          * f(-1)=1, f(-2)=-1, f(-3)=2, f(-4)=-3, f(-5)=5, ...
          * f(1)=1,  f(2)=1,   f(3)=2,   f(4)=3,  f(5)=5, ...
-         * @param n
-         * @return
+         * @param n x값
+         * @return {f(x)의 값이 음수면 -1, 0이면 0, 양수면 1}\n{f(x)의 절대값}
          */
         public StringBuilder fiboExpand(int n) {
             StringBuilder sb = new StringBuilder();
@@ -39,10 +38,9 @@ public class Main1788 {
             else sb.append(-1);
             //둘째 줄 : 결과의 절대값 구하기
             int index = Math.abs(n); // 0 ~ 양수만 입력되게 함
-            fibo(index);
-
-            BigInteger result = fiboSeq[n];
-            sb.append("\n").append(result.mod(BigInteger.valueOf(100000000)));
+            fibo(index); //피보나치 수열 전개
+            long result = fiboSeq[index];
+            sb.append("\n").append(result);
             return sb;
         }
 
@@ -50,14 +48,15 @@ public class Main1788 {
          * 피보나치 수열 전개
          * Top-Down(재귀)
          * -> Bottom-Up 으로 바꿈 (원인: StackOverFlowError)
-         * @param n
-         * @return
+         * @param n ( -1000000 ~ 1000000 정수 )
          */
         public void fibo(int n) {
-            fiboSeq[0] = BigInteger.ZERO;
-            fiboSeq[1] = BigInteger.ONE;
+            fiboSeq[0] = 0;
+            fiboSeq[1] = 1;
             for(int i=2; i<=n; i++) {
-                fiboSeq[i] = fiboSeq[i-1].add(fiboSeq[i-2]);
+                //1000_000_000 는 문제에서 제시한 최대값+1 이기도 하며 
+                //동시에 long 오버플로우 방지 가능
+                fiboSeq[i] = (fiboSeq[i-1] + fiboSeq[i-2]) % 1000_000_000;
             }
         }
     }
