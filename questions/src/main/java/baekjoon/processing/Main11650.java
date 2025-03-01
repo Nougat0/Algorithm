@@ -21,9 +21,9 @@ public class Main11650 {
         //정렬 (Comparator 커스텀 정의)
         Collections.sort(Arrays.asList(dots), (o1, o2) -> {
             //return o1-o2 오름차순 (양수: o2부터, 음수: o1부터)
-            if(o1[0] > o2[0] && o1[1] > o2[1]) { //x와 y 모두 o1이 큰 상황
+            if(o1[0] > o2[0]) { //o1가 x좌표가 더 큰 상황
                 return 1;
-            } else if(o1[0] == o2[0] && o1[1] > o2[1]) { //y만 o1이 큰 상황
+            } else if(o1[0] == o2[0] && o1[1] > o2[1]) { //x는 동일하고 o1이 y만 더 큰 상황
                 return 1;
             } else {
                 return -1;
