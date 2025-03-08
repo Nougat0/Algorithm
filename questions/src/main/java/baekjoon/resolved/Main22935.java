@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -12,6 +12,7 @@ public class Main22935 {
         int testCase = Integer.parseInt(br.readLine());
         for(int t=0; t<testCase; t++) {
             int turn = Integer.parseInt(br.readLine()) % 28;
+            if(turn == 0) turn = 2; //입력된 turn이 28의 배수일 경우 0이 되어버리는 현상 제어
             if(turn / 15 > 0) { //내림차순 숫자
                 turn = 15 - (turn % 15); //외칠 숫자 구하기
             }
