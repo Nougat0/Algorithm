@@ -13,12 +13,13 @@ public class Main2775 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     public static void main(String[] args) throws IOException {
         APT apt = new APT();
+        apt.dpFunc(14, 14);
         int testCase = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<testCase; i++) {
             int k = Integer.parseInt(br.readLine()); //층수
             int n = Integer.parseInt(br.readLine()); //호수
-            int r = apt.getResident(k, n);
+            int r = apt.residents[k][n];
             sb.append(r).append("\n");
         }
         bw.write(sb.toString());
