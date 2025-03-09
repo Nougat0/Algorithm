@@ -1,9 +1,7 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main11651 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
