@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -16,8 +16,8 @@ public class Main2775 {
         int testCase = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<testCase; i++) {
-            int k = Integer.parseInt(br.readLine());
-            int n = Integer.parseInt(br.readLine());
+            int k = Integer.parseInt(br.readLine()); //층수
+            int n = Integer.parseInt(br.readLine()); //호수
             int r = apt.getResident(k, n);
             sb.append(r).append("\n");
         }
@@ -34,8 +34,8 @@ public class Main2775 {
         }
         /**
          * DP :: Top-Down 방식 (재귀)
-         * @param a
-         * @param b
+         * @param a 층수
+         * @param b 호수
          * @return
          */
         public int getResident(int a, int b) {
@@ -45,7 +45,7 @@ public class Main2775 {
             } else {
                 int sum = 0;
                 for(int i=1; i<=b; i++) {
-                    sum += getResident(a-1, b);
+                    sum += getResident(a-1, i); //아래층
                 }
                 return (residents[a][b] = sum);
             }
