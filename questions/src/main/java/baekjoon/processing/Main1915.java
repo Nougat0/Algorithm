@@ -12,13 +12,13 @@ public class Main1915 {
         55555
 
         입력된 배열 값이 전부 1이라고 가정했을 때,
-        사각형 한 변의 길이가 N 일 때 확인하면 되는 칸들을 표시함
+        사각형 한 변의 길이가 N 일 때 확인하면 되는 칸들을 표시해봄
         (예: 한 변의 길이가 3인 정사각형이 존재하는지 확인할 때는
         길이 1, 2 에서 이미 체크된 칸 바로 바깥의 5개 칸만 확인하면 됨)
         위의 예시는 (1,1) 칸을 기준으로 정사각형이 존재하는지 확인함
 
         굳이 N*N 칸을 모두 확인할 필요가 없지만,
-        길이 1부터 오름차순으로 확인해야 함 (Bottom-Up)
+        한 변의 길이 1부터 오름차순으로 확인해야 함 (Bottom-Up)
 
         12345
         22345
@@ -74,16 +74,16 @@ public class Main1915 {
     public static class Sequence {
         int n, m, maxLength; //배열크기 행의 수, 열의 수, 더 큰 값
         boolean[][] sequence; //입력받은 배열
-        boolean[] squareExist; //length(인덱스)의 정사각형 존재유무
-        List<Coordinate>[] list; //length(인덱스)의 정사각형을 이룬 왼쪽 위 꼭지점 목록
+        boolean squareExist; //length(인덱스)의 정사각형 존재유무
+        Set<Coordinate> list; //length(인덱스)의 정사각형을 이룬 왼쪽 위 꼭지점 목록
 
         public Sequence(int n, int m, boolean[][] sequence) {
             this.n = n; //행
             this.m = m; //열
             this.sequence = sequence; //배열 (n*m)
             maxLength = Math.max(n, m);
-            squareExist = new boolean[maxLength+1];
-            list = new List[maxLength+1];
+            squareExist = false;
+            list = new HashSet<>();
         }
 
         /**
@@ -92,19 +92,19 @@ public class Main1915 {
          */
         public int getMaxSquare() {
             //길이 1 먼저 체크 (확인 로직이 다름)
-            list[1] = new ArrayList<>();
             for(int i=0; i<n; i++)
                 for(int j=0; j<m; j++)
                     if(sequence[i][j]) {
-                        squareExist[1] = true;
-                        list[1].add(new Coordinate(i, j));
+                        squareExist = true;
+                        list.add(new Coordinate(i, j));
                     }
             // 길이 2 -> maxLength 까지 정사각형 순차 체크
             int maxSquareLength = 1;
-            for(int l=2; l<=maxLength && squareExist[l - 1]; l++) {
-                list[l] = new ArrayList<>();
+            for(int l=2; l<=maxLength && squareExist; l++) {
+                squareExist = false; //이번 길이 체크 초기화
+                Set<Coordinate> newList = new HashSet<>();
                 //이전 크기 정사각형들 꼭지점 순환
-                for(Coordinate coord : list[l - 1]) {
+                for(Coordinate coord : list) {
                     boolean isSquare = true;
                     int yMax = coord.y + l - 1;
                     int xMax = coord.x + l - 1;
@@ -116,14 +116,16 @@ public class Main1915 {
                         isSquare = isSquare && sequence[coord.y + i][xMax - 1] && sequence[yMax - 1][coord.x + i];
                     isSquare = isSquare && sequence[yMax][xMax];
 
-                    //정사각형이 맞을 경우
-                    if(isSquare) {
-                        squareExist[l] = true;
-                        list[l].add(new Coordinate(coord.y, coord.x));
+                    if(isSquare) { //정사각형이 맞을 경우
+                        squareExist = true;
+                        newList.add(coord);
                     }
                 }
                 //이번 길이에서 정사각형이 있었으면 최대값 갱신
-                if(squareExist[l]) maxSquareLength = l;
+                if(squareExist) {
+                    maxSquareLength = l;
+                    list = newList; //새 list 전달
+                }
             }
             return maxSquareLength;
         }
