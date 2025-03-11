@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -16,6 +16,7 @@ public class Main9184 {
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
             if(a == -1 && b == -1 && c == -1) break;
+            sb.append("w(").append(a).append(", ").append(b).append(", ").append(c).append(") = ");
             sb.append(w(a, b, c)).append("\n");
         }
         bw.write(sb.toString());
