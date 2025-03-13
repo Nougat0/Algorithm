@@ -7,25 +7,16 @@ public class Main25757 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     public static void main(String[] args) throws IOException {
-        int recruit = 0, gamePlayedCnt = 0;
         Set<String> applied = new HashSet<>();
         //입력
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int needed = Game.getQuota(st.nextToken()) - 1; //본인 제외 필요인원
         for(int i=0; i<n; i++) {
-            String name = br.readLine();
-            //연산
-            if(!applied.contains(name)) { //지원한 적 없을 경우
-                applied.add(name); //지원자 명단에 추가
-                if(++recruit == needed) { //모집인원+1, 모집인원 충원 완료 시
-                    recruit = 0; //모집인원 초기화
-                    gamePlayedCnt++; //게임 진행 횟수 증가
-                }
-            }
+            applied.add(br.readLine());
         }
-        //출력
-        bw.write(gamePlayedCnt + "\n");
+        //출력 - 아뿔싸 HashSet 썼으면서 왜 활용 10%밖에 못했었니... 활용도 100% 코드로 변경
+        bw.write(applied.size() / needed + "\n");
         bw.flush();
         bw.close();
         br.close();
