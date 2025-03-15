@@ -16,27 +16,22 @@ public class Main22282 {
     */
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static final int MAX_CITATION = 1_000_000_000;
     public static void main(String[] args) throws IOException {
         int n = Integer.parseInt(br.readLine());
         int h_index = 0; //기본 h_index
-        int maxIndex = 0; //주어진 citation 최대값 -> citations에서 사용할 거라 index
-        int[] citations = new int[MAX_CITATION + 1]; //등장 빈도 세기
+        Map<Integer, Integer> citations = new TreeMap<>(Collections.reverseOrder()); //key(=citation 값) 내림차순 자동정렬
         //입력
         while(n-- > 0) {
             int c = Integer.parseInt(br.readLine());
-            citations[c]++;
-            maxIndex = Math.max(maxIndex, c);
+            citations.compute(c, (key, value) -> value == null ? 1 : (value+1));
         }
-        //기존 10억 배열에서 사용하는 부분만 잘라쓰기
-        citations = Arrays.copyOf(citations, maxIndex + 1);
         //h_index 연산
-        long sum = citations[maxIndex]; //누적합 첫 값으로 초기화
+        long sum = 0; //누적합 첫 값으로 초기화
         int count; //citation 몇 개 있는지
-        while(maxIndex-- > 0) {
-            count = citations[maxIndex];
-            if(count > 0 && (sum += count) / maxIndex >= 1) {
-                h_index = maxIndex;
+        for(Integer c : citations.keySet()) {
+            count = citations.get(c);
+            if((sum += count) / c >= 1) {
+                h_index = c; //가능한 citation 값, 내림차순 탐색이므로 최대값임
                 break;
             }
         }
