@@ -16,7 +16,7 @@ public class Main22282 {
     */
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static final int MAX_CITATION = 1000_000_000;
+    static final int MAX_CITATION = 1_000_000_000;
     public static void main(String[] args) throws IOException {
         int n = Integer.parseInt(br.readLine());
         int h_index = 0; //기본 h_index
@@ -28,6 +28,8 @@ public class Main22282 {
             citations[c]++;
             maxIndex = Math.max(maxIndex, c);
         }
+        //기존 10억 배열에서 사용하는 부분만 잘라쓰기
+        citations = Arrays.copyOf(citations, maxIndex + 1);
         //h_index 연산
         long sum = citations[maxIndex]; //누적합 첫 값으로 초기화
         int count; //citation 몇 개 있는지
