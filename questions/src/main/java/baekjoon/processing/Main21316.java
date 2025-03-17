@@ -26,14 +26,22 @@ public class Main21316 {
         }
         //연산
         stars = 12;
-        foundSpica:
+        int links;
         while(stars-- > 0)
-            if(linkCount[stars] == 3) //spica 후보군
-                for(int linkedStar : starList[stars]) //후보군과 연결된 별들 순회
-                    if(linkCount[linkedStar] == 1) { //연결점이 1개인 별이 있는지 확인
-                        spica = stars; //있다면 stars 가 spica이다
-                        break foundSpica;
-                    }
+            if(linkCount[stars] == 3) { //spica 후보군
+                boolean hasOneLink = false, hasTwoLinks = false;
+                for(int linkedStar : starList[stars]) {//후보군과 연결된 별들 순회
+                    links = linkCount[linkedStar];
+                    //연결선 체크
+                    if(links == 1) hasOneLink = true;
+                    else if(links == 2) hasTwoLinks = true;
+                }
+                //연결선 1개, 2개 모두 갖고 있는지 확인
+                if(hasOneLink && hasTwoLinks) {
+                    spica = stars;
+                    break;
+                }
+            }
         bw.write(spica + "\n");
         bw.flush();
         bw.close();
