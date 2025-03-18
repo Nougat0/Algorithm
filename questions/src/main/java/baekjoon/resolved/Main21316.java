@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -27,7 +27,7 @@ public class Main21316 {
         //연산
         stars = 12;
         int links;
-        while(stars-- > 0)
+        while(stars > 0) {
             if(linkCount[stars] == 3) { //spica 후보군
                 boolean hasOneLink = false, hasTwoLinks = false;
                 for(int linkedStar : starList[stars]) {//후보군과 연결된 별들 순회
@@ -42,6 +42,8 @@ public class Main21316 {
                     break;
                 }
             }
+            stars--;
+        }
         bw.write(spica + "\n");
         bw.flush();
         bw.close();
