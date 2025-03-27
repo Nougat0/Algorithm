@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -18,7 +18,7 @@ public class Main15702 {
             points[i] = Integer.parseInt(st.nextToken());
         }
         //점수 계산, 동시에 최고값 구하기
-        int maxScore = 0;
+        int maxScore = -1; //수정함: 0점이 최고점수일 경우를 고려하지 못했었음...
         int maxScoreStudentNum = 0;
         for(int i=0; i<studentCnt; i++) {
             st = new StringTokenizer(br.readLine());
@@ -31,8 +31,9 @@ public class Main15702 {
             if(score > maxScore) {
                 maxScore = score;
                 maxScoreStudentNum = studentNo;
-            } else if(score == maxScore) { //학생번호 제시 순서는 주어지지 않음
-                maxScoreStudentNum = Math.min(maxScoreStudentNum, studentNo);
+            } else if(score == maxScore && maxScoreStudentNum > studentNo) {
+                //학생번호 제시 순서는 주어지지 않음, 매번 체크
+                maxScoreStudentNum = studentNo;
             }
         }
         //출력
