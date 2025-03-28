@@ -39,38 +39,38 @@ public class Main14455 {
         if(workingCowCnt == 0) {
             /*[1] 아무도 우유 생산을 안했다!*/
             sb.append("Tie");
-        } else if(workingCowCnt < cowCnt) {
-            /*[2] 생산량 존재하나, 최소 생산량은 0*/
-            sb.append(CowNumber.values()[minNonZeroMilkCow.cowNumber].name());
-        } else { //모든 소가 0 이상 생산 - milkProduceList에 모두 등록됨
-            int minProduce = minNonZeroMilkCow.milkProduce;
-            if(milkProduceList.get(cowCnt-1).milkProduce == minProduce) {
-                /*[3] 마지막 소까지 모두 최소 생산량만 생산함*/
-                sb.append("Tie");
+        } else {
+            /**
+             * 우유 생산을 N(1<=N<=7) 마리 했음
+             * 최소 생산량은 0일수도, 양수일 수도 있다!
+             */
+            int minNonZeroMilkProduce = minNonZeroMilkCow.milkProduce;
+            /*[2] 모두 동일한 생산량*/
+            if(milkProduceList.get(workingCowCnt-1).milkProduce == minNonZeroMilkProduce) {
+                sb.append("Tie"); //2등 다수, 1등 다수 모두 Tie
             } else {
-                /*[4] 2번째 최소 생산한 소 존재*/
-                Cow secondMinProduceCow = null;
-                boolean multipleSecondsExist = false;
-                for(int i=1; i<cowCnt; i++) {
-                    Cow cow = milkProduceList.get(i);
-                    if(minProduce < cow.milkProduce) {
-                        if(secondMinProduceCow == null) {
-                            //뒤에서 2등 자리 채우기
-                            secondMinProduceCow = cow;
-                        } else if(secondMinProduceCow.milkProduce == cow.milkProduce){
-                            //뒤에서 2등 자리 채워졌는데 같은 2등 등장
-                            multipleSecondsExist = true;
+                /*[3] 뒤에서 3등 이상 존재*/
+                int minProduceMilk = workingCowCnt == cowCnt ? minNonZeroMilkProduce : 0;
+                //지정된 최소생산량보다 큰 값 찾기
+                int secondMinProduceMilk = -1, secondMinProduceMilkCowNum = -1;
+                boolean isTie = false;
+                for(Cow cow : milkProduceList) {
+                    if(cow.milkProduce > minProduceMilk) {
+                        if(secondMinProduceMilk == -1) { //첫번째 뒤에서 2등 소
+                            secondMinProduceMilk = cow.milkProduce;
+                            secondMinProduceMilkCowNum = cow.cowNumber;
+                        } else if(secondMinProduceMilk == cow.milkProduce) { //두번째 뒤에서 2등 소
+                            isTie = true;
                             break;
-                        } else {
-                            //뒤에서 2등 자리 1마리만 존재
+                        } else { //뒤에서 3등 소
                             break;
                         }
                     }
                 }
-                if(multipleSecondsExist) {
+                if(isTie) {
                     sb.append("Tie");
                 } else {
-                    sb.append(CowNumber.values()[secondMinProduceCow.cowNumber].name());
+                    sb.append(CowNumber.values()[secondMinProduceMilkCowNum].name());
                 }
             }
         }
