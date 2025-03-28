@@ -50,13 +50,17 @@ public class Main14455 {
                 sb.append("Tie"); //2등 다수, 1등 다수 모두 Tie
             } else {
                 /*[3] 뒤에서 3등 이상 존재*/
-                int minProduceMilk = workingCowCnt == cowCnt ? minNonZeroMilkProduce : 0;
+                boolean allCowsWorking = workingCowCnt == cowCnt;
+                int minProduceMilk = allCowsWorking ? minNonZeroMilkProduce : 0;
+                //초기값 최소생산량에 따라 다르게 설정
+                int initMilkValue = allCowsWorking ? minNonZeroMilkProduce : -1;
+                int initCowNumValue = allCowsWorking ? minNonZeroMilkCow.cowNumber : -1;
                 //지정된 최소생산량보다 큰 값 찾기
-                int secondMinProduceMilk = -1, secondMinProduceMilkCowNum = -1;
+                int secondMinProduceMilk = initMilkValue, secondMinProduceMilkCowNum = initCowNumValue;
                 boolean isTie = false;
                 for(Cow cow : milkProduceList) {
                     if(cow.milkProduce > minProduceMilk) {
-                        if(secondMinProduceMilk == -1) { //첫번째 뒤에서 2등 소
+                        if(secondMinProduceMilk == initMilkValue) { //첫번째 뒤에서 2등 소
                             secondMinProduceMilk = cow.milkProduce;
                             secondMinProduceMilkCowNum = cow.cowNumber;
                         } else if(secondMinProduceMilk == cow.milkProduce) { //두번째 뒤에서 2등 소
