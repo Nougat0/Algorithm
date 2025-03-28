@@ -33,13 +33,14 @@ public class Main14455 {
         Collections.sort(milkProduceList, Comparator.comparingInt(c -> c.milkProduce));
         /**
          * 가장 좋은 순위 차지한 소는 누구 ?
+         * Tie: 뒤에서 2등 자리에 0마리가 있거나, 여러 마리가 있을 경우 출력
          */
         Cow minNonZeroMilkCow = milkProduceList.get(0);
         if(workingCowCnt == 0) {
             /*[1] 아무도 우유 생산을 안했다!*/
             sb.append("Tie");
         } else if(workingCowCnt < cowCnt) {
-            /*[2] 최소 생산량은 0*/
+            /*[2] 생산량 존재하나, 최소 생산량은 0*/
             sb.append(CowNumber.values()[minNonZeroMilkCow.cowNumber].name());
         } else { //모든 소가 0 이상 생산 - milkProduceList에 모두 등록됨
             int minProduce = minNonZeroMilkCow.milkProduce;
@@ -48,12 +49,28 @@ public class Main14455 {
                 sb.append("Tie");
             } else {
                 /*[4] 2번째 최소 생산한 소 존재*/
+                Cow secondMinProduceCow = null;
+                boolean multipleSecondsExist = false;
                 for(int i=1; i<cowCnt; i++) {
                     Cow cow = milkProduceList.get(i);
                     if(minProduce < cow.milkProduce) {
-                        sb.append(CowNumber.values()[cow.cowNumber].name());
-                        break;
+                        if(secondMinProduceCow == null) {
+                            //뒤에서 2등 자리 채우기
+                            secondMinProduceCow = cow;
+                        } else if(secondMinProduceCow.milkProduce == cow.milkProduce){
+                            //뒤에서 2등 자리 채워졌는데 같은 2등 등장
+                            multipleSecondsExist = true;
+                            break;
+                        } else {
+                            //뒤에서 2등 자리 1마리만 존재
+                            break;
+                        }
                     }
+                }
+                if(multipleSecondsExist) {
+                    sb.append("Tie");
+                } else {
+                    sb.append(CowNumber.values()[secondMinProduceCow.cowNumber].name());
                 }
             }
         }
