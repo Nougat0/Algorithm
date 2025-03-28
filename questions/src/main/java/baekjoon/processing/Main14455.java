@@ -51,16 +51,16 @@ public class Main14455 {
             } else {
                 /*[3] 뒤에서 3등 이상 존재*/
                 boolean allCowsWorking = workingCowCnt == cowCnt;
-                int minProduceMilk = allCowsWorking ? minNonZeroMilkProduce : 0;
                 //초기값 최소생산량에 따라 다르게 설정
-                int initMilkValue = allCowsWorking ? minNonZeroMilkProduce : -1;
-                int initCowNumValue = allCowsWorking ? minNonZeroMilkCow.cowNumber : -1;
+                int minProduceMilk = allCowsWorking ? minNonZeroMilkProduce : 0;
+                int startIndex = allCowsWorking ? 1 : 0;
                 //지정된 최소생산량보다 큰 값 찾기
-                int secondMinProduceMilk = initMilkValue, secondMinProduceMilkCowNum = initCowNumValue;
+                int secondMinProduceMilk = -1, secondMinProduceMilkCowNum = -1;
                 boolean isTie = false;
-                for(Cow cow : milkProduceList) {
+                for(int i=startIndex; i<workingCowCnt; i++) {
+                    Cow cow = milkProduceList.get(i);
                     if(cow.milkProduce > minProduceMilk) {
-                        if(secondMinProduceMilk == initMilkValue) { //첫번째 뒤에서 2등 소
+                        if(secondMinProduceMilk == -1) { //첫번째 뒤에서 2등 소
                             secondMinProduceMilk = cow.milkProduce;
                             secondMinProduceMilkCowNum = cow.cowNumber;
                         } else if(secondMinProduceMilk == cow.milkProduce) { //두번째 뒤에서 2등 소
