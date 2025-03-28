@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -45,11 +45,14 @@ public class Main14455 {
              * 최소 생산량은 0일수도, 양수일 수도 있다!
              */
             int minNonZeroMilkProduce = minNonZeroMilkCow.milkProduce;
-            /*[2] 모두 동일한 생산량*/
-            if(milkProduceList.get(workingCowCnt-1).milkProduce == minNonZeroMilkProduce) {
+            if(workingCowCnt == 1) {
+                /*[2] 한 마리만 생산함 - 자동 2등*/
+                sb.append(CowNumber.values()[minNonZeroMilkCow.cowNumber].name());
+            } else if(milkProduceList.get(workingCowCnt-1).milkProduce == minNonZeroMilkProduce) {
+                /*[3] 모두 동일한 생산량*/
                 sb.append("Tie"); //2등 다수, 1등 다수 모두 Tie
             } else {
-                /*[3] 뒤에서 3등 이상 존재*/
+                /*[4] 뒤에서 3등 이상 존재*/
                 boolean allCowsWorking = workingCowCnt == cowCnt;
                 //초기값 최소생산량에 따라 다르게 설정
                 int minProduceMilk = allCowsWorking ? minNonZeroMilkProduce : 0;
