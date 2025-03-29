@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -36,6 +36,7 @@ public class Main13777 {
             else if(rabbitCardNo > mid) left = mid+1;
             else right = mid-1;
         }
+        if(left == right) sb.append(left);
         return sb.toString();
     }
 }
