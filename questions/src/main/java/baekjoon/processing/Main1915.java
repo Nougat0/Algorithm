@@ -102,9 +102,11 @@ public class Main1915 {
             int maxSquareLength = 1;
             for(int l=2; l<=maxLength && squareExist; l++) {
                 squareExist = false; //이번 길이 체크 초기화
-                Set<Coordinate> newList = new HashSet<>();
+
+                Iterator<Coordinate> iterator = list.iterator();
                 //이전 크기 정사각형들 꼭지점 순환
-                for(Coordinate coord : list) {
+                while(iterator.hasNext()) {
+                    Coordinate coord = iterator.next();
                     boolean isSquare = true;
                     int yMax = coord.y + l - 1;
                     int xMax = coord.x + l - 1;
@@ -118,13 +120,13 @@ public class Main1915 {
 
                     if(isSquare) { //정사각형이 맞을 경우
                         squareExist = true;
-                        newList.add(coord);
+                    } else { //이번 길이에서 해당 좌표는 정사각형 아님
+                        iterator.remove();
                     }
                 }
                 //이번 길이에서 정사각형이 있었으면 최대값 갱신
                 if(squareExist) {
                     maxSquareLength = l;
-                    list = newList; //새 list 전달
                 }
             }
             return maxSquareLength;
