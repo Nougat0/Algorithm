@@ -1,6 +1,7 @@
 package baekjoon.processing;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Main4197 {
@@ -13,8 +14,7 @@ public class Main4197 {
         Turtle turtle;
         while(testCase-- > 0) {
             turtle = new Turtle();
-            double distance = turtle.processCommands();
-            sb.append(distance).append("\n");
+            sb.append(turtle.processCommands()).append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
@@ -35,7 +35,7 @@ public class Main4197 {
         }
 
         //명령 N개 입력받고 함수 호출하여 실행, 결과값 반환
-        public double processCommands() throws IOException {
+        public String processCommands() throws IOException {
             int commandCnt = Integer.parseInt(br.readLine());
             while(commandCnt-- > 0) {
                 st = new StringTokenizer(br.readLine());
@@ -63,8 +63,9 @@ public class Main4197 {
         }
 
         //0,0 (초기 좌표) 와 현재 좌표의 직선거리 구하기
-        private double getDistance() {
-            return Math.round(Math.sqrt(x*x + y*y) * 100) / 100.0;
+        private String getDistance() {
+            DecimalFormat df = new DecimalFormat("###.###");
+            return df.format((Math.sqrt(x*x + y*y)));
         }
     }
 }
