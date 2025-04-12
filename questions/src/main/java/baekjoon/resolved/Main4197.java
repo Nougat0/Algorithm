@@ -1,7 +1,6 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class Main4197 {
@@ -35,7 +34,7 @@ public class Main4197 {
         }
 
         //명령 N개 입력받고 함수 호출하여 실행, 결과값 반환
-        public String processCommands() throws IOException {
+        public long processCommands() throws IOException {
             int commandCnt = Integer.parseInt(br.readLine());
             while(commandCnt-- > 0) {
                 st = new StringTokenizer(br.readLine());
@@ -60,12 +59,13 @@ public class Main4197 {
                 x += Math.cos(Math.toRadians(degree)) * value;
                 y += Math.sin(Math.toRadians(degree)) * value;
             }
+            //뒷걸음질(bk)이었다면 각도는 변하지 않으므로 다시 돌려놓기
+            if(command == 'b') degree += 180;
         }
 
-        //0,0 (초기 좌표) 와 현재 좌표의 직선거리 구하기
-        private String getDistance() {
-            DecimalFormat df = new DecimalFormat("###.###");
-            return df.format((Math.sqrt(x*x + y*y)));
+        //0,0 (초기 좌표) 와 현재 좌표의 직선거리 구하기 (소수점 반올림)
+        private long getDistance() {
+            return Math.round(Math.sqrt(x*x + y*y));
         }
     }
 }
