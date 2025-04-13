@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -36,6 +36,11 @@ public class Main2139 {
         br.close();
     }
 
+    /**
+     * 윤년인지 체크
+     * @param year
+     * @return
+     */
     public static boolean isLeapYear(int year) {
         boolean isLeapYear = false;
         if(year % 4 == 0) isLeapYear = true;
