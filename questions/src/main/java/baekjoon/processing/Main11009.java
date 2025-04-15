@@ -20,8 +20,8 @@ public class Main11009 {
             final int RED_BALLS = Integer.parseInt(st.nextToken());
             final int WHITE_BALLS = Integer.parseInt(st.nextToken());
 
-            int[] fraction = null; //매 차례별 확률 누적값
-            int[] winningFraction = new int[2]; //빨간공 뽑기 직전까지의 확률(다음차례에 재활용)
+            long[] fraction = null; //매 차례별 확률 누적값
+            long[] winningFraction = new long[2]; //빨간공 뽑기 직전까지의 확률(다음차례에 재활용)
             /*
                 이전에 계산한 확률 누적값 재사용하기 위한 변수들
             */
@@ -34,8 +34,8 @@ public class Main11009 {
             for(int i=1, loop=-1; i<=(WHITE_BALLS + 1); i+=2, loop++) {
                 boolean usingSavedValue = loop > 0;
 
-                int numerator = winningFraction[NUMERATOR];
-                int denominator = winningFraction[DENOMINATOR];
+                long numerator = winningFraction[NUMERATOR];
+                long denominator = winningFraction[DENOMINATOR];
 
                 int whiteBallLoopValue = usingSavedValue ? WHITE_BALLS-(loop+1) : WHITE_BALLS;
                 int redBallLoopValue = RED_BALLS;
@@ -50,7 +50,7 @@ public class Main11009 {
                     numerator *= (whiteBallLoopValue--);
                 }
                 //흰 공 뽑는 확률 저장 (+ 약분)
-                int gcd = getGCD(numerator, denominator);
+                long gcd = getGCD(numerator, denominator);
                 winningFraction[NUMERATOR] = (numerator /= gcd);
                 winningFraction[DENOMINATOR] = (denominator /= gcd);
                 /*
@@ -64,11 +64,11 @@ public class Main11009 {
                 numerator /= gcd;
                 denominator /= gcd;
                 //지난차례와 이번차례의 확률 덧셈
-                if(fraction == null) fraction = new int[] {numerator, denominator};
+                if(fraction == null) fraction = new long[] {numerator, denominator};
                 else fraction = addFractions(numerator, denominator, fraction[NUMERATOR], fraction[DENOMINATOR]);
             }
             //약분하기
-            int gcd = getGCD(fraction[NUMERATOR], fraction[DENOMINATOR]);
+            long gcd = getGCD(fraction[NUMERATOR], fraction[DENOMINATOR]);
             sb.append(fraction[NUMERATOR] / gcd).append('/').append(fraction[DENOMINATOR] / gcd).append("\n");
         }
         bw.write(sb.toString());
@@ -83,8 +83,8 @@ public class Main11009 {
      * @param b
      * @return
      */
-    public static int getGCD(int a, int b) {
-        int remainder;
+    public static long getGCD(long a, long b) {
+        long remainder;
         while((a % b) != 0) {
             remainder = a % b;
             a = b;
@@ -101,10 +101,10 @@ public class Main11009 {
      * @param b_denominator b 분모
      * @return a분자/a분모 + b분자/b분모
      */
-    public static int[] addFractions(int a_numerator, int a_denominator, int b_numerator, int b_denominator) {
-        int[] result = new int[2];
-        int gcd = getGCD(a_denominator, b_denominator);
-        int lcm = a_denominator * b_denominator / gcd;
+    public static long[] addFractions(long a_numerator, long a_denominator, long b_numerator, long b_denominator) {
+        long[] result = new long[2];
+        long gcd = getGCD(a_denominator, b_denominator);
+        long lcm = a_denominator * b_denominator / gcd;
         result[NUMERATOR] = a_numerator * lcm / a_denominator + b_numerator * lcm / b_denominator;
         result[DENOMINATOR] = lcm;
         //약분하기
