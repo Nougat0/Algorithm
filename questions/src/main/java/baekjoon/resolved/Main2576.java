@@ -5,29 +5,28 @@ import java.io.*;
 public class Main2576 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         int count = 7;
-        boolean oddNumberExist = false;
-        int minOdd = 99;
-        int oddSum = 0;
+        boolean isEven, onlyEvenNumbers = true;
+        int minOdd = 99, oddSum = 0;
+        int number;
         while(count-- > 0) {
-            int number = Integer.parseInt(br.readLine());
-            boolean isOdd = number % 2 == 1;
-            if(isOdd) {
-                oddNumberExist = true;
+            number = Integer.parseInt(br.readLine());
+            isEven = number % 2 == 0;
+            onlyEvenNumbers &= isEven;
+            if(!isEven) {
                 oddSum += number;
                 if(number < minOdd) {
                     minOdd = number;
                 }
             }
         }
-        if(oddNumberExist) {
-            bw.write(oddSum + "\n" + minOdd);
+        if(onlyEvenNumbers) {
+            sb.append(-1);
         } else {
-            bw.write("-1");
+            sb.append(oddSum).append("\n").append(minOdd);
         }
-        bw.flush();
-        bw.close();
+        System.out.println(sb);
         br.close();
     }
 }
