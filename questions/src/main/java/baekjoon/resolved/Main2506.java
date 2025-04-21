@@ -6,7 +6,6 @@ import java.util.StringTokenizer;
 public class Main2506 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int questionCnt = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
         int score = 1;
@@ -18,9 +17,7 @@ public class Main2506 {
                 score = 1;
             }
         }
-        bw.write(totalScore + "\n");
-        bw.flush();
-        bw.close();
+        System.out.println(totalScore);
         br.close();
     }
 }
