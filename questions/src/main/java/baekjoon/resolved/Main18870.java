@@ -13,27 +13,33 @@ public class Main18870 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
-        int[] coordinates = new int[n]; //좌표 배열
-        Integer[] sortedDeDuped; //좌표 중복제거, 정렬한 배열
-        Set<Integer> set = new HashSet<>();
+        int[] originCoords = new int[n]; //좌표 배열
+        Integer[] sortedDeDupedCoords; //좌표 중복제거, 정렬한 배열
+        Set<Integer> dedupedCoords = new HashSet<>();
+        Map<Integer, Integer> memoization = new HashMap<>(); //압축값 기록
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         //좌표 배열과 index 배열 입력
-        int coordinate;
+        int coord;
         for(int i=0; i<n; i++) {
-            coordinate = Integer.parseInt(st.nextToken());
-            coordinates[i] = coordinate;
-            set.add(coordinate);
+            coord = Integer.parseInt(st.nextToken());
+            originCoords[i] = coord;
+            dedupedCoords.add(coord);
         }
-        sortedDeDuped = set.toArray(new Integer[0]);
+        sortedDeDupedCoords = dedupedCoords.toArray(new Integer[0]);
         //index 배열만 정렬 (좌표 기준 오름차순)
-        Arrays.sort(sortedDeDuped);
+        Arrays.sort(sortedDeDupedCoords);
 
-        int value, index;
+        int value, compressedCoord;
         for(int i=0; i<n; i++) {//압축 좌표값 구하기
-            value = coordinates[i];
-            index = binarySearch(value, sortedDeDuped);
-            sb.append(index).append(' ');
+            value = originCoords[i];
+            if(memoization.containsKey(value)) {
+                compressedCoord = memoization.get(value);
+            } else {
+                compressedCoord = binarySearch(value, sortedDeDupedCoords);
+                memoization.put(value, compressedCoord);
+            }
+            sb.append(compressedCoord).append(' ');
         }
         bw.write(sb.toString());
         bw.flush();
