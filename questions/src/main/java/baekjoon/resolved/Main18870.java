@@ -14,9 +14,8 @@ public class Main18870 {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         int[] originCoords = new int[n]; //좌표 배열
-        Integer[] sortedDeDupedCoords; //좌표 중복제거, 정렬한 배열
+        int[] sortedDeDupedCoords; //좌표 중복제거, 정렬한 배열
         Set<Integer> dedupedCoords = new HashSet<>();
-        Map<Integer, Integer> memoization = new HashMap<>(); //압축값 기록
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         //좌표 배열과 index 배열 입력
@@ -26,19 +25,14 @@ public class Main18870 {
             originCoords[i] = coord;
             dedupedCoords.add(coord);
         }
-        sortedDeDupedCoords = dedupedCoords.toArray(new Integer[0]);
+        sortedDeDupedCoords = dedupedCoords.stream().mapToInt(Integer::intValue).toArray();
         //index 배열만 정렬 (좌표 기준 오름차순)
-        Arrays.sort(sortedDeDupedCoords);
+        mergeSort(sortedDeDupedCoords, sortedDeDupedCoords.length);
 
         int value, compressedCoord;
         for(int i=0; i<n; i++) {//압축 좌표값 구하기
             value = originCoords[i];
-            if(memoization.containsKey(value)) {
-                compressedCoord = memoization.get(value);
-            } else {
-                compressedCoord = binarySearch(value, sortedDeDupedCoords);
-                memoization.put(value, compressedCoord);
-            }
+            compressedCoord = binarySearch(value, sortedDeDupedCoords);
             sb.append(compressedCoord).append(' ');
         }
         bw.write(sb.toString());
@@ -55,7 +49,7 @@ public class Main18870 {
      * @param arr 정렬, 중복제거된 배열
      * @return
      */
-    public static int binarySearch(int value, Integer[] arr) {
+    public static int binarySearch(int value, int[] arr) {
         int length = arr.length;
         int leftIndex = 0;
         int rightIndex = length - 1;
@@ -74,5 +68,40 @@ public class Main18870 {
             }
         }
         return leftIndex;
+    }
+
+    public static void mergeSort(int[] arr, int length) {
+        if(length < 2) return; //길이가 1일 경우 실행중단
+        //[1] 배열 변수 선언
+        int mid = length / 2; //절반으로 자룰 한쪽 길이
+        int[] left = new int[mid];
+        int[] right = new int[length - mid];
+        //[2] 쪼갠 배열 초기화
+        for(int i=0; i<mid; i++)
+            left[i] = arr[i];
+        for(int i=mid; i<length; i++)
+            right[i - mid] = arr[i];
+        //[3] 쪼갠 배열에서 위 과정 반복
+        mergeSort(left, mid);
+        mergeSort(right, length - mid);
+
+        //[4] 쪼갠 배열들 정렬하면서 병합
+        merge(arr, left, right, mid, length - mid);
+
+    }
+
+    public static void merge(int[] arr, int[] left, int[] right, int leftLength, int rightLength) {
+        int leftIndex = 0, rightIndex = 0, mergedIndex = 0;
+        while(leftIndex < leftLength && rightIndex < rightLength) {
+            if(left[leftIndex] <= right[rightIndex])
+                arr[mergedIndex++] = left[leftIndex++];
+            else
+                arr[mergedIndex++] = right[rightIndex++];
+        }
+        //남은 값 채워넣기
+        while(leftIndex < leftLength)
+            arr[mergedIndex++] = left[leftIndex++];
+        while(rightIndex < rightLength)
+            arr[mergedIndex++] = right[rightIndex++];
     }
 }
