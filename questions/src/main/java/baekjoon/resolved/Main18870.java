@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -14,24 +14,25 @@ public class Main18870 {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         int[] coordinates = new int[n]; //좌표 배열
-        Integer[] indexes = new Integer[n]; //index 배열
+        Integer[] sortedDeDuped; //좌표 중복제거, 정렬한 배열
+        Set<Integer> set = new HashSet<>();
+
         StringTokenizer st = new StringTokenizer(br.readLine());
         //좌표 배열과 index 배열 입력
+        int coordinate;
         for(int i=0; i<n; i++) {
-            coordinates[i] = Integer.parseInt(st.nextToken());
-            indexes[i] = i;
+            coordinate = Integer.parseInt(st.nextToken());
+            coordinates[i] = coordinate;
+            set.add(coordinate);
         }
+        sortedDeDuped = set.toArray(new Integer[0]);
         //index 배열만 정렬 (좌표 기준 오름차순)
-        Arrays.sort(indexes, Comparator.comparingInt(i -> coordinates[i]));
+        Arrays.sort(sortedDeDuped);
 
+        int value, index;
         for(int i=0; i<n; i++) {//압축 좌표값 구하기
-            int value = coordinates[i];
-            //[1] 대략적 위치 도출
-            int index = binarySearch(value, coordinates, indexes);
-            //[2] 정확한 위치 도출 (동일 값 맨 앞 index 찾기)
-            while(index > 0 && coordinates[indexes[index - 1]] == value) {
-                index--;
-            }
+            value = coordinates[i];
+            index = binarySearch(value, sortedDeDuped);
             sb.append(index).append(' ');
         }
         bw.write(sb.toString());
@@ -45,11 +46,10 @@ public class Main18870 {
      * 각 좌표별로 대략적인 indexes 에서의 위치 파악
      * (같은 숫자가 여러 개일 수 있으므로 러프한 위치를 파악함)
      * @param value index를 찾을 값
-     * @param arr 초기 배열
-     * @param idx arr값 기준 정렬된 index 배열
+     * @param arr 정렬, 중복제거된 배열
      * @return
      */
-    public static int binarySearch(int value, int[] arr, Integer[] idx) {
+    public static int binarySearch(int value, Integer[] arr) {
         int length = arr.length;
         int leftIndex = 0;
         int rightIndex = length - 1;
@@ -58,7 +58,7 @@ public class Main18870 {
 
         while(leftIndex < rightIndex) {
             midIndex = (leftIndex + rightIndex)/2;
-            midValue = arr[idx[midIndex]];
+            midValue = arr[midIndex];
             if(value == midValue) {
                 return midIndex;
             } else if(value > midValue) {
