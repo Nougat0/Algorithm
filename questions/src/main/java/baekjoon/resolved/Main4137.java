@@ -4,12 +4,18 @@ import java.io.*;
 import java.util.*;
 
 public class Main4137 {
+    /*
+        https://www.acmicpc.net/problem/4137
+        https://www.acmicpc.net/user/bcdlife
+    */
+    public static final int ARRAY_LENGTH = 10_000_000;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
-        Map<Integer, Integer> telephoneCount = new HashMap<>();
+        int[] telephoneCount = new int[ARRAY_LENGTH];
+        int min = ARRAY_LENGTH, max = 0; //최소최대 범위 추적
         while(n-- > 0) {
             StringBuilder telephoneNumber = new StringBuilder();
             char[] number = br.readLine().toCharArray();
@@ -23,20 +29,21 @@ public class Main4137 {
                 }
             }
             int teleNumIntKey = Integer.parseInt(telephoneNumber.toString());
-            telephoneCount.put(teleNumIntKey, telephoneCount.getOrDefault(teleNumIntKey, 0) + 1);
+            telephoneCount[teleNumIntKey]++;
+            if(teleNumIntKey > max) max = teleNumIntKey;
+            if(teleNumIntKey < min) min = teleNumIntKey;
         }
-        //lexicographical 정렬
-        List<Integer> keySet = new ArrayList<>(telephoneCount.keySet());
-        Collections.sort(keySet);
+        //lexicographical 정렬 (배열이라 자동)
+
         //중복 확인
         int duplicateCount = 0;
-        for(Integer teleNumIntKey : keySet) {
-            int count = telephoneCount.get(teleNumIntKey); //개수 세기
+        for(int i=min; i<=max; i++) {
+            int count = telephoneCount[i]; //개수 세기
             if(count > 1) {
                 //7자리 고정 (3 - 4 자리)
-                appendNumberAsLength(teleNumIntKey / 10000, 3, sb);
+                appendNumberAsLength(i / 10000, 3, sb);
                 sb.append('-');
-                appendNumberAsLength(teleNumIntKey % 10000, 4, sb);
+                appendNumberAsLength(i % 10000, 4, sb);
                 sb.append(' ').append(count).append("\n");
                 duplicateCount++;
             }
