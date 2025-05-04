@@ -8,25 +8,29 @@ public class Main2966 {
         https://www.acmicpc.net/problem/2966
         https://www.acmicpc.net/user/bcdlife
     */
+    public enum Student {
+        Adrian, Bruno, Goran
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int length = Integer.parseInt(br.readLine());
         char[] answerList = br.readLine().toCharArray();
-        int scoreAdrian = 0, scoreBruno = 0, scoreGoran = 0;
+        int[] scores = new int[3];
         for(int i=0; i<length; i++) {
             char answer = answerList[i];
-            scoreAdrian += matchAdrian(i, answer);
-            scoreBruno += matchBruno(i, answer);
-            scoreGoran += matchGoran(i, answer);
+            scores[Student.Adrian.ordinal()] += matchAdrian(i, answer);
+            scores[Student.Bruno.ordinal()] += matchBruno(i, answer);
+            scores[Student.Goran.ordinal()] += matchGoran(i, answer);
         }
-        int maxScore = Math.max(Math.max(scoreAdrian, scoreBruno), scoreGoran);
+        int maxScore = Math.max(Math.max(scores[Student.Adrian.ordinal()], scores[Student.Bruno.ordinal()]), scores[Student.Goran.ordinal()]);
 
         sb.append(maxScore).append("\n");
-        if(scoreAdrian == maxScore) sb.append("Adrian\n");
-        if(scoreBruno == maxScore) sb.append("Bruno\n");
-        if(scoreGoran == maxScore) sb.append("Goran\n");
+        for(int i=0; i<3; i++) {
+            if(scores[i] == maxScore) sb.append(Student.values()[i].name()).append("\n");
+        }
 
         bw.write(sb.toString());
         bw.flush();
