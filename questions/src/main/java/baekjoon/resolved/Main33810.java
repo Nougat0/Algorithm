@@ -11,16 +11,13 @@ public class Main33810 {
     public static final int LENGTH = 10;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         char[] line = br.readLine().toCharArray();
         char[] origin = new char[] {'S', 'c', 'i', 'C', 'o', 'm', 'L', 'o', 'v', 'e'};
         int changedCount = 0;
         for(int i=0; i<LENGTH; i++) {
             if(origin[i] != line[i]) changedCount++;
         }
-        bw.write(changedCount + "\n");
-        bw.flush();
-        bw.close();
+        System.out.println(changedCount + "\n");
         br.close();
     }
 }
