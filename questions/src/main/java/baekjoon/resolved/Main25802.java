@@ -11,7 +11,6 @@ public class Main25802 {
     public static final int INIT_LENGTH = 2;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
@@ -24,9 +23,7 @@ public class Main25802 {
             b = remainder;
             seqLength++;
         }
-        bw.write(seqLength + "\n");
-        bw.flush();
-        bw.close();
+        System.out.println(seqLength);
         br.close();
     }
 }
