@@ -8,6 +8,8 @@ public class Main13274 {
         https://www.acmicpc.net/user/bcdlife
         https://www.acmicpc.net/problem/13274
     */
+
+    public static long[] sorted; //정렬 결과 저장용 배열
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -24,7 +26,8 @@ public class Main13274 {
             seq[i] = Long.parseLong(st.nextToken());
         }
         //사전 정렬
-        mergeSort(seq, n);
+        sorted = new long[n];
+        mergeSort(seq, 0, n-1);
         //쿼리 실행
         while(k-- > 0) {
             st = new StringTokenizer(br.readLine());
@@ -36,11 +39,11 @@ public class Main13274 {
                 seq[i] += x;
             }
             //정렬
-            mergeSort(seq, n);
+            mergeSort(seq, 0, n-1);
         }
         //출력
         for(int i=0; i<n; i++) {
-            sb.append(seq[i]).append(" ");
+            sb.append(seq[i]).append(' ');
         }
         bw.write(sb.toString());
         bw.flush();
@@ -49,44 +52,35 @@ public class Main13274 {
     }
 
     /**
-     * 병합정렬
+     * 병합정렬 + 이진탐색
      * @param arr
      * @return
      */
-    public static void mergeSort(long[] arr, int length) {
-        if(length < 2) return;
-        //병합정렬 - 쪼개기
-        int leftLength = length / 2;
-        int rightLength = length - leftLength;
-
-        long[] left = new long[leftLength];
-        long[] right = new long[rightLength];
-
-        for(int i=0; i<leftLength; i++) {
-            left[i] = arr[i];
-        }
-        for(int i=leftLength; i<length; i++) {
-            right[i - leftLength] = arr[i];
-        }
-
-        mergeSort(left, leftLength);
-        mergeSort(right, rightLength);
-        //병합정렬 - 합치기 + 정렬
-        merge(arr, left, right, leftLength, rightLength);
+    public static void mergeSort(long[] arr, int leftIndex, int rightIndex) {
+        if(leftIndex >= rightIndex) return;
+        //병합정렬 - 쪼개기 (쪼갠 결과를 index로 전달하여 관리)
+        int midIndex = (leftIndex + rightIndex) / 2;
+        mergeSort(arr, leftIndex, midIndex);
+        mergeSort(arr, midIndex + 1, rightIndex);
+        //병합정렬 - 쪼개진 배열 부분별로 정렬
+        merge(arr, leftIndex, midIndex, rightIndex);
     }
 
     /**
-     * 병합 정렬 - 합치기 + 정렬
+     * 병합 정렬 - 쪼개진 배열 부분별로 정렬
      */
-    public static void merge(long[] arr, long[] left, long[] right, int leftLength, int rightLength) {
-        int leftIndex = 0, rightIndex = 0, mergedIndex = 0;
+    public static void merge(long[] origin, int start, int mid, int end) {
+        int leftIndex = start, rightIndex = mid + 1, mergedIndex = start;
         //두 배열 중 짧은 쪽에 맞춰서 index 하나씩 비교, 정렬
-        while(leftIndex < leftLength && rightIndex < rightLength)
-            if(left[leftIndex] <= right[rightIndex]) arr[mergedIndex++] = left[leftIndex++];
-            else arr[mergedIndex++] = right[rightIndex++];
+        while(leftIndex <= mid && rightIndex <= end)
+            if(origin[leftIndex] <= origin[rightIndex]) sorted[mergedIndex++] = origin[leftIndex++];
+            else sorted[mergedIndex++] = origin[rightIndex++];
 
         //남은 값 채워넣기 (왼쪽 배열 먼저)
-        while(leftIndex < leftLength) arr[mergedIndex++] = left[leftIndex++];
-        while(rightIndex < rightLength) arr[mergedIndex++] = right[rightIndex++];
+        while(leftIndex <= mid) sorted[mergedIndex++] = origin[leftIndex++];
+        while(rightIndex <= end) sorted[mergedIndex++] = origin[rightIndex++];
+
+        //정렬결과를 기존 배열에 넣어줌
+        for(int i=start; i<=end; i++) origin[i] = sorted[i];
     }
 }
