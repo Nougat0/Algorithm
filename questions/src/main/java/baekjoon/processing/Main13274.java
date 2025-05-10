@@ -1,7 +1,7 @@
 package baekjoon.processing;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main13274 {
     /*
@@ -18,12 +18,13 @@ public class Main13274 {
         //입력
         int l, r, x;
         st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
+        final int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         long[] seq = new long[n];
         st = new StringTokenizer(br.readLine());
-        for(int i=0; i<n; i++) {
-            seq[i] = Long.parseLong(st.nextToken());
+        int index = 0;
+        while(index < n) {
+            seq[index++] = Long.parseLong(st.nextToken());
         }
         //사전 정렬
         sorted = new long[n];
@@ -34,16 +35,21 @@ public class Main13274 {
             l = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             r = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             x = Integer.parseInt(st.nextToken());
-            //값 추가
-            for(int i=l; i<=r; i++) {
-                seq[i] += x;
+            //값 추가 - 양쪽 동시 진행하여 횟수/2
+            int length = r-l+1;
+            for(index=0; index<length/2; index++) {
+                seq[l+index] += x;
+                seq[r-index] += x;
+            }
+            if(length % 2 == 1) { //가운데 값 더하기
+                seq[l+length/2] += x;
             }
             //정렬
             mergeSort(seq, 0, n-1);
         }
         //출력
-        for(int i=0; i<n; i++) {
-            sb.append(seq[i]).append(' ');
+        for(index=0; index<n; index++) {
+            sb.append(seq[index]).append(' ');
         }
         bw.write(sb.toString());
         bw.flush();
