@@ -30,16 +30,21 @@ public class Main13274 {
         sorted = new long[n];
         mergeSort(seq, 0, n-1);
         //쿼리 실행
+        boolean sortNotNeeded;
+        int start, end, min = -1, max = -1;
         while(k-- > 0) {
             st = new StringTokenizer(br.readLine());
             l = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             r = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             x = Integer.parseInt(st.nextToken());
             //더한 후 값의 더하기 전 index 확인
-            int start = binarySearch(seq, seq[l]+x);
-            int end = binarySearch(seq, seq[r]+x);
-            int min = Math.min(start, l);
-            int max = Math.max(end, r);
+            sortNotNeeded = (r == n-1 && x >= 0) || (l == 0 && x <= 0);
+            if(!sortNotNeeded) {
+                start = binarySearch(seq, seq[l]+x);
+                end = binarySearch(seq, seq[r]+x);
+                min = Math.min(start, l);
+                max = Math.max(end, r);
+            }
             //값 추가 - 양쪽 동시 진행하여 횟수/2
             int length = r-l+1;
             for(index=0; index<length/2; index++) {
@@ -49,6 +54,8 @@ public class Main13274 {
             if(length % 2 == 1) { //가운데 값 더하기
                 seq[l+length/2] += x;
             }
+            //재정렬할 필요없는 경우 continue (현재 위치 그대로)
+            if(sortNotNeeded) continue;
             //정렬
             mergeSort(seq, min, max);
         }
