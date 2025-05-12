@@ -31,20 +31,14 @@ public class Main13274 {
         mergeSort(seq, 0, n-1);
         //쿼리 실행
         boolean sortNotNeeded;
-        int start, end, min = -1, max = -1;
         while(k-- > 0) {
             st = new StringTokenizer(br.readLine());
             l = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             r = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             x = Integer.parseInt(st.nextToken());
-            //더한 후 값의 더하기 전 index 확인
-            sortNotNeeded = (r == n-1 && x >= 0) || (l == 0 && x <= 0);
-            if(!sortNotNeeded) {
-                start = binarySearch(seq, seq[l]+x);
-                end = binarySearch(seq, seq[r]+x);
-                min = Math.min(start, l);
-                max = Math.max(end, r);
-            }
+            //재정렬 필요없는 경우 구하기
+            sortNotNeeded = (x == 0) || (r == n-1 && x > 0) || (l == 0 && x < 0);
+
             //값 추가 - 양쪽 동시 진행하여 횟수/2
             int length = r-l+1;
             for(index=0; index<length/2; index++) {
@@ -57,7 +51,8 @@ public class Main13274 {
             //재정렬할 필요없는 경우 continue (현재 위치 그대로)
             if(sortNotNeeded) continue;
             //정렬
-            mergeSort(seq, min, max);
+            if(x > 0) mergeSort(seq, l, n-1);
+            else mergeSort(seq, 0, r);
         }
         //출력
         for(index=0; index<n; index++) {
@@ -100,30 +95,5 @@ public class Main13274 {
 
         //정렬결과를 기존 배열에 넣어줌
         for(int i=start; i<=end; i++) origin[i] = sorted[i];
-    }
-
-
-    /**
-     * 전달된 값이 배열의 어느 범위에 있는지 확인
-     * @param arr
-     * @param value
-     * @return
-     */
-    public static int binarySearch(long[] arr, long value) {
-        int leftIndex = 0;
-        int rightIndex = arr.length - 1;
-        int midIndex;
-        long midValue;
-
-        while(leftIndex <= rightIndex) {
-            midIndex = (leftIndex + rightIndex)/2;
-            midValue = arr[midIndex];
-            if(midValue == value) return midIndex;
-            else if(arr[rightIndex] < value) return rightIndex;
-            else if(arr[leftIndex] > value) return leftIndex;
-            else if(midValue > value) rightIndex = midIndex;
-            else if(midValue < value) leftIndex = midIndex;
-        }
-        return leftIndex;
     }
 }
