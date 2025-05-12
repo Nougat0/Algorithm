@@ -35,6 +35,11 @@ public class Main13274 {
             l = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             r = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             x = Integer.parseInt(st.nextToken());
+            //더한 후 값의 더하기 전 index 확인
+            int start = binarySearch(seq, seq[l]+x);
+            int end = binarySearch(seq, seq[r]+x);
+            int min = Math.min(start, l);
+            int max = Math.max(end, r);
             //값 추가 - 양쪽 동시 진행하여 횟수/2
             int length = r-l+1;
             for(index=0; index<length/2; index++) {
@@ -45,7 +50,7 @@ public class Main13274 {
                 seq[l+length/2] += x;
             }
             //정렬
-            mergeSort(seq, 0, n-1);
+            mergeSort(seq, min, max);
         }
         //출력
         for(index=0; index<n; index++) {
@@ -88,5 +93,30 @@ public class Main13274 {
 
         //정렬결과를 기존 배열에 넣어줌
         for(int i=start; i<=end; i++) origin[i] = sorted[i];
+    }
+
+
+    /**
+     * 전달된 값이 배열의 어느 범위에 있는지 확인
+     * @param arr
+     * @param value
+     * @return
+     */
+    public static int binarySearch(long[] arr, long value) {
+        int leftIndex = 0;
+        int rightIndex = arr.length - 1;
+        int midIndex;
+        long midValue;
+
+        while(leftIndex <= rightIndex) {
+            midIndex = (leftIndex + rightIndex)/2;
+            midValue = arr[midIndex];
+            if(midValue == value) return midIndex;
+            else if(arr[rightIndex] < value) return rightIndex;
+            else if(arr[leftIndex] > value) return leftIndex;
+            else if(midValue > value) rightIndex = midIndex;
+            else if(midValue < value) leftIndex = midIndex;
+        }
+        return leftIndex;
     }
 }
