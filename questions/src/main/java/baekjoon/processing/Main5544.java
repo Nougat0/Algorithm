@@ -7,8 +7,6 @@ public class Main5544 {
         https://www.acmicpc.net/user/bcdlife
         https://www.acmicpc.net/problem/5544
     */
-
-    public static int[] sorted; //정렬 결과 저장용 배열
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
