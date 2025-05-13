@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -7,6 +7,8 @@ public class Main13274 {
     /*
         https://www.acmicpc.net/user/bcdlife
         https://www.acmicpc.net/problem/13274
+
+        참고한 글: https://ongveloper.tistory.com/374
     */
 
     public static long[] sorted; //정렬 결과 저장용 배열
@@ -37,7 +39,7 @@ public class Main13274 {
             r = Integer.parseInt(st.nextToken()) - 1; //1~n 값 조정
             x = Integer.parseInt(st.nextToken());
             //재정렬 필요없는 경우 구하기
-            sortNotNeeded = (x == 0) || (r == n-1 && x > 0) || (l == 0 && x < 0);
+            sortNotNeeded = (x == 0) || (x > 0 && r == n-1) || (x < 0 && l == 0);
 
             //값 추가 - 양쪽 동시 진행하여 횟수/2
             int length = r-l+1;
@@ -51,8 +53,8 @@ public class Main13274 {
             //재정렬할 필요없는 경우 continue (현재 위치 그대로)
             if(sortNotNeeded) continue;
             //정렬
-            if(x > 0) mergeSort(seq, l, n-1);
-            else mergeSort(seq, 0, r);
+            if(x > 0) merge(seq, l, r, n-1);
+            else merge(seq, 0, l-1, r);
         }
         //출력
         for(index=0; index<n; index++) {
@@ -82,18 +84,18 @@ public class Main13274 {
     /**
      * 병합 정렬 - 쪼개진 배열 부분별로 정렬
      */
-    public static void merge(long[] origin, int start, int mid, int end) {
-        int leftIndex = start, rightIndex = mid + 1, mergedIndex = start;
+    public static void merge(long[] origin, int leftStart, int leftEnd, int rightEnd) {
+        int leftIndex = leftStart, rightIndex = leftEnd + 1, mergedIndex = leftStart;
         //두 배열 중 짧은 쪽에 맞춰서 index 하나씩 비교, 정렬
-        while(leftIndex <= mid && rightIndex <= end)
+        while(leftIndex <= leftEnd && rightIndex <= rightEnd)
             if(origin[leftIndex] <= origin[rightIndex]) sorted[mergedIndex++] = origin[leftIndex++];
             else sorted[mergedIndex++] = origin[rightIndex++];
 
-        //남은 값 채워넣기 (왼쪽 배열 먼저)
-        while(leftIndex <= mid) sorted[mergedIndex++] = origin[leftIndex++];
-        while(rightIndex <= end) sorted[mergedIndex++] = origin[rightIndex++];
+        //남은 값 채워넣기 (왼쪽이든 오른쪽이든 한쪽만 남은 상태)
+        while(leftIndex <= leftEnd) sorted[mergedIndex++] = origin[leftIndex++];
+        while(rightIndex <= rightEnd) sorted[mergedIndex++] = origin[rightIndex++];
 
         //정렬결과를 기존 배열에 넣어줌
-        for(int i=start; i<=end; i++) origin[i] = sorted[i];
+        for(int i=leftStart; i<=rightEnd; i++) origin[i] = sorted[i];
     }
 }
