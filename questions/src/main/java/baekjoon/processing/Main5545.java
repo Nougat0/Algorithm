@@ -28,7 +28,7 @@ public class Main5545 {
         int calories = dough_calories;
         int best_pizza = calories / price;
         for(int i=0; i<topping_count; i++) {
-            if(best_pizza < (calories + topping_calories[i]) / (price + topping_price)) {
+            if(best_pizza <= (calories + topping_calories[i]) / (price + topping_price)) {
                 calories += topping_calories[i];
                 price += topping_price;
                 best_pizza = calories / price;
