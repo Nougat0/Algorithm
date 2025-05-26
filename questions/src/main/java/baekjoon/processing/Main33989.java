@@ -31,11 +31,15 @@ public class Main33989 {
             sumCoins[i][0] = countB;
             sumCoins[i][1] = countD;
         }
-        //혼합구간에서 적은 종류의 개수 구하기
-        int sumB = sumCoins[lastD][0] - (lastB-1 >= 0 ? sumCoins[lastB-1][0] : 0);
-        int sumD = sumCoins[lastD][1] - (lastB-1 >= 0 ? sumCoins[lastB-1][1] : 0);
-
-        bw.write(Math.min(sumB, sumD) + "\n");
+        //값 조정
+        if(lastD == -1 || lastD == n-1) {
+            bw.write(0 + "\n"); //모두 D / B일 경우
+        } else {
+            //혼합구간에서 적은 종류의 개수 구하기
+            int sumB = sumCoins[lastD][0] - (lastB-1 >= 0 ? sumCoins[lastB-1][0] : 0);
+            int sumD = sumCoins[lastD][1] - (lastB-1 >= 0 ? sumCoins[lastB-1][1] : 0);
+            bw.write(Math.min(sumB, sumD) + "\n");
+        }
         bw.flush();
         bw.close();
         br.close();
