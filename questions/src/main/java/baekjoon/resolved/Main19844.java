@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -32,7 +32,8 @@ public class Main19844 {
                         }
                         switch(line[i-1]) {
                             case 'c': case 'j': case 'n': case 'm': case 't': case 's': case 'l': case 'd':
-                                formerCheck = true;
+                                //line[i-2] 가 split 임을 확인
+                                if(i-1 - splitIndex == 1) formerCheck = true;
                                 break;
                             case 'u':
                                 if(i-2 >=0 && line[i-2] == 'q')
