@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -44,6 +44,8 @@ public class Main17952 {
                 if(!taskRemains.isEmpty()) {
                     currentTaskRemains = taskRemains.pop();
                     currentTaskPoint = taskPoints.pop();
+                } else {
+                    currentTaskPoint = 0; //진행 과제 없으니 점수도 초기화
                 }
             }
         }
