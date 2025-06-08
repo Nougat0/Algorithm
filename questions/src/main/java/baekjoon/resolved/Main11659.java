@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -16,23 +16,17 @@ public class Main11659 {
         st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        int[] numbers = new int[n];
+        int[] accum = new int[n];
+        int sum = 0;
         st = new StringTokenizer(br.readLine());
-        for(int index=0; index<n; index++) numbers[index] = Integer.parseInt(st.nextToken());
+        for(int index=0; index<n; index++) accum[index] = (sum += Integer.parseInt(st.nextToken()));
 
         for(int caseNo=0; caseNo<m; caseNo++) {
             st = new StringTokenizer(br.readLine());
             int i = Integer.parseInt(st.nextToken())-1;
             int j = Integer.parseInt(st.nextToken())-1;
-            int count = j - i + 1; //개수
-            int sum = 0;
-            for(int index=0; index<count/2; index++) { //앞부분 뒷부분 한꺼번에 더하기
-                sum += (numbers[i + index] + numbers[j - index]);
-            }
-            if(count % 2 == 1) { //홀수 개수 빠진 값 추가
-                sum += numbers[(i+j)/2];
-            }
-            sb.append(sum).append("\n");
+            //이중 for문 사용 시 시간초과... 따라서 미리 합산 값을 구해놓고 (누적합) 사용해야 함
+            sb.append(accum[j] - (i>0 ? accum[i-1] : 0)).append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
