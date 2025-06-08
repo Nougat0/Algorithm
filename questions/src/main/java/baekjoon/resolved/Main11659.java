@@ -16,17 +16,17 @@ public class Main11659 {
         st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        int[] accum = new int[n];
+        int[] accum = new int[n+1];
         int sum = 0;
         st = new StringTokenizer(br.readLine());
-        for(int index=0; index<n; index++) accum[index] = (sum += Integer.parseInt(st.nextToken()));
+        for(int index=1; index<=n; index++) accum[index] = (sum += Integer.parseInt(st.nextToken()));
 
         for(int caseNo=0; caseNo<m; caseNo++) {
             st = new StringTokenizer(br.readLine());
-            int i = Integer.parseInt(st.nextToken())-1;
-            int j = Integer.parseInt(st.nextToken())-1;
+            int i = Integer.parseInt(st.nextToken());
+            int j = Integer.parseInt(st.nextToken());
             //이중 for문 사용 시 시간초과... 따라서 미리 합산 값을 구해놓고 (누적합) 사용해야 함
-            sb.append(accum[j] - (i>0 ? accum[i-1] : 0)).append("\n");
+            sb.append(accum[j] - accum[i-1]).append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
