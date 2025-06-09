@@ -5,6 +5,10 @@ import java.math.BigInteger;
 import java.util.StringTokenizer;
 
 public class Main11009 {
+    /*
+        https://www.acmicpc.net/problem/11009
+        https://www.acmicpc.net/user/bcdlife
+    */
     public static final int NUMERATOR = 0;
     public static final int DENOMINATOR = 1;
     public static void main(String[] args) throws IOException {
@@ -86,8 +90,8 @@ public class Main11009 {
      */
     public static BigInteger getGCD(BigInteger a, BigInteger b) {
         BigInteger remainder;
-        while((a.mod(b).compareTo(BigInteger.ZERO) != 0)) {
-            remainder = a.mod(b);
+        while((a.remainder(b).compareTo(BigInteger.ZERO) != 0)) {
+            remainder = a.remainder(b);
             a = b;
             b = remainder;
         }
@@ -106,7 +110,7 @@ public class Main11009 {
         BigInteger[] result = new BigInteger[2];
         BigInteger gcd = getGCD(a_denominator, b_denominator);
         BigInteger lcm = a_denominator.multiply(b_denominator).divide(gcd);
-        result[NUMERATOR] = (a_numerator.multiply(lcm).divide(a_denominator)).add(b_numerator.multiply(lcm).divide(b_denominator));
+        result[NUMERATOR] = (lcm.divide(a_denominator).multiply(a_numerator)).add(lcm.divide(b_denominator).multiply(b_numerator));
         result[DENOMINATOR] = lcm;
         //약분하기
         gcd = getGCD(result[NUMERATOR], result[DENOMINATOR]);
