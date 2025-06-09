@@ -1,7 +1,6 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.util.*;
 
 public class Main33989 {
     /*
@@ -23,8 +22,7 @@ public class Main33989 {
         */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        final int N = Integer.parseInt(st.nextToken());
+        final int N = Integer.parseInt(br.readLine());
         char[] coins = br.readLine().toCharArray();
         int[][] sumCoins = new int[N+1][2]; //[B, D] 위치별 누적합 : coins 맨앞 [0,0] 추가됨
         int countB = 0, countD = 0; //누적값 기록용
