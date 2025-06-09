@@ -71,13 +71,13 @@ public class Main1915 {
                 if(filled) {
                     //2*2 범위 탐색, 최소값+1 도출
                     maxLengthOfCoord = Math.min(Math.min(maxLengthValues[i][j], maxLengthValues[i+1][j]), maxLengthValues[i][j+1]) + 1;
+                    //최대값 갱신하기
+                    if(maxLength < maxLengthOfCoord) maxLength = maxLengthOfCoord;
                 } else {
                     //사각형이 되지 못하므로 무조건 0
                     maxLengthOfCoord = 0;
                 }
-                //최대값 갱신하기
-                if(maxLength < maxLengthOfCoord) maxLength = maxLengthOfCoord;
-                maxLengthValues[i+1][j+1] = maxLength;
+                maxLengthValues[i+1][j+1] = maxLengthOfCoord;
             }
         }
         //출력
