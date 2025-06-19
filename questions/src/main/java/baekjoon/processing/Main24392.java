@@ -13,10 +13,10 @@ public class Main24392 {
         final int MOD = 1_000_000_007;
         StringTokenizer st;
         st = new StringTokenizer(br.readLine());
-        int rows = Integer.parseInt(st.nextToken());
-        int cols = Integer.parseInt(st.nextToken());
-        int[] count = new int[cols+2]; //맨 앞, 맨 뒤 공간 남겨둠
-        int[] newRow = new int[cols+2]; //맨 앞, 맨 뒤 공간 남겨둠
+        final int rows = Integer.parseInt(st.nextToken());
+        final int cols = Integer.parseInt(st.nextToken());
+        long[] count = new long[cols+2]; //맨 앞, 맨 뒤 공간 남겨둠
+        long[] newRow = new long[cols+2]; //맨 앞, 맨 뒤 공간 남겨둠
         //첫 줄 초기화
         st = new StringTokenizer(br.readLine());
         for(int col=1; col<=cols; col++) count[col] = Integer.parseInt(st.nextToken());
@@ -28,7 +28,7 @@ public class Main24392 {
             for(int col=1; col<=cols; col++) {
                  usable= st.nextToken().charAt(0) == '1';
                  if(usable) {
-                     newRow[col] = count[col-1] % MOD  + count[col] % MOD + count[col+1] % MOD;
+                     newRow[col] = (count[col-1] % MOD  + count[col] % MOD + count[col+1] % MOD) % MOD;
                  } else {
                      newRow[col] = 0;
                  }
@@ -36,8 +36,8 @@ public class Main24392 {
             //연산된 값 넣어주기
             for(int col=1; col<=cols; col++) count[col] = newRow[col];
         }
-        int cases = 0; //최종 건널 수 있는 경우의 수
-        for(int col=1; col<=cols; col++) cases = (cases + count[col]) % MOD;
+        long cases = 0; //최종 건널 수 있는 경우의 수
+        for(int col=1; col<=cols; col++) cases += count[col] % MOD;
         System.out.println(cases);
         br.close();
     }
