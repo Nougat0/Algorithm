@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -38,7 +38,7 @@ public class Main24392 {
         }
         long cases = 0; //최종 건널 수 있는 경우의 수
         for(int col=1; col<=cols; col++) cases += count[col] % MOD;
-        System.out.println(cases);
+        System.out.println(cases % MOD);
         br.close();
     }
 }
