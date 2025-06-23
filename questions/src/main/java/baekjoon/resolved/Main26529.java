@@ -13,32 +13,20 @@ public class Main26529 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
+        //n 최대값까지 미리 전개
         bunnies[0] = 1;
         bunnies[1] = 1;
+        for(int i=2; i<=45; i++) {
+            bunnies[i] = bunnies[i-1] + bunnies[i-2];
+        }
         int month;
         while(n-- > 0) {
             month = Integer.parseInt(br.readLine());
-            sb.append(getBunnies(month)).append("\n");
+            sb.append(bunnies[month]).append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
         bw.close();
         br.close();
-    }
-
-    /**
-     * DP 재귀방식
-     * @param month
-     * @return
-     */
-    public static long getBunnies(int month) {
-        if(month < 2) {
-            return bunnies[month];
-        } else if(bunnies[month] == 0){
-            bunnies[month] = getBunnies(month-1) + getBunnies(month-2);
-            return bunnies[month];
-        } else {
-            return bunnies[month];
-        }
     }
 }
