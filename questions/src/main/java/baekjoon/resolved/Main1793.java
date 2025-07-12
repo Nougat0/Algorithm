@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -16,6 +16,7 @@ public class Main1793 {
         while((input = br.readLine()) != null) {
             final int N = Integer.parseInt(input);
             BigInteger[] dp = new BigInteger[N+3]; //N이 0일 때도 감안
+            dp[0] = BigInteger.ONE;
             dp[1] = BigInteger.ONE;
             dp[2] = BigInteger.valueOf(3);
             for(int i=3; i<=N; i++) {
