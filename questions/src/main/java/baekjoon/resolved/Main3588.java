@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -22,13 +22,15 @@ public class Main3588 {
             long gallonsWasted = 0;
             while(breaks-- > 0) {
                 st = new StringTokenizer(br.readLine());
-                int start = Math.max(s, Integer.parseInt(st.nextToken())); //더 나중 시작점 선택
-                int finish = Math.min(f, Integer.parseInt(st.nextToken())); //더 이른 종료점 선택
+                int start = Integer.parseInt(st.nextToken());
+                int finish = Integer.parseInt(st.nextToken());
                 int rate = Integer.parseInt(st.nextToken());
-                gallonsWasted += (finish - start + 1) * rate;
+                if(start <= f && finish >= s) { //집계 범위에 걸쳤는지 확인
+                    gallonsWasted += (Math.min(finish, f) - Math.max(start, s) + 1) * rate;
+                }
             }
-            sb.append("Data Set ").append(dataSet).append(":\n").append(gallonsWasted);
-            if(dataSet < DATA_SETS) sb.append("\n\n");
+            sb.append("Data Set ").append(dataSet).append(":\n").append(gallonsWasted).append("\n");
+            if(dataSet < DATA_SETS) sb.append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
