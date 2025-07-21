@@ -14,13 +14,18 @@ public class Main1940 {
         int m = Integer.parseInt(br.readLine());
         boolean[] arr = new boolean[10_000_001];
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int max = 0, value;
         for(int i=0; i<n; i++) {
-            arr[Integer.parseInt(st.nextToken())] = true;
+            value = Integer.parseInt(st.nextToken());
+            if(max < value) max = value;
+            arr[value] = true;
         }
         int armor = 0;
-        for(int i=1; i<m/2+1; i++) {
-            //같은 재료 2번 사용 못함 예외처리 (m-i != i)
-            if(m-i != i && arr[m - i] && arr[i]) armor++;
+        if(max >= m / 2) { //m의 절반보다 최대값이 커야 loop 도는 의미 있음
+            for(int i=1; i<m/2+1; i++) {
+                //같은 재료 2번 사용 못함 예외처리 (m-i != i)
+                if(m-i != i && arr[m - i] && arr[i]) armor++;
+            }
         }
         System.out.println(armor);
         br.close();
