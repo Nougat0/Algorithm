@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -28,7 +28,10 @@ public class Main29965 {
                     jurySum += Integer.parseInt(st.nextToken());
             }
         }
-        int maryToJury = Double.compare(marySum/maryCount, jurySum/juryCount);
+        double maryAvg = maryCount == 0 ? 0 : marySum/maryCount;
+        double juryAvg = juryCount == 0 ? 0 : jurySum/juryCount;
+        int maryToJury = Double.compare(maryAvg, juryAvg);
+
         if(maryToJury > 0) System.out.println("M");
         else if(maryToJury < 0) System.out.println("J");
         else System.out.println("V");
