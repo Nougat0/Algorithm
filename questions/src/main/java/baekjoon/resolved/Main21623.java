@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -17,18 +17,18 @@ public class Main21623 {
         int moves = Integer.parseInt(st.nextToken());
         int initial = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
-        /*
+        /* 예외처리
         If the last move of the game had ended the round, Petya didn't not begin a new round and his score was 0.
         */
         int score = initial;
         int round = 0;
-        while(moves-- > 0) {
+        while(st.hasMoreTokens()) {
             int number = Integer.parseInt(st.nextToken());
             if(score >= number) {
                 score -= number;
                 if(score == 0) {
                     round++;
-                    if(moves > -1) score = initial;
+                    if(st.hasMoreTokens()) score = initial;
                 }
             }
         }
