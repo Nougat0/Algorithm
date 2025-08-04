@@ -18,9 +18,28 @@ public class Main31287 {
         String s = br.readLine();
 
         boolean backToOrigin = false;
-        long x=0, y=0; //원점
-        label:
-        for(int loop=0; loop<k; loop++) {
+        int x=0, y=0, finishX, finishY; //원점, 종점
+        for(int i=0; i<n; i++) {
+            char c = s.charAt(i);
+            switch(c) {
+                case 'U': y++; break;
+                case 'D': y--; break;
+                case 'L': x--; break;
+                case 'R': x++; break;
+            }
+            if(x == 0 && y == 0) {
+                backToOrigin = true;
+                break;
+            }
+        }
+        //1회차에서 원점 지나지 않을 경우 2회차 체크
+        if(!backToOrigin && k > 1) {
+            //종점 + 원점으로 각 점이 지나가는 직선 구하기
+            finishX = x;
+            finishY = y;
+            // y = (slope)x + b
+            // b = y - (slope)x
+            double slope = (double) finishY / finishX;
             for(int i=0; i<n; i++) {
                 char c = s.charAt(i);
                 switch(c) {
@@ -29,12 +48,14 @@ public class Main31287 {
                     case 'L': x--; break;
                     case 'R': x++; break;
                 }
-                if(x == 0 && y == 0) {
+                //직선 위에 원점 있는지 확인
+                if((i > 0 && i < n-1) && y == slope * x) {
                     backToOrigin = true;
-                    break label;
+                    break;
                 }
             }
         }
+        //출력
         bw.write(backToOrigin ? "YES" : "NO");
         bw.flush();
         bw.close();
