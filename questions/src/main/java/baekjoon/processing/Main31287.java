@@ -18,7 +18,7 @@ public class Main31287 {
         String s = br.readLine();
 
         boolean backToOrigin = false;
-        int x=0, y=0, finishX, finishY; //원점, 종점
+        int x=0, y=0, finishX, finishY, symmX, symmY; //원점, 종점
         for(int i=0; i<n; i++) {
             char c = s.charAt(i);
             switch(c) {
@@ -34,8 +34,10 @@ public class Main31287 {
         }
         //1회차에서 원점 지나지 않을 경우 N회차 체크
         if(!backToOrigin && k > 1) {
-            finishX = x;
-            finishY = y;
+            symmX = -x;
+            symmY = -y;
+            double distance = Math.sqrt(x*x + y*y);
+            double dotDistance;
             x = 0;
             y = 0;
             //대칭점 위에 있는지 확인하기
@@ -48,18 +50,13 @@ public class Main31287 {
                     case 'R': x++; break;
                 }
                 //원점 기준 종점의 대칭점 N배수 값일 때, 0 <= N <= k 이면 도달 가능
-                if(finishX != 0 && finishY != 0) {
-                    if((x % finishX == 0 && x / -finishX <= k && x / -finishX > 0)
-                            && (y % finishY == 0 && y / -finishY <= k && y / -finishY > 0)
-                            && (x / -finishX == y / -finishY)) {
-                        backToOrigin = true;
-                        break;
-                    }
-                } else if(finishX != 0 || finishY != 0) {
-                    if((finishX != 0 && x % finishX == 0 && x / -finishX <= k && x / -finishX > 0)
-                            || (finishY != 0 && y % finishY == 0 && y / -finishY <= k && y / -finishY > 0)) {
-                        backToOrigin = true;
-                        break;
+                if(y * symmX == symmY * x) { //직선 위에 존재
+                    dotDistance = Math.sqrt(x*x + y*y);
+                    if(dotDistance % distance == 0 && dotDistance / distance <= k) { //K번째 대칭점 내에 존재
+                        if(symmX / x > 0 && symmY / y > 0) { //방향 체크
+                            backToOrigin = true;
+                            break;
+                        }
                     }
                 }
             }
