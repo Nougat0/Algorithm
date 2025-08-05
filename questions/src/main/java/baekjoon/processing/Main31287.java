@@ -32,14 +32,13 @@ public class Main31287 {
                 break;
             }
         }
-        //1회차에서 원점 지나지 않을 경우 2회차 체크
+        //1회차에서 원점 지나지 않을 경우 N회차 체크
         if(!backToOrigin && k > 1) {
-            //종점 + 원점으로 각 점이 지나가는 직선 구하기
             finishX = x;
             finishY = y;
-            // y = (slope)x + b
-            // b = y - (slope)x
-            double slope = (double) finishY / finishX;
+            x = 0;
+            y = 0;
+            //대칭점 위에 있는지 확인하기
             for(int i=0; i<n; i++) {
                 char c = s.charAt(i);
                 switch(c) {
@@ -48,10 +47,20 @@ public class Main31287 {
                     case 'L': x--; break;
                     case 'R': x++; break;
                 }
-                //직선 위에 원점 있는지 확인
-                if((i > 0 && i < n-1) && y == slope * x) {
-                    backToOrigin = true;
-                    break;
+                //원점 기준 종점의 대칭점 N배수 값일 때, 0 <= N <= k 이면 도달 가능
+                if(finishX != 0 && finishY != 0) {
+                    if((x % finishX == 0 && x / -finishX <= k && x / -finishX > 0)
+                            && (y % finishY == 0 && y / -finishY <= k && y / -finishY > 0)
+                            && (x / -finishX == y / -finishY)) {
+                        backToOrigin = true;
+                        break;
+                    }
+                } else if(finishX != 0 || finishY != 0) {
+                    if((finishX != 0 && x % finishX == 0 && x / -finishX <= k && x / -finishX > 0)
+                            || (finishY != 0 && y % finishY == 0 && y / -finishY <= k && y / -finishY > 0)) {
+                        backToOrigin = true;
+                        break;
+                    }
                 }
             }
         }
