@@ -34,12 +34,14 @@ public class Main31287 {
         }
         //1회차에서 원점 지나지 않을 경우 N회차 체크
         if(!backToOrigin && k > 1) {
-            symmX = -x;
-            symmY = -y;
-            double distance = Math.sqrt(x*x + y*y);
-            double dotDistance;
+            finishX = x;
+            finishY = y;
+            int distance = Math.abs(x) + Math.abs(y);
+            int dotDistance;
             x = 0;
             y = 0;
+            boolean xOk = false;
+            boolean yOk = false;
             //대칭점 위에 있는지 확인하기
             for(int i=0; i<n; i++) {
                 char c = s.charAt(i);
@@ -50,10 +52,10 @@ public class Main31287 {
                     case 'R': x++; break;
                 }
                 //원점 기준 종점의 대칭점 N배수 값일 때, 0 <= N <= k 이면 도달 가능
-                if(y * symmX == symmY * x) { //직선 위에 존재
-                    dotDistance = Math.sqrt(x*x + y*y);
-                    if(dotDistance % distance == 0 && dotDistance / distance <= k) { //K번째 대칭점 내에 존재
-                        if(symmX / x > 0 && symmY / y > 0) { //방향 체크
+                if(y * finishX == finishY * x) { //직선 위에 존재
+                    dotDistance = Math.abs(x) + Math.abs(y);
+                    if(dotDistance % distance == 0 && dotDistance / distance < k) { //K번째 대칭점 내에 존재
+                        if(finishX * x <= 0 && finishY * y <= 0) { //대칭점이니 음수 아니면 0
                             backToOrigin = true;
                             break;
                         }
