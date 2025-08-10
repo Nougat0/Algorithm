@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -39,7 +39,7 @@ public class Main22951 {
                 cardNoList.remove((Integer) cardNo); //카드 제거
 
                 listNo = (start + cardNum) % --size; //다음 시작 순번 (List 상 순번) 찾기
-                cardNo = cardNoList.get(listNo-1); //다음 시작 카드 순번 꺼내기
+                cardNo = cardNoList.get(listNo == 0 ? size-1 : listNo-1); //다음 시작 카드 순번 꺼내기
             }
             cardNoList.remove((Integer) cardNo);
             cardNo = cardNoList.get(0); //마지막 남은 카드의 순번
