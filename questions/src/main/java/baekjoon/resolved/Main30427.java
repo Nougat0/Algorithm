@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -16,7 +16,7 @@ public class Main30427 {
         int n = Integer.parseInt(br.readLine());
         for(int i=0; i<n; i++) suspects.add(br.readLine());
         int m = Integer.parseInt(br.readLine());
-        for(int i=0; i<n; i++) cleared.add(br.readLine());
+        for(int i=0; i<m; i++) cleared.add(br.readLine());
         
         suspects.add("swi"); //본인도 용의자에 포함
         if(suspects.contains("dongho")) System.out.println("dongho");
