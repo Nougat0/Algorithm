@@ -18,7 +18,7 @@ public class Main16466 {
             arr[i] = Integer.parseInt(st.nextToken());
         }
         Arrays.sort(arr); //오름차순 정렬
-        int min = 0;
+        int min = 1_000_000 + 1; //100만 개 모두 순차적일 경우 대비
         for(int i=1; i<arr[n]; i++) {
             if(arr[i] != i) { //1부터 순차적으로 보다가 비는 곳
                 min = i;
