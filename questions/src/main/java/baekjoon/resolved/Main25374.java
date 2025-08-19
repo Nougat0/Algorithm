@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -40,6 +40,9 @@ public class Main25374 {
                 if((totalCount += scoreCount[score]) >= cutLines[i]) {
                     cutLineCount[i] = totalCount - lastCount;
                     lastCount = totalCount;
+                    //만약 이번 % 값보다 훨씬 커서 다음 등급을 넘어서면
+                    //다음 넣어줄 등급을 조정해줘야 함
+                    while(i < 9 && totalCount >= cutLines[i+1]) i++;
                     break;
                 }
             }
