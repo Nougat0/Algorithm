@@ -16,7 +16,9 @@ public class Main25193 {
             if(line.charAt(i) != 'C') otherCount++;
         }
         int chickenCount = n - otherCount;
-        System.out.printf("%.0f%n", Math.ceil((double) chickenCount/(otherCount + 1)));
+        int mod = chickenCount / (otherCount + 1);
+        boolean hasRemains = chickenCount % (otherCount + 1) > 0;
+        System.out.println(mod + (hasRemains ? 1 : 0));
         br.close();
     }
 }
