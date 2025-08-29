@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -17,14 +17,14 @@ public class Main25325 {
         int[] count = new int[n]; //호감표시 개수 기록용 목록
         Integer[] indexes = new Integer[n]; //index 목록 (정렬용)
         Map<String, Integer> list = new HashMap<>(); //(이름, index) 목록
-        Map<Integer, String> listIndex = new HashMap<>(); //(index, 이름) 목록
+        String[] names = new String[n]; //(index, 이름) 목록
 
         //이름 입력
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
             String name = st.nextToken();
             list.put(name, i);
-            listIndex.put(i, name);
+            names[i] = name;
             indexes[i] = i;
         }
 
@@ -41,7 +41,7 @@ public class Main25325 {
         Arrays.sort(indexes, (i1, i2) -> {
             int compareResult = Integer.compare(count[i2], count[i1]);
             if(compareResult == 0) { //같은 값일 시 알파벳 비교 --> 오름차순 정렬
-                return listIndex.get(i1).compareTo(listIndex.get(i2));
+                return names[i1].compareTo(names[i2]);
             } else { //내림차순 정렬
                 return compareResult;
             }
@@ -50,7 +50,7 @@ public class Main25325 {
         //출력
         for(int i=0; i<n; i++) {
             int index = indexes[i];
-            sb.append(listIndex.get(index)).append(" ").append(count[index]).append("\n");
+            sb.append(names[index]).append(" ").append(count[index]).append("\n");
         }
 
         bw.write(sb.toString());
