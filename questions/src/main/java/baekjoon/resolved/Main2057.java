@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -28,10 +28,11 @@ public class Main2057 {
          *
          * 즉, N 보다 작은 팩토리얼들을 전부 빼도 N이랑 같을까말까이니
          * 전부 합해서 N을 만들 수 있는지에 대한 조합은 1가지 뿐이다
+         * 단, 뺄 수 있을 때만 빼야 한다
          */
         long result = N;
-        for(int i=count-1; i>=0 && result > 0; i--) { //result == 0 되면 break
-            result -= factorial[i];
+        for(int i=count-1; i>=0; i--) {
+            if(result >= factorial[i]) result -= factorial[i];
         }
         if(N > 0 && result == 0) System.out.println("YES");
         else System.out.println("NO");
