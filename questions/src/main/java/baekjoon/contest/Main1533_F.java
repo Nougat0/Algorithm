@@ -26,12 +26,10 @@ public class Main1533_F {
             int currentValue = 0;
             int usageIndex = 0;
             String line = br.readLine();
-            StringBuilder builder = new StringBuilder();
             int count = 0;
             for(int j=1; j<=K; j++) {
                 int index = z ? K-j+1 : j;
                 boolean ij = line.charAt(index-1) == '1';
-                builder.append(ij ? 1 : 0);
                 if(ij) {
                     currentValue += Math.pow(2, K-j);
                     usages[++usageIndex] = j;
