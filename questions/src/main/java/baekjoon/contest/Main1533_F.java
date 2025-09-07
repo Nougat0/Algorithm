@@ -19,7 +19,7 @@ public class Main1533_F {
         final int K = Integer.parseInt(st.nextToken());
         //먼저 출제된 문제들 중 이번 문제에서 사용하는 알고리즘을 모두 사용하는 것이 있다면
         //이번 문제는 WellKnown 이 된다
-        Set<Integer> cases = new HashSet<>();
+        Set<Integer> cases = new HashSet<>(400_000);
         boolean z = false;
         int[] usages = new int[21]; //알고리즘 사용된 것들의 index 기록해두기
         for(int i=1; i<=N; i++) {
