@@ -21,7 +21,6 @@ public class Main1533_F {
         //이번 문제는 WellKnown 이 된다
         Set<String> cases = new HashSet<>();
         boolean z = false;
-        boolean[][] S = new boolean[N+1][K+1];
         int[] usages = new int[21]; //알고리즘 사용된 것들의 index 기록해두기
         for(int i=1; i<=N; i++) {
             int usageIndex = 0;
@@ -31,7 +30,7 @@ public class Main1533_F {
             for(int j=1; j<=K; j++) {
                 int index = z ? K-j+1 : j;
                 boolean ij = line.charAt(index-1) == '1';
-                builder.append((S[i][j] = ij) ? 1 : 0);
+                builder.append(ij ? 1 : 0);
                 if(ij) {
                     usages[++usageIndex] = j;
                     count++;
@@ -42,7 +41,7 @@ public class Main1533_F {
             for(String s : cases) {
                 int containsCount = 0;
                 for(int j=1; j<=usageIndex; j++) {
-                    if(S[i][usages[j]] == true && s.charAt(usages[j]-1) == '1') containsCount++;
+                    if(builder.charAt(usages[j]-1) == '1' && s.charAt(usages[j]-1) == '1') containsCount++;
                     else break;
                 }
                 if(containsCount == count) {
