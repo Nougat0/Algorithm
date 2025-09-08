@@ -23,18 +23,10 @@ public class Main12175 {
             for(int i=0; i<=K; i++) { //첫 자리 -- 최대값 최소값 지정됨
                 //확인할 범위의 시작점에 대한 최소 최대값
                 int min = i-V >= 0 ? i-V : 0;
-                boolean[][] used = new boolean[K+1][K+1]; //i마다 새로 확인 (이전값 갖고 있을 필요 X)
-                for(int start=min; start<=i; start++) {
-                    //j, l 값 확인
-                    int max = start+V <= K ? start+V : K;
-                    for(int j=start; j<=max; j++) {
-                        for(int l=start; l<=max; l++) {
-                            if(!used[j][l]) {
-                                count++;
-                                used[j][l] = true;
-                            }
-                        }
-                    }
+                int maxLoop = Math.min(K-V, i);
+                for(int start=min; start<=maxLoop; start++) {
+                    if(start == min) count += Math.pow(V+1, 2); //처음에는 온전한 네모
+                    else count += (V*2 + 1); //끝에 꺾인 한줄
                 }
             }
             sb.append("Case #").append(testCase).append(": ").append(count).append("\n");
