@@ -19,7 +19,7 @@ public class Main12175 {
             final int K = Integer.parseInt(st.nextToken()); //0~K
             final int V = Integer.parseInt(st.nextToken());
             //개수 세기
-            Set<Integer> used = new HashSet<>();
+            boolean[] used = new boolean[255_255_256];
             //범위에 해당하는 경우의 수 세기
             int count = 0;
             for(int i=0; i<=K; i++) { //첫 자리 -- 최대값 최소값 지정됨
@@ -30,8 +30,10 @@ public class Main12175 {
                     int max = start+V <= K ? start+V : K;
                     for(int j=start; j<=max; j++) {
                         for(int l=start; l<=max; l++) {
-                            if(used.add(getNum(i, j, l))) {
+                            int num = getNum(i, j, l);
+                            if(!used[num]) {
                                 count++;
+                                used[num] = true;
                             }
                         }
                     }
@@ -47,6 +49,6 @@ public class Main12175 {
 
     //i, j, l 색상 값을 1개의 숫자로 변환
     public static int getNum(int h, int t, int o) {
-        return h*100 + t*10 + o;
+        return h*1_000_000 + t*1_000 + o;
     }
 }
