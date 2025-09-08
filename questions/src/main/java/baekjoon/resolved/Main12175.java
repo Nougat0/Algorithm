@@ -18,22 +18,20 @@ public class Main12175 {
             st = new StringTokenizer(br.readLine());
             final int K = Integer.parseInt(st.nextToken()); //0~K
             final int V = Integer.parseInt(st.nextToken());
-            //개수 세기
-            boolean[] used = new boolean[255_255_256];
             //범위에 해당하는 경우의 수 세기
             int count = 0;
             for(int i=0; i<=K; i++) { //첫 자리 -- 최대값 최소값 지정됨
                 //확인할 범위의 시작점에 대한 최소 최대값
                 int min = i-V >= 0 ? i-V : 0;
+                boolean[][] used = new boolean[K+1][K+1]; //i마다 새로 확인 (이전값 갖고 있을 필요 X)
                 for(int start=min; start<=i; start++) {
                     //j, l 값 확인
                     int max = start+V <= K ? start+V : K;
                     for(int j=start; j<=max; j++) {
                         for(int l=start; l<=max; l++) {
-                            int num = getNum(i, j, l);
-                            if(!used[num]) {
+                            if(!used[j][l]) {
                                 count++;
-                                used[num] = true;
+                                used[j][l] = true;
                             }
                         }
                     }
@@ -45,10 +43,5 @@ public class Main12175 {
         bw.flush();
         bw.close();
         br.close();
-    }
-
-    //i, j, l 색상 값을 1개의 숫자로 변환
-    public static int getNum(int h, int t, int o) {
-        return h*1_000_000 + t*1_000 + o;
     }
 }
