@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -20,7 +20,7 @@ public class Main11896 {
         long sumA = newA * (newA + 1); // 1~(A-1) 까지의 합
         long sumB = newB * (newB + 1); // 1~B 까지의 합
         long sum = sumB - sumA;
-        if(A <= 2 && B >= 4) sum -= 2; //2각형은 제외
+        if(!(A == 1 && B == 1) && A <= 2) sum -= 2; //2각형은 제외
         System.out.println(sum); // 1~B 합에서 1~A 합을 뺌
         br.close();
     }
