@@ -32,31 +32,32 @@ public class Main5177 {
                     lastIndex--;
                 }
                 //중간 패턴 기록
-                int index;
-                for(index=lineIndex, formatIndex[loop]=0; index<=lastIndex; index++) {
+                int index, fIndex;
+                for(index=lineIndex, fIndex=0; index<=lastIndex; index++) {
                     //2칸 이상의 공백 존재 시 index 조정
                     index = deleteWhiteSpace(line, index);
                     //출력형식 문자 통일
                     char c = unify(line.charAt(index));
-                    if(isSymbol(c) && index > 0 && !isBlank(format[loop][formatIndex[loop]-1])) {
+                    if(isSymbol(c) && index > 0 && !isBlank(format[loop][fIndex-1])) {
                         //이전 패턴 문자열이 공백 아니면 추가
-                        format[loop][formatIndex[loop]] = ' ';
-                        format[loop][formatIndex[loop]+1] = c;
-                        formatIndex[loop]++;
-                    } else if(!isBlank(c) && formatIndex[loop] > 0 && isSymbol(format[loop][formatIndex[loop]-1])) {
+                        format[loop][fIndex] = ' ';
+                        format[loop][fIndex+1] = c;
+                        fIndex++;
+                    } else if(!isBlank(c) && fIndex > 0 && isSymbol(format[loop][fIndex-1])) {
                         //이전 패턴 문자열이 특수문자이고, 이번이 공백이 아닐 경우 추가
-                        format[loop][formatIndex[loop]] = c;
-                        format[loop][formatIndex[loop]+1] = ' ';
-                        formatIndex[loop]++;
+                        format[loop][fIndex] = c;
+                        format[loop][fIndex+1] = ' ';
+                        fIndex++;
                     } else {
-                        format[loop][formatIndex[loop]] = c;
+                        format[loop][fIndex] = c;
                     }
-                    formatIndex[loop]++;
+                    fIndex++;
                 }
+                formatIndex[loop] = fIndex-1;
             }
             //패턴 비교
             boolean isEqual = formatIndex[0] == formatIndex[1];
-            for(int i=0; i<formatIndex[0] && isEqual; i++) {
+            for(int i=0; i<=formatIndex[0] && isEqual; i++) {
                 if(format[0][i] != format[1][i]) isEqual = false;
             }
             sb.append(isEqual ? "equal" : "not equal").append("\n");
