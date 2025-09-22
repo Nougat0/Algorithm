@@ -38,12 +38,12 @@ public class Main5177 {
                     index = deleteWhiteSpace(line, index);
                     //출력형식 문자 통일
                     char c = unify(line.charAt(index));
-                    if(isSymbol(c) && index > 0 && format[loop][formatIndex-1] != ' ') {
+                    if(isSymbol(c) && index > 0 && !isBlank(format[loop][formatIndex-1])) {
                         //이전 패턴 문자열이 공백 아니면 추가
                         format[loop][formatIndex] = ' ';
                         format[loop][formatIndex+1] = c;
                         formatIndex++;
-                    } else if(c != ' ' && formatIndex > 0 && isSymbol(format[loop][formatIndex-1])) {
+                    } else if(!isBlank(c) && formatIndex > 0 && isSymbol(format[loop][formatIndex-1])) {
                         //이전 패턴 문자열이 특수문자이고, 이번이 공백이 아닐 경우 추가
                         format[loop][formatIndex] = c;
                         format[loop][formatIndex+1] = ' ';
@@ -94,5 +94,9 @@ public class Main5177 {
 
     public static boolean isSymbol(char c) {
         return c == ';' || c == '(' || c == ')' || c == '.' || c == ':';
+    }
+
+    public static boolean isBlank(char c) {
+        return c == ' ';
     }
 }
