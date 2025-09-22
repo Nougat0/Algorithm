@@ -13,7 +13,7 @@ public class Main5177 {
         StringBuilder sb = new StringBuilder();
         final int K = Integer.parseInt(br.readLine());
         char[][] format = new char[2][1000];
-        int formatIndex = 0;
+        int[] formatIndex = new int[2];
         for(int k=1; k<=K; k++) {
             if(k > 1) sb.append("\n");
             sb.append("Data Set ").append(k).append(": ");
@@ -33,30 +33,30 @@ public class Main5177 {
                 }
                 //중간 패턴 기록
                 int index;
-                for(index=lineIndex, formatIndex=0; index<=lastIndex; index++) {
+                for(index=lineIndex, formatIndex[loop]=0; index<=lastIndex; index++) {
                     //2칸 이상의 공백 존재 시 index 조정
                     index = deleteWhiteSpace(line, index);
                     //출력형식 문자 통일
                     char c = unify(line.charAt(index));
-                    if(isSymbol(c) && index > 0 && !isBlank(format[loop][formatIndex-1])) {
+                    if(isSymbol(c) && index > 0 && !isBlank(format[loop][formatIndex[loop]-1])) {
                         //이전 패턴 문자열이 공백 아니면 추가
-                        format[loop][formatIndex] = ' ';
-                        format[loop][formatIndex+1] = c;
-                        formatIndex++;
-                    } else if(!isBlank(c) && formatIndex > 0 && isSymbol(format[loop][formatIndex-1])) {
+                        format[loop][formatIndex[loop]] = ' ';
+                        format[loop][formatIndex[loop]+1] = c;
+                        formatIndex[loop]++;
+                    } else if(!isBlank(c) && formatIndex[loop] > 0 && isSymbol(format[loop][formatIndex[loop]-1])) {
                         //이전 패턴 문자열이 특수문자이고, 이번이 공백이 아닐 경우 추가
-                        format[loop][formatIndex] = c;
-                        format[loop][formatIndex+1] = ' ';
-                        formatIndex++;
+                        format[loop][formatIndex[loop]] = c;
+                        format[loop][formatIndex[loop]+1] = ' ';
+                        formatIndex[loop]++;
                     } else {
-                        format[loop][formatIndex] = c;
+                        format[loop][formatIndex[loop]] = c;
                     }
-                    formatIndex++;
+                    formatIndex[loop]++;
                 }
             }
             //패턴 비교
-            boolean isEqual = true;
-            for(int i=0; i<=formatIndex && isEqual; i++) {
+            boolean isEqual = formatIndex[0] == formatIndex[1];
+            for(int i=0; i<formatIndex[0] && isEqual; i++) {
                 if(format[0][i] != format[1][i]) isEqual = false;
             }
             sb.append(isEqual ? "equal" : "not equal").append("\n");
