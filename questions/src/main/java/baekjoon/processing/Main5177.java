@@ -15,7 +15,7 @@ public class Main5177 {
         char[][] format = new char[2][1000];
         int formatIndex = 0;
         for(int k=1; k<=K; k++) {
-            if(k < K) sb.append("\n");
+            if(k > 1) sb.append("\n");
             sb.append("Data Set ").append(k).append(": ");
             //2줄 loop
             for(int loop=0; loop<2; loop++) {
@@ -42,6 +42,11 @@ public class Main5177 {
                         //이전 패턴 문자열이 공백 아니면 추가
                         format[loop][formatIndex] = ' ';
                         format[loop][formatIndex+1] = c;
+                        formatIndex++;
+                    } else if(c != ' ' && formatIndex > 0 && isSymbol(format[loop][formatIndex-1])) {
+                        //이전 패턴 문자열이 특수문자이고, 이번이 공백이 아닐 경우 추가
+                        format[loop][formatIndex] = c;
+                        format[loop][formatIndex+1] = ' ';
                         formatIndex++;
                     } else {
                         format[loop][formatIndex] = c;
@@ -88,6 +93,6 @@ public class Main5177 {
     }
 
     public static boolean isSymbol(char c) {
-        return c == ';' || c == '(' || c == ')' || c == '.';
+        return c == ';' || c == '(' || c == ')' || c == '.' || c == ':';
     }
 }
