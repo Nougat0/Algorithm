@@ -32,13 +32,13 @@ public class Main5177 {
                     lastIndex--;
                 }
                 //중간 패턴 기록
-                int index, fIndex;
-                for(index=lineIndex, fIndex=0; index<=lastIndex; index++) {
+                int index, fIndex = 0;
+                for(index=lineIndex; index<=lastIndex; index++) {
                     //2칸 이상의 공백 존재 시 index 조정
                     index = deleteWhiteSpace(line, index);
                     //출력형식 문자 통일
                     char c = unify(line.charAt(index));
-                    if(isSymbol(c) && index > 0 && !isBlank(format[loop][fIndex-1])) {
+                    if(isSymbol(c) && fIndex > 0 && !isBlank(format[loop][fIndex-1])) {
                         //이전 패턴 문자열이 공백 아니면 추가
                         format[loop][fIndex] = ' ';
                         format[loop][fIndex+1] = c;
