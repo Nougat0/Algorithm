@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -14,7 +14,6 @@ public class Main5177 {
         final int K = Integer.parseInt(br.readLine());
         char[][] format = new char[2][1000];
         int[] formatIndex = new int[2];
-        //16% 틀림...
         for(int k=1; k<=K; k++) {
             if(k > 1) sb.append("\n");
             sb.append("Data Set ").append(k).append(": ");
@@ -39,13 +38,10 @@ public class Main5177 {
                     index = deleteWhiteSpace(line, index);
                     //출력형식 문자 통일
                     char c = unify(line.charAt(index));
-                    if(isSymbol(c) && fIndex > 0 && !isBlank(format[loop][fIndex-1])) {
-                        //특수문자 이전 공백 체크
-                        format[loop][fIndex] = ' ';
-                        format[loop][fIndex+1] = c;
-                        fIndex++;
-                    } else if(!isBlank(c) && fIndex > 0 && isSymbol(format[loop][fIndex-1])) {
-                        //특수문자 다음 공백 체크
+                    boolean needBlankBeforeSymbol = isSymbol(c) && fIndex > 0 && !isBlank(format[loop][fIndex-1]);
+                    boolean needBlankAfterSymbol = !isBlank(c) && fIndex > 0 && isSymbol(format[loop][fIndex-1]);
+                    //특수문자 이전, 이후 공백 체크
+                    if(needBlankBeforeSymbol || needBlankAfterSymbol) {
                         format[loop][fIndex] = ' ';
                         format[loop][fIndex+1] = c;
                         fIndex++;
