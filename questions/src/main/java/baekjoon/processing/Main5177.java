@@ -14,6 +14,7 @@ public class Main5177 {
         final int K = Integer.parseInt(br.readLine());
         char[][] format = new char[2][1000];
         int[] formatIndex = new int[2];
+        //16% 틀림...
         for(int k=1; k<=K; k++) {
             if(k > 1) sb.append("\n");
             sb.append("Data Set ").append(k).append(": ");
