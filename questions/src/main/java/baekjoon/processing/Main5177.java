@@ -40,14 +40,14 @@ public class Main5177 {
                     //출력형식 문자 통일
                     char c = unify(line.charAt(index));
                     if(isSymbol(c) && fIndex > 0 && !isBlank(format[loop][fIndex-1])) {
-                        //이전 패턴 문자열이 공백 아니면 추가
+                        //특수문자 이전 공백 체크
                         format[loop][fIndex] = ' ';
                         format[loop][fIndex+1] = c;
                         fIndex++;
                     } else if(!isBlank(c) && fIndex > 0 && isSymbol(format[loop][fIndex-1])) {
-                        //이전 패턴 문자열이 특수문자이고, 이번이 공백이 아닐 경우 추가
-                        format[loop][fIndex] = c;
-                        format[loop][fIndex+1] = ' ';
+                        //특수문자 다음 공백 체크
+                        format[loop][fIndex] = ' ';
+                        format[loop][fIndex+1] = c;
                         fIndex++;
                     } else {
                         format[loop][fIndex] = c;
