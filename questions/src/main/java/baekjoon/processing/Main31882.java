@@ -15,7 +15,7 @@ public class Main31882 {
 
         Set<Integer> lengths = new HashSet<>();
         int[] count = new int[1_000_001];
-        int sum = 0;
+        long sum = 0;
         int thisCount = 0;
         for(int i=0; i<N; i++) {
             int number = line.charAt(i) - '0';
@@ -30,7 +30,7 @@ public class Main31882 {
 
         for(Integer num : lengths) {
             int c = count[num];
-            for(int i=1; i<=num; i++) sum += i*(num-i+1)*c;
+            for(int i=1; i<=num; i++) sum += (long) i*(num-i+1)*c;
         }
         System.out.println(sum);
         br.close();
