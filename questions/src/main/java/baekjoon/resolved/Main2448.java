@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -53,7 +53,7 @@ public class Main2448 {
                     }
                 }
             }
-            if(i != (N-1) && row != 2) sb.append(blank.repeat(N-i));
+            if(i != (N-1)) sb.append(blank.repeat(N-i));
             sb.append(newLine);
         }
         bw.write(sb.toString());
