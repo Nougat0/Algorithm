@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -26,6 +26,10 @@ public class Main31882 {
                 lengths.add(thisCount);
                 thisCount = 0;
             }
+        }
+        if(thisCount > 0) {
+            count[thisCount]++;
+            lengths.add(thisCount);
         }
 
         for(Integer num : lengths) {
