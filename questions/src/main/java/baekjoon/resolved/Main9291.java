@@ -8,7 +8,6 @@ public class Main9291 {
         https://www.acmicpc.net/user/bcdlife
         https://www.acmicpc.net/problem/9291
     */
-    public static final int SUM = 45;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -43,32 +42,47 @@ public class Main9291 {
     
     // 가로줄 검사
     public static boolean checkRow(int[][] sudoku, int rowIndex) {
-        int sum = 0;
+        boolean[] check = new boolean[9];
         for(int col=0; col<9; col++) {
-            sum += sudoku[rowIndex][col] - 1;
+            int number = sudoku[rowIndex][col] - 1;
+            if(!check[number]) {
+                check[number] = true;
+            } else {
+                return false;
+            }
         }
-        return sum == SUM;
+        return true;
     }
 
     // 세로줄 검사
     public static boolean checkCol(int[][] sudoku, int colIndex) {
-        int sum = 0;
+        boolean[] check = new boolean[9];
         for(int row=0; row<9; row++) {
-            sum += sudoku[row][colIndex] - 1;
+            int number = sudoku[row][colIndex] - 1;
+            if(!check[number]) {
+                check[number] = true;
+            } else {
+                return false;
+            }
         }
-        return sum == SUM;
+        return true;
     }
 
     // 3*3 으로 이뤄진 정사각형 내부 검사 (전체 9구간)
     public static boolean checkSquare(int[][] sudoku, int index) {
-        int sum = 0;
+        boolean[] check = new boolean[9];
         int startRow = index / 3 * 3;
         int startCol = index % 3 * 3;
         for(int i=0; i<3; i++) {
             for(int j=0; j<3; j++) {
-                sum += sudoku[startRow + i][startCol + j] - 1;
+                int number = sudoku[startRow + i][startCol + j] - 1;
+                if(!check[number]) {
+                    check[number] = true;
+                } else {
+                    return false;
+                }
             }
         }
-        return sum == SUM;
+        return true;
     }
 }
