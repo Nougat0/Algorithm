@@ -8,6 +8,9 @@ public class Main9291 {
         https://www.acmicpc.net/user/bcdlife
         https://www.acmicpc.net/problem/9291
     */
+    public static final int ROW = 0;
+    public static final int COL = 1;
+    public static final int SQU = 2;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -26,11 +29,24 @@ public class Main9291 {
             if(testCase < n) br.readLine(); //공백 한 줄 읽기
             //연산 + 출력
             sb.append("Case ").append(testCase).append(": ");
+            checkValid:
             for(int i=0; i<9; i++) {
-                if(!checkCol(sudoku, i) || !checkRow(sudoku, i) || !checkSquare(sudoku, i)) {
-                    sb.append("IN");
-                    break;
-                };
+                boolean[][] check = new boolean[3][9];
+                int startRow = i / 3 * 3;
+                int startCol = i % 3 * 3;
+                for(int j=0; j<9; j++) {
+                    int rowNumber = sudoku[i][j] - 1;
+                    int colNumber = sudoku[j][i] - 1;
+                    int squareNumber = sudoku[startRow + j/3][startCol + j%3] - 1;
+                    if(check[ROW][rowNumber] || check[COL][colNumber] || check[SQU][squareNumber]) {
+                        sb.append("IN");
+                        break checkValid;
+                    } else {
+                        check[ROW][rowNumber] = true;
+                        check[COL][colNumber] = true;
+                        check[SQU][squareNumber] = true;
+                    }
+                }
             }
             sb.append("CORRECT\n");
         }
@@ -38,51 +54,5 @@ public class Main9291 {
         bw.flush();
         bw.close();
         br.close();
-    }
-    
-    // 가로줄 검사
-    public static boolean checkRow(int[][] sudoku, int rowIndex) {
-        boolean[] check = new boolean[9];
-        for(int col=0; col<9; col++) {
-            int number = sudoku[rowIndex][col] - 1;
-            if(!check[number]) {
-                check[number] = true;
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // 세로줄 검사
-    public static boolean checkCol(int[][] sudoku, int colIndex) {
-        boolean[] check = new boolean[9];
-        for(int row=0; row<9; row++) {
-            int number = sudoku[row][colIndex] - 1;
-            if(!check[number]) {
-                check[number] = true;
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // 3*3 으로 이뤄진 정사각형 내부 검사 (전체 9구간)
-    public static boolean checkSquare(int[][] sudoku, int index) {
-        boolean[] check = new boolean[9];
-        int startRow = index / 3 * 3;
-        int startCol = index % 3 * 3;
-        for(int i=0; i<3; i++) {
-            for(int j=0; j<3; j++) {
-                int number = sudoku[startRow + i][startCol + j] - 1;
-                if(!check[number]) {
-                    check[number] = true;
-                } else {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
