@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -26,8 +26,10 @@ public class Main1706 {
                 crossword[i][j] = c;
                 if(c != '#') {
                     word.append(c);
-                } else if(word.length() > 1) {
-                    words.add(String.valueOf(word));
+                } else {
+                    if(word.length() > 1) {
+                        words.add(String.valueOf(word));
+                    }
                     word = new StringBuilder();
                 }
             }
@@ -43,8 +45,10 @@ public class Main1706 {
                 char c = crossword[i][j];
                 if(c != '#') {
                     word.append(c);
-                } else if(word.length() > 1) {
-                    words.add(String.valueOf(word));
+                } else {
+                    if(word.length() > 1) {
+                        words.add(String.valueOf(word));
+                    }
                     word = new StringBuilder();
                 }
             }
