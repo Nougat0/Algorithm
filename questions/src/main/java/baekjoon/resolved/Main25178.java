@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -12,26 +12,26 @@ public class Main25178 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
-        int[] vowel1 = new int[5];
-        int[] vowel2 = new int[5];
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
 
         int length = Integer.parseInt(br.readLine());
         String word1 = br.readLine();
         String word2 = br.readLine();
-        boolean affected = false;
+        boolean affected = true;
         //첫글자, 마지막글자 체크
         if(word1.charAt(0) == word2.charAt(0) && word1.charAt(length-1) == word2.charAt(length-1)) {
             for(int i=0; i<length; i++) {
                 char c1 = word1.charAt(i);
                 char c2 = word2.charAt(i);
                 //[+] 서로 다른 단어인지 체크
-                if(c1 != c2) affected = true;
+                //if(c1 != c2) affected = true;
                 //[+] 알파벳 모음 사용개수 체크
+                count1[c1 - 'a']++;
+                count2[c2 - 'a']++;
                 //[+] 자음 문자열 짓기
-                if(isVowel(c1)) vowel1[getIndex(c1)]++;
-                else sb1.append(c1);
-                if(isVowel(c2)) vowel2[getIndex(c2)]++;
-                else sb2.append(c2);
+                if(!isVowel(c1)) sb1.append(c1);
+                if(!isVowel(c2)) sb2.append(c2);
             }
 
             //모음 제외한 문자열 비교
@@ -48,13 +48,15 @@ public class Main25178 {
                     }
                 }
                 //모음 사용개수 체크
-                for(int i=0; i<5; i++) {
-                    if(vowel1[i] != vowel2[i]) {
+                for(int i=0; i<26; i++) {
+                    if(count1[i] != count2[i]) {
                         affected = false;
                         break;
                     }
                 }
             }
+        } else {
+            affected = false;
         }
         bw.write(affected ? "YES" : "NO");
         bw.flush();
