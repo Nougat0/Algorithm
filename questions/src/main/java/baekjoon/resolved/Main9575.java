@@ -38,17 +38,14 @@ public class Main9575 {
                     int two = b[j];
                     for(int l=0; l<k; l++) {
                         int three = c[l];
-                        sum.add(one + two + three);
+                        int number = one + two + three;
+                        if(checkLucky(number)) {
+                            sum.add(number);
+                        }
                     }
                 }
             }
-            int count = 0;
-            for(Integer number : sum) {
-                if(checkLucky(number)) {
-                    count++;
-                }
-            }
-            sb.append(count).append("\n");
+            sb.append(sum.size()).append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
