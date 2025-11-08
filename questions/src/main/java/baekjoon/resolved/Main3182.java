@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -17,9 +17,12 @@ public class Main3182 {
         //모든 선배 대답 확인
         int max = 0, number = -1;
         for(int no=1; no<=n; no++) {
-            int a = ans[no];
-            int count = 0;
+            //처음 선배님 체크
+            int a = no;
+            int count = 1;
             boolean[] asked = new boolean[n+1];
+            asked[no] = true;
+            //대답 연쇄 길이 확인
             while((a = ans[a]) != no && !asked[a]) {
                 asked[a] = true;
                 count++;
