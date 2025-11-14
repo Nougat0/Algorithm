@@ -29,7 +29,7 @@ public class Main13217 {
             }
         }
         int count = 0;
-        int totalAmount = 0;
+        long totalAmount = 0;
         int honey = ml;
         while(count < tries && honey > 0) {
             if(hiveHoney[honey] > 0) {
