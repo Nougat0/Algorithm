@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -15,7 +15,7 @@ public class Main13217 {
         int hives = Integer.parseInt(st.nextToken());
         int ml = Integer.parseInt(st.nextToken());
         int tries = Integer.parseInt(st.nextToken());
-        int[] hiveHoney = new int[ml + 1];
+        long[] hiveHoney = new long[ml + 1];
         for(int i=0; i<hives; i++) {
             int amount = Integer.parseInt(br.readLine());
             // 미리 honeyPot 용량에 맞춰 분리
@@ -33,7 +33,7 @@ public class Main13217 {
         int honey = ml;
         while(count < tries && honey > 0) {
             if(hiveHoney[honey] > 0) {
-                int usingTimes = Math.min(hiveHoney[honey], tries - count);
+                long usingTimes = Math.min(hiveHoney[honey], tries - count);
                 count += usingTimes;
                 totalAmount += usingTimes * honey;
             }
