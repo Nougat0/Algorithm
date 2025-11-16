@@ -26,18 +26,19 @@ public class Main15467 {
             for(int j=1; j<=13; j++) {
                 count[cards[j]]++;
             }
-            //분기
+            //분기 - 많이 조회하는 것은 따로 변수로 빼냄
+            int count2 = count[2];
+            int count3 = count[3];
             if(count[4] > 0) {
-                if(count[2] == 1) sb.append("tiki pair");
+                if(count2 == 1) sb.append("tiki pair");
                 else sb.append("tiki");
-            } else if(count[3] > 0) {
-                if(count[3] == 2) sb.append("two triples");
-                else if(count[3] == 1) {
-                    if(count[2] == 1) sb.append("full house");
+            } else if(count3 > 0) {
+                if(count3 == 2) sb.append("two triples");
+                else if(count3 == 1) {
+                    if(count2 == 1) sb.append("full house");
                     else sb.append("one triple");
                 }
-            } else if(count[2] > 0) {
-                int count2 = count[2];
+            } else if(count2 > 0) {
                 if(count2 == 3) sb.append("three pairs");
                 else if(count2 == 2) sb.append("two pairs");
                 else if(count2 == 1) sb.append("one pair");
