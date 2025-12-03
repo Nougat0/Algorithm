@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -31,7 +31,7 @@ public class Main13490 {
             }
 
             bestFishes.clear();
-            bestScore = 0;
+            bestScore = -5_000;
             for(index=1; index<=fishCount; index++) {
                 // 물고기 심사
                 fishScore = 0;
