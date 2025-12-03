@@ -16,6 +16,7 @@ public class Main15953 {
         StringBuilder sb = new StringBuilder();
         StringTokenizer st;
 
+        //1차 틀림 왜?
         int n = Integer.parseInt(br.readLine());
         for(int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
