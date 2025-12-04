@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -16,7 +16,7 @@ public class Main15953 {
         StringBuilder sb = new StringBuilder();
         StringTokenizer st;
 
-        //1차 틀림 왜?
+        //1차 틀림 왜? -- rank 0에 대한 예외 처리를 하지 않음
         int n = Integer.parseInt(br.readLine());
         for(int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
@@ -33,7 +33,7 @@ public class Main15953 {
 
     private static int get2017Prize(int rank) {
         int prize = 0;
-        if(rank <= 21)
+        if(rank > 0 && rank <= 21)
             for(int i=0; i<6; i++)
                 if(p2017[i][1] >= rank) {
                     prize = p2017[i][0];
@@ -44,7 +44,7 @@ public class Main15953 {
 
     private static int get2018Prize(int rank) {
         int prize = 0;
-        if(rank <= 31)
+        if(rank > 0 && rank <= 31)
             for(int i=0; i<5; i++)
                 if(p2018[i][1] >= rank) {
                     prize = p2018[i][0];
