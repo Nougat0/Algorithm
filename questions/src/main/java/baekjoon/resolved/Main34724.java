@@ -3,17 +3,18 @@ package baekjoon.resolved;
 import java.io.*;
 import java.util.*;
 
-public class Main32724 {
+public class Main34724 {
     /*
         https://www.acmicpc.net/user/bcdlife
-        https://www.acmicpc.net/problem/32724
+        https://www.acmicpc.net/problem/34724
+        주석 문제번호 잘못 기입했었음...
     */
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        boolean[][] xray = new boolean[n+1][m+1];
+        int[][] xray = new int[n+2][m+2];
         boolean hasTumor = false;
         diagnosis:
         for(int r=1; r<=n; r++) {
@@ -22,20 +23,17 @@ public class Main32724 {
                 boolean hasTissue = (row.charAt(c-1) - '0') == 1;
                 if(hasTissue) {
                     // 2*2 공간 확인
-                    if(checkTumor(xray, r, c)) {
+                    if(xray[r][c] >= 3) {
                         hasTumor = true;
                         break diagnosis;
                     }
-                    xray[r][c] = true;
+                    xray[r][c+1]++;
+                    xray[r+1][c]++;
+                    xray[r+1][c+1]++;
                 }
             }
         }
         System.out.println(hasTumor ? 1 : 0);
         br.close();
-    }
-
-    private static boolean checkTumor(boolean[][] xray, int row, int col) {
-        //row,col 이 우측 하단 꼭지점으로 두고 2*2 공간 확인
-        return xray[row-1][col-1] && xray[row-1][col] && xray[row][col-1];
     }
 }
