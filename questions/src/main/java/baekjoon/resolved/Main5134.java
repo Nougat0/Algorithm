@@ -13,6 +13,10 @@ public class Main5134 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         StringTokenizer st;
+        Map<String, Integer> map = new HashMap<>();
+        double[] discount;
+        int[] amount;
+
         int k = Integer.parseInt(br.readLine());
         for(int dataSet=1; dataSet<=k; dataSet++) {
             st = new StringTokenizer(br.readLine());
@@ -20,9 +24,8 @@ public class Main5134 {
             int neededItems = Integer.parseInt(st.nextToken());
 
             int index = 0;
-            Map<String, Integer> map = new HashMap<>();
-            double[] discount = new double[storeItems];
-            int[] amount = new int[storeItems];
+            discount = new double[storeItems];
+            amount = new int[storeItems];
 
             for(int i=0; i<storeItems; i++) {
                 st = new StringTokenizer(br.readLine());
@@ -48,16 +51,14 @@ public class Main5134 {
                     name.append(st.nextToken()).append(" ");
                 }
                 //비교 및 연산
-                try {
-                    index = map.get(name.toString().toLowerCase());
-                } catch (NullPointerException e) {
-                    continue;
-                }
+                String nameStr = name.toString().toLowerCase();
+                if(map.containsKey(nameStr)) index = map.get(name.toString().toLowerCase());
+                else continue;
                 saved += discount[index] * Math.min(needed, amount[index]);
             }
             sb.append("Data Set ").append(dataSet).append(":\n$");
-            sb.append(String.format("%.2f", saved)).append("\n");
-            if(dataSet < k-1) sb.append("\n");
+            sb.append(String.format("%.2f", saved)).append("\n\n");
+            map.clear();
         }
         bw.write(sb.toString());
         bw.flush();
