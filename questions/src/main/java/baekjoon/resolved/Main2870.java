@@ -1,7 +1,8 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
+import java.math.BigInteger;
 
 public class Main2870 {
     /*
@@ -13,11 +14,11 @@ public class Main2870 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
-        List<Integer> list = new ArrayList<>();
+        List<BigInteger> list = new ArrayList<>();
         for(int i=0; i<n; i++) {
             StringTokenizer ss = new StringTokenizer(br.readLine(), "abcdefghijklmnopqrstuvwxyz");
             while(ss.hasMoreTokens()) {
-                list.add(Integer.parseInt(ss.nextToken()));
+                list.add(new BigInteger(ss.nextToken()));
             }
         }
         Collections.sort(list);
