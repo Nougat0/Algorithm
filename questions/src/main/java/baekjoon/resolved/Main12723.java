@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -29,7 +29,7 @@ public class Main12723 {
             Arrays.sort(arr[1], Collections.reverseOrder());
             int resultA = 0;
             for(int i=0; i<length; i++) {
-                resultA += arr[0][i] * arr[1][0];
+                resultA += arr[0][i] * arr[1][i];
             }
             int resultB = 0;
             for(int i=length-1; i>=0; i--) {
