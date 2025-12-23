@@ -1,9 +1,6 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
 
 public class Main34917 {
     /*
@@ -16,11 +13,10 @@ public class Main34917 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
         int testCases = Integer.parseInt(br.readLine());
         for(int t=0; t<testCases; t++) {
             int n = Integer.parseInt(br.readLine());
-            printM(n, sb);
+            printM_onBanner(n, sb);
         }
         bw.write(sb.toString());
         bw.flush();
@@ -28,7 +24,7 @@ public class Main34917 {
         br.close();
     }
 
-    private static StringBuilder printM(int n, StringBuilder banner) {
+    private static void printM_onBanner(int n, StringBuilder banner) {
         for(int r=0; r<n; r++) {
             banner.append(INK);
             if(r == 0 || r > n/2) {
@@ -41,6 +37,5 @@ public class Main34917 {
             }
             banner.append(INK).append("\n");
         }
-        return new StringBuilder();
     }
 }
