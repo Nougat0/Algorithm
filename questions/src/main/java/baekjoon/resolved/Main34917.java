@@ -12,19 +12,19 @@ public class Main34917 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuilder sb = new StringBuilder();
+        StringBuilder banner = new StringBuilder();
         int testCases = Integer.parseInt(br.readLine());
         for(int t=0; t<testCases; t++) {
             int n = Integer.parseInt(br.readLine());
-            printM_onBanner(n, sb);
+            printOnBannerM(n, banner);
         }
-        bw.write(sb.toString());
+        bw.write(banner.toString());
         bw.flush();
         bw.close();
         br.close();
     }
 
-    private static void printM_onBanner(int n, StringBuilder banner) {
+    private static void printOnBannerM(int n, StringBuilder banner) {
         for(int r=0; r<n; r++) {
             banner.append(INK);
             if(r == 0 || r > n/2) {
