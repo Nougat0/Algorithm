@@ -2,6 +2,7 @@ package baekjoon.processing;
 
 import java.io.*;
 import java.util.*;
+
 public class Main34935 {
     /*
         https://www.acmicpc.net/user/bcdlife
@@ -12,6 +13,8 @@ public class Main34935 {
             오름차순: 숫자가 항상 다음숫자보다 작음
             비-내림차순: 숫자가 다음숫자보다 작거나 같다
             내림차순: 숫자가 항상 다음숫자보다 큼
+            
+            1차 틀림
         */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
