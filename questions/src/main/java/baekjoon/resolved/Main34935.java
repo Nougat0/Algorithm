@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -14,14 +14,14 @@ public class Main34935 {
             비-내림차순: 숫자가 다음숫자보다 작거나 같다
             내림차순: 숫자가 항상 다음숫자보다 큼
             
-            1차 틀림
+            1차 틀림 - former를 0으로 무조건 초기화했었네...
         */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        long current, former = 0;
+        long current, former = Long.parseLong(st.nextToken());
         boolean ascending = true;
-        for(int i=0; i<n; i++) {
+        for(int i=1; i<n; i++) {
             current = Long.parseLong(st.nextToken());
             if(current <= former) {
                 ascending = false;
