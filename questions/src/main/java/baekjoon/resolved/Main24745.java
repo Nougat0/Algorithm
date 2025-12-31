@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -23,7 +23,7 @@ public class Main24745 {
                 break;
             }
         }
-        System.out.println(isPalindrome ? "YES" : "NO");
+        System.out.println(length == 0 ? "NO" : (isPalindrome ? "YES" : "NO"));
         br.close();
     }
 
