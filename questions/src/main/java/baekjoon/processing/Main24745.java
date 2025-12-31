@@ -65,8 +65,7 @@ public class Main24745 {
             case '7': return "--...";
             case '8': return "---..";
             case '9': return "----.";
-            case ' ': return "";
-            default: return "?";
+            default: return "";
         }
     }
 }
