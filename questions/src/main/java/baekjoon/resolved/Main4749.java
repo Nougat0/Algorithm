@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -33,7 +33,7 @@ public class Main4749 {
 
             double percent = a / r * 100;
             if(percent >= 1.0) {
-                provided.append(name).append(a).append(' ').append(unit).append(' ')
+                provided.append(name).append(String.format("%.1f", a)).append(' ').append(unit).append(' ')
                         .append(String.format("%.0f", percent)).append("%\n");
             } else {
                 lacking.append(name).append("\n");
