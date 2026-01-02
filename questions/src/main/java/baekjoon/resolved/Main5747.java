@@ -13,7 +13,6 @@ public class Main5747 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         StringTokenizer blue, red;
-        int[] mary, john;
         /*
             카드의 순서가 뒤섞인 상태
             따라서 input 카드의 순서는 무의미함
@@ -25,11 +24,9 @@ public class Main5747 {
             red = new StringTokenizer(br.readLine());
             maryOdd = 0;
             johnOdd = 0;
-            mary = new int[n];
-            john = new int[n];
             for(int i=0; i<n; i++) {
-                if((mary[i] = Integer.parseInt(blue.nextToken())) % 2 == 1) maryOdd++;
-                if((john[i] = Integer.parseInt(red.nextToken())) % 2 == 1) johnOdd++;
+                if(Integer.parseInt(blue.nextToken()) % 2 == 1) maryOdd++;
+                if(Integer.parseInt(red.nextToken()) % 2 == 1) johnOdd++;
             }
             maryEven = n - maryOdd;
             johnEven = n - johnOdd;
