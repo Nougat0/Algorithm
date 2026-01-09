@@ -5,6 +5,7 @@
 
 ### 이력 기록
 - Baekjoon 추가 (2024.06.13 최초) https://www.acmicpc.net/user/bcdlife
+- Programmers 추가 (2026.01.09 최초) https://school.programmers.co.kr/learn/challenges?order=recent
 ---
 ### 읽을거리
 - 모든 문제가 이 프로젝트에 등록되는 것은 아니며, 백준에서 풀었으나 여기에 없는 문제도 있다  
@@ -27,4 +28,5 @@
 | ✏️  | `:pencil2:`     | 오타 수정    | 24.07.11 |
 | 👟  | `:athletic_shoe:`| 마라톤(solved.ac) | 24.10.07 |
 | 🏆  | `:trophy:`                         | 대회(baekjoon)     | 25.05.10 |
+| 🐦  | `:bird:`        | programmers (구분용)    | 26.01.09 |
 | ️1️⃣2️⃣3️⃣4️⃣ | `:one:` `:two:` `:three:` `:four:`| CLASS(solved.ac) | 24.10.07 |
