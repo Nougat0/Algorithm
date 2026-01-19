@@ -17,11 +17,11 @@ public class Main28419 {
 
         long oddSum = 0;
         long evenSum = 0;
-        for(int i=1; i<=n; i++) {
-            int number = Integer.parseInt(st.nextToken());
-            if(i%2 == 0) evenSum += number;
-            else oddSum += number;
+        for(int i=0; i<n/2; i++) {
+            oddSum += Integer.parseInt(st.nextToken());
+            evenSum += Integer.parseInt(st.nextToken());
         }
+        if(n%2 == 1) oddSum += Integer.parseInt(st.nextToken());
 
         long sum = 0;
         if(oddSum != evenSum) {
