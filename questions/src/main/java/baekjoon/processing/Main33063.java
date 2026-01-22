@@ -41,20 +41,20 @@ public class Main33063 {
 
     public static class Cheese {
         boolean[][][] cheese;
-        int total;
+        long total;
         public Cheese(int n) {
             int length = n+4;
             this.cheese = new boolean[length][length][length];
             this.total = 0;
         }
 
-        public int poke(int x, int y, int z) {
+        public long poke(int x, int y, int z) {
             this.cheese[x+2][y+2][z+2] = true;
-            int count = checkCount(x+2, y+2, z+2);
+            long count = checkCount(x+2, y+2, z+2);
             return count;
         }
 
-        private int checkCount(int x, int y, int z) {
+        private long checkCount(int x, int y, int z) {
             int xDiff = checkRow(cheese[x-2][y][z], cheese[x-1][y][z], cheese[x+1][y][z], cheese[x+2][y][z]);
             int yDiff = checkRow(cheese[x][y-2][z], cheese[x][y-1][z], cheese[x][y+1][z], cheese[x][y+2][z]);
             int zDiff = checkRow(cheese[x][y][z-2], cheese[x][y][z-1], cheese[x][y][z+1], cheese[x][y][z+2]);
@@ -68,9 +68,9 @@ public class Main33063 {
             boolean noSide = !ff && !ll;
             if(former && latter) { // 11X11 기존 2개였던 게 하나가 됨
                 return -1;
-            } else if(former ^ latter) { // 11X00 OR 00X11 기존에 합쳐짐
+            } else if(former ^ latter) { // 11X00 OR 00X11 OR 11X10 OR 11X01 OR 01X11 OR 10X11 기존에 합쳐짐
                 return 0;
-            } else if(noSide && (f || l)){ // 00X10 OR 01X00 하나가 생김
+            } else if(noSide && (f || l)){ // 00X10 OR 01X00 OR 01X10 하나가 생김
                 return 1;
             } else { // 10X01 이어지지 않음
                 return 0;
