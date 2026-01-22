@@ -65,8 +65,11 @@ public class Main33063 {
 
         private int checkCount(int x, int y, int z) {
             int xDiff = checkRow(getXRow(y, z)) - this.xCount[y][z];
-            int yDiff = checkRow(getYRow(x, z)) - this.xCount[x][z];
+            int yDiff = checkRow(getYRow(x, z)) - this.yCount[x][z];
             int zDiff = checkRow(getZRow(x, y)) - this.zCount[x][y];
+            if(xDiff != 0) this.xCount[y][z] = xDiff;
+            if(yDiff != 0) this.yCount[x][z] = yDiff;
+            if(zDiff != 0) this.zCount[x][y] = zDiff;
             return (total += (xDiff + yDiff + zDiff));
         }
 
