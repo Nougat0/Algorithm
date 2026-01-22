@@ -22,8 +22,8 @@ public class Main33063 {
          * 그냥 공간 뚫고, 2개 이상 이어져있는지만 확인하면 될 듯?
          * 아 근데 각 동작마다 출력해야 하네...최대 20만 회 반복, 빡센데...
          *
-         * 매 동작마다 x, y, z 한 줄씩 뚫린 개수 확인
-         * 이전 개수와 비교해서 등락 확인
+         * 매 동작마다 x, y, z 한 줄씩 뚫린 개수 확인 (X)
+         * 매 동작마다 x, y, z 앞뒤 2개씩 확인해서 개수 증감 확인 (O)
          */
         Cheese cheese = new Cheese(n);
         while(q-- > 0) {
@@ -40,73 +40,41 @@ public class Main33063 {
     }
 
     public static class Cheese {
-        private int n;
         boolean[][][] cheese;
-        int[][] xCount;
-        int[][] yCount;
-        int[][] zCount;
-        boolean[] temp;
         int total;
         public Cheese(int n) {
-            this.n = n;
-            this.cheese = new boolean[n][n][n];
-            this.xCount = new int[n][n];
-            this.yCount = new int[n][n];
-            this.zCount = new int[n][n];
+            int length = n+4;
+            this.cheese = new boolean[length][length][length];
             this.total = 0;
-            this.temp = new boolean[n];
         }
 
         public int poke(int x, int y, int z) {
-            this.cheese[x][y][z] = true;
-            int count = checkCount(x, y, z);
+            this.cheese[x+2][y+2][z+2] = true;
+            int count = checkCount(x+2, y+2, z+2);
             return count;
         }
 
         private int checkCount(int x, int y, int z) {
-            int xDiff = checkRow(getXRow(y, z)) - this.xCount[y][z];
-            int yDiff = checkRow(getYRow(x, z)) - this.yCount[x][z];
-            int zDiff = checkRow(getZRow(x, y)) - this.zCount[x][y];
-            if(xDiff != 0) this.xCount[y][z] = xDiff;
-            if(yDiff != 0) this.yCount[x][z] = yDiff;
-            if(zDiff != 0) this.zCount[x][y] = zDiff;
+            int xDiff = checkRow(cheese[x-2][y][z], cheese[x-1][y][z], cheese[x+1][y][z], cheese[x+2][y][z]);
+            int yDiff = checkRow(cheese[x][y-2][z], cheese[x][y-1][z], cheese[x][y+1][z], cheese[x][y+2][z]);
+            int zDiff = checkRow(cheese[x][y][z-2], cheese[x][y][z-1], cheese[x][y][z+1], cheese[x][y][z+2]);
             return (total += (xDiff + yDiff + zDiff));
         }
 
-        private boolean[] getXRow(int y, int z) {
-            temp = new boolean[n];
-            for(int i=0; i<n; i++) {
-                temp[i] = cheese[i][y][z];
+        private int checkRow(boolean ff, boolean f, boolean l, boolean ll) {
+            // 같은 곳을 또 뚫지는 않음을 보장함 (문제에서)
+            boolean former = ff && f;
+            boolean latter = ll && l;
+            boolean noSide = !ff && !ll;
+            if(former && latter) { // 11X11 기존 2개였던 게 하나가 됨
+                return -1;
+            } else if(former ^ latter) { // 11X00 OR 00X11 기존에 합쳐짐
+                return 0;
+            } else if(noSide && (f || l)){ // 00X10 OR 01X00 하나가 생김
+                return 1;
+            } else { // 10X01 이어지지 않음
+                return 0;
             }
-            return temp;
-        }
-
-        private boolean[] getYRow(int x, int z) {
-            temp = new boolean[n];
-            for(int i=0; i<n; i++) {
-                temp[i] = cheese[x][i][z];
-            }
-            return temp;
-        }
-
-        private boolean[] getZRow(int x, int y) {
-            return cheese[x][y];
-        }
-
-        private int checkRow(boolean[] row) {
-            int length = row.length;
-            int count = 0;
-            int open = 0;
-            for(int i=0; i<length; i++) {
-                if(row[i]) {
-                    open++;
-                } else {
-                    if(open > 1) count++;
-                    open = 0;
-                }
-            }
-            if(open > 1) count++;
-            return count;
         }
     }
 }
