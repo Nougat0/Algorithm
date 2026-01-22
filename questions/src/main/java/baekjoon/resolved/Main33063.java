@@ -44,14 +44,12 @@ public class Main33063 {
 
     public static class Cheese {
         private int n;
-        boolean[][][] cheese;
         int[][] xCount;
         int[][] yCount;
         int[][] zCount;
         int total;
         public Cheese(int n) {
             this.n = n;
-            this.cheese = new boolean[n][n][n];
             this.xCount = new int[n][n];
             this.yCount = new int[n][n];
             this.zCount = new int[n][n];
