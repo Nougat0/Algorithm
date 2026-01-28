@@ -18,9 +18,7 @@ public class Main32952 {
         long m = Long.parseLong(st.nextToken());
         
         long wavesHit= m/k;
-        for(int i=0; i<wavesHit; i++) {
-            r /= 2;
-        }
+        r = r / (long) Math.pow(2, wavesHit);
         System.out.println(r);
         br.close();
     }
