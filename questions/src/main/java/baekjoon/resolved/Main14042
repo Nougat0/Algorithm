@@ -1,0 +1,40 @@
+package baekjoon.resolved;
+
+import java.io.*;
+import java.util.*;
+
+public class Main14042 {
+    /*
+        https://www.acmicpc.net/user/bcdlife
+        https://www.acmicpc.net/problem/14042
+    */
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer std, stp;
+        int type = Integer.parseInt(br.readLine());
+        int n = Integer.parseInt(br.readLine());
+        int[] d = new int[n];
+        int[] p = new int[n];
+        /*
+            minimum : 유사한 속도끼리 묶기 (정렬 후 순서대로 2명씩)
+            maximum : 차이가 큰 순서대로 묶기 (정렬 후 최대값 최소값끼리 2명씩)
+        */
+        std = new StringTokenizer(br.readLine());
+        stp = new StringTokenizer(br.readLine());
+        for(int i=0; i<n; i++) {
+            d[i] = Integer.parseInt(std.nextToken());
+            p[i] = Integer.parseInt(stp.nextToken());
+        }
+
+        Arrays.sort(d);
+        Arrays.sort(p);
+        
+        int sum = 0;
+        for(int i=0; i<n; i++) {
+            int rear = type == 1 ? i : (n-1-i);
+            sum += Math.max(d[i], p[rear]);
+        }
+        System.out.println(sum);
+        br.close();
+    }
+}
