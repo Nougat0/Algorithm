@@ -1,0 +1,66 @@
+package baekjoon.resolved;
+
+import java.io.*;
+import java.util.*;
+
+public class Main1966 {
+    /*
+        https://www.acmicpc.net/user/bcdlife
+        https://www.acmicpc.net/problem/1966
+    */
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
+        int n, m, p;
+        int[] priority; //중요도 1~9
+        int[] que; //문서별 중요도 기록
+        Queue<Integer> q;
+        
+        int t = Integer.parseInt(br.readLine());
+        while(t-- > 0) {
+            st = new StringTokenizer(br.readLine());
+            n = Integer.parseInt(st.nextToken());
+            m = Integer.parseInt(st.nextToken());
+            priority = new int[10];
+            que = new int[n];
+            q = new LinkedList<>();
+            st = new StringTokenizer(br.readLine());
+            for(int i=0; i<n; i++) {
+                p = Integer.parseInt(st.nextToken());
+                priority[p]++;
+                que[i] = p;
+                q.offer(i);
+            }
+            //프린터 전개
+            int order = 0;
+            while(!q.isEmpty()) {
+                int num = q.poll();
+                p = que[num];
+                if(hasPriority(priority, p)) {
+                    order++;
+                    priority[p]--;
+                    if(num == m) {
+                        break;
+                    }
+                } else {
+                    q.offer(num);
+                }
+            }
+            sb.append(order).append("\n");
+        }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+        br.close();
+    }
+    
+    //우선순위가 될 수 있는지 확인
+    public static boolean hasPriority(int[] priority, int p) {
+        for(int i=p+1; i<10; i++) {
+            if(priority[i] > 0) return false;
+        }
+        return true;
+    }
+}
