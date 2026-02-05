@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -13,7 +13,7 @@ public class Main5345 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-        int between, length, count;
+        int length, count;
         char c;
         String line;
         boolean[] plu = new boolean[2];
@@ -22,8 +22,9 @@ public class Main5345 {
         int n = Integer.parseInt(br.readLine());
         while(n-- > 0) {
             line = br.readLine();
-            between = 0;
             count = 0;
+            plu[P] = false;
+            plu[L] = false;
             length = line.length();
             for(int i=0; i<length; i++) {
                 c = line.charAt(i);
@@ -33,19 +34,12 @@ public class Main5345 {
                 if(plu[P]) {
                     if(plu[L]) {
                         if(isU) {
-                            if(between > 0) {
-                                count++;
-                            }
-                            //조건 충족 여부와 상관 없이 초기화
+                            count++;
                             plu[P] = false;
                             plu[L] = false;
-                        } else {
-                            between++;
                         }
                     } else if(isL){
                         plu[L] = true;
-                    } else {
-                        between++;
                     }
                 } else if(isP) {
                     plu[P] = true;
