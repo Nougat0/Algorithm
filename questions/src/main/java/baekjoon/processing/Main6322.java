@@ -41,7 +41,7 @@ public class Main6322 {
             if(Double.isNaN(side)) {
                 sb.append("Impossible.");
             } else {
-                sb.append((char) (v + 'a')).append(" = ").append(String.format("%.3f", side));
+                sb.append((char) (v + 'a')).append(" = ").append(String.format("%.3f", Math.floor(side * 1000) / 1000.0));
             }
             num++;
         }
