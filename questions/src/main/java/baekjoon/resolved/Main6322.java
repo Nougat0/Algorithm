@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -38,10 +38,10 @@ public class Main6322 {
                 side = Math.sqrt(t[c]*t[c] - not*not);
             }
 
-            if(Double.isNaN(side)) {
+            if(Double.isNaN(side) || side == 0.0) {
                 sb.append("Impossible.");
             } else {
-                sb.append((char) (v + 'a')).append(" = ").append(String.format("%.3f", Math.floor(side * 1000) / 1000.0));
+                sb.append((char) (v + 'a')).append(" = ").append(String.format("%.3f", side));
             }
             num++;
         }
