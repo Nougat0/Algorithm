@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -45,7 +45,7 @@ public class Main12043 {
             for(int base=2; base<=3; base++) {
                 int exp = count[base];
                 if(exp > 0) {
-                    result = result * power(exp, base) % MOD;
+                    result = result * power(base, exp) % MOD;
                 }
             }
             sb.append(result).append("\n");
