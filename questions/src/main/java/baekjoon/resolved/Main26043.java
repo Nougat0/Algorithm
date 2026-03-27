@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -19,8 +19,8 @@ public class Main26043 {
         Queue<Integer> line = new LinkedList<>();
         int n = Integer.parseInt(br.readLine());
         int maxNo = 0;
-        int[] favMenu = new int[n];
-        int[] status = new int[n];
+        int[] favMenu = new int[n+1];
+        int[] status = new int[n+1];
         int[] menuCount = new int[3];
         for(int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
