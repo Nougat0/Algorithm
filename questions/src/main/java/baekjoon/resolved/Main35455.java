@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 import java.util.*;
@@ -17,10 +17,9 @@ public class Main35455 {
         for(int i=0; i<t; i++) {
             st = new StringTokenizer(br.readLine());
             int n = Integer.parseInt(st.nextToken());
-            double s = Double.parseDouble(st.nextToken());
+            int s = Integer.parseInt(st.nextToken());
 
-            double perfect = 10_000_000.0 / n + 1;
-            if((long) (n * perfect) == s) {
+            if((10_000_000 + n) == s) {
                 sb.append("Yes");
             } else {
                 sb.append("No");
