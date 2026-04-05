@@ -15,21 +15,21 @@ public class Main3077 {
         StringTokenizer st;
         int n = Integer.parseInt(br.readLine());
         Map<String, Integer> correct = new HashMap<>();
-        Map<Integer, String> ans = new HashMap<>();
+        String[] ans = new String[n];
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
             correct.put(st.nextToken(), i);
         }
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
-            ans.put(i, st.nextToken());
+            ans[i] = st.nextToken();
         }
 
         int sum = 0;
         int dom = n*(n-1)/2;
         for(int i=0; i<n-1; i++) {
             for(int j=i+1; j<n; j++) {
-                if(correct.get(ans.get(i)) < correct.get(ans.get(j))) sum++;
+                if(correct.get(ans[i]) < correct.get(ans[j])) sum++;
             }
         }
         sb.append(sum).append('/').append(dom);
