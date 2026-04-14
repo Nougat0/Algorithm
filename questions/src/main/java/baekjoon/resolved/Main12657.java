@@ -61,14 +61,16 @@ public class Main12657 {
         private int height;
         private int width;
         private int[][] land;
-        private Map<Integer, Integer> sinks;
+        private Set<Integer> sinks;
+        private int[] sinkMap;
         private int sinkCount;
 
         public Land(int height, int width) {
             this.height = height;
             this.width = width;
             this.land = new int[height][width];
-            this.sinks = new HashMap<>();
+            this.sinks = new HashSet<>();
+            this.sinkMap = new int[height*width];
             this.sinkCount = 0;
         }
 
@@ -112,13 +114,14 @@ public class Main12657 {
 
             if(minDir == null) {
                 //현재 위치가 가장 낮은 위치, 혹은 주변 altitude 모두 동일
-                int position = h*height + w;
-                if(sinks.containsKey(position)) {
+                int position = h*width + w;
+                if(sinks.contains(position)) {
                     //기존 sink 사용
-                    return sinks.get(position);
+                    return sinkMap[position];
                 } else {
                     //새로운 sink 발견
-                    sinks.put(position, sinkCount);
+                    sinks.add(position);
+                    sinkMap[position] = sinkCount;
                     return sinkCount++;
                 }
             } else {
