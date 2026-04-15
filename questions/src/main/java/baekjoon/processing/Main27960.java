@@ -13,15 +13,20 @@ public class Main27960 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
-
-        boolean[] aShot = getShotList(a);
-        boolean[] bShot = getShotList(b);
-
         int c = 0;
-        for(int i=0; i<10; i++) {
-            if(aShot[i] ^ bShot[i]) {
-                c += biPow(i);
+
+        if(a > 0 && b > 0) {
+            boolean[] aShot = getShotList(a);
+            boolean[] bShot = getShotList(b);
+
+            for(int i=0; i<10; i++) {
+                if(aShot[i] ^ bShot[i]) {
+                    c += biPow(i);
+                }
             }
+        } else {
+            // 한쪽이라도 0점인 경우 기존 로직으로 오류 발생
+            c = Math.max(a, b);
         }
         System.out.println(c);
         br.close();
