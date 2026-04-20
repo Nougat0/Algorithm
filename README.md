@@ -29,4 +29,5 @@
 | 👟  | `:athletic_shoe:`| 마라톤(solved.ac) | 24.10.07 |
 | 🏆  | `:trophy:`                         | 대회(baekjoon)     | 25.05.10 |
 | 🐦  | `:bird:`        | programmers (구분용)    | 26.01.09 |
+| 📦  | `:package:`     | 백업         | 26.04.20 |
 | ️1️⃣2️⃣3️⃣4️⃣ | `:one:` `:two:` `:three:` `:four:`| CLASS(solved.ac) | 24.10.07 |
