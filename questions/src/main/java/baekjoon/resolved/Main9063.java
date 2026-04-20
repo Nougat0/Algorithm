@@ -7,7 +7,7 @@ public class Main9063 {
     /*
         https://www.acmicpc.net/user/bcdlife
         https://www.acmicpc.net/problem/9063
-        https://www.acmicpc.net/source/79332190
+        https://www.acmicpc.net/source/79332310
     */
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,9 +20,9 @@ public class Main9063 {
          */
         int n = Integer.parseInt(br.readLine());
         for(int i=0; i<n; i++) {
-            String[] token = br.readLine().split(" ");
-            x.add(Integer.parseInt(token[0]));
-            y.add(Integer.parseInt(token[1]));
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            x.add(Integer.parseInt(st.nextToken()));
+            y.add(Integer.parseInt(st.nextToken()));
         }
         /**
          * x, y 최소값,최대값 계산 후 차이를 한 변으로 간주
