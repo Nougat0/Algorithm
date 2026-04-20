@@ -1,4 +1,4 @@
-package baekjoon.processing;
+package baekjoon.resolved;
 
 import java.io.*;
 
@@ -21,7 +21,7 @@ public class Main15360 {
             int max = position + updown;
             if(min - covered > 1) {
                 //비어있는 공간 너비 계산
-                int distance = min - covered;
+                int distance = min - covered - 1;
                 int neededCount = distance / range + (distance % range > 0 ? 1 : 0);
                 neededTotal +=  neededCount;
             }
