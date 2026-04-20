@@ -12,7 +12,7 @@ public class Main15360 {
         int length = Integer.parseInt(br.readLine()); // 1~length
         int lights = Integer.parseInt(br.readLine());
         int updown = Integer.parseInt(br.readLine());
-        final int range = updown*2;
+        final int range = updown == 0 ? 1 : (updown*2 + 1);
         int covered = 0;
         int neededTotal = 0;
         for(int i=0; i<lights; i++) {
