@@ -16,18 +16,18 @@ public class Main17204 {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         int[] point = new int[n];
-        boolean recursive = false;
         for(int i=0; i<n; i++) {
             point[i] = Integer.parseInt(br.readLine());
-            if(!recursive && point[i] == i) recursive = true;
         }
 
         int count = 0;
         int pointed = 0;
+        int prev = pointed;
         while((pointed = point[pointed]) != 0) {
             count++;
+            if(prev == pointed) break; //recursive
             if(pointed == k) break;
-            if(recursive && count > n) break;
+            prev = pointed;
         }
 
         if(pointed == k) {
