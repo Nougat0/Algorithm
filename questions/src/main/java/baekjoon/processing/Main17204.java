@@ -27,6 +27,7 @@ public class Main17204 {
             count++;
             if(prev == pointed) break; //recursive
             if(pointed == k) break;
+            if(count > n) break;
             prev = pointed;
         }
 
