@@ -20,10 +20,8 @@ public class Main13923 {
             1) 개수가 1개 부족한 팀, 1개 더 많은 팀
             2) 개수가 1개 부족한 팀, 1개만 있는 팀
         */
-        int cont = 0;
         String line;
         while((line = br.readLine()) != null) {
-            cont++;
             int n = Integer.parseInt(line);
 
             teamName = new HashSet<>();
