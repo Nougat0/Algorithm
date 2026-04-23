@@ -59,15 +59,19 @@ public class Main13923 {
                 int rowCount = 0;
                 int colCount = 0;
                 for(int j=0; j<n; j++) {
+                    /*
+                        한꺼번에 처리하려다가 로직이 꼬여서...
+                        col 검사 row 검사 따로 이중 loop 구현해서 공통점만 뽑아냄
+                        손코딩의 중요성...
+                    */
                     if(seats[i][j] == over) {
-                        if(isOne) {
-                            overRow = i;
-                            overCol = j;
-                        } else {
-                            if(rowCount == 1) overRow = i;
-                            if(colCount == 1) overCol = j;
-                        }
+                        if(isOne) overRow = i;
+                        else if(rowCount == 1) overRow = i;
                         rowCount++;
+                    }
+                    if(seats[j][i] == over) {
+                        if(isOne) overCol = i;
+                        else if(colCount == 1) overCol = i;
                         colCount++;
                     }
                 }
