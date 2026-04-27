@@ -15,12 +15,11 @@ public class Main29790 {
         int n = Integer.parseInt(st.nextToken());
         int u = Integer.parseInt(st.nextToken());
         int l = Integer.parseInt(st.nextToken());
-        boolean baekjoonGosu = n >= 1000;
+        boolean baekjoonGosu = n >= 1_000;
         boolean maplestoryGosu = u >= 8_000 || l >= 260;
-        if(baekjoonGosu || maplestoryGosu) {
-            if(baekjoonGosu && maplestoryGosu) {
-                sb.append("Very ");
-            }
+        if(baekjoonGosu && maplestoryGosu) {
+            sb.append("Very Good");
+        } else if(baekjoonGosu) {
             sb.append("Good");
         } else {
             sb.append("Bad");
